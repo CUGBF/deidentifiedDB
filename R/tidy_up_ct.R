@@ -1,9 +1,9 @@
-#' Format the
+#' Format the columns containing Ct values to remove non-numeric values
 #'
-#' @param ct_value
+#' @param ct_value Value from any of the columns containing Ct values from
+#' qRT-PCR in the diagnostics table
 #'
 #' @return
-#' @export
 #'
 #' @examples
 tidy_up_ct <- function(ct_value) {
@@ -12,7 +12,7 @@ tidy_up_ct <- function(ct_value) {
     !str_detect(
       ct_value,
       regex("^[0-9.]*$",
-            ignore_case = T
+        ignore_case = T
       )
     ),
     NA

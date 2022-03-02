@@ -10,7 +10,8 @@ read_diagnostics_csv(filepath)
 \item{filepath}{Path to the CSV file containing COVID19 Diagnostics Data}
 }
 \value{
-A tibble with the COVID19 Diagnostics Data under column names used in the deidentifiedDB SQLite database.
+A tibble with the COVID19 Diagnostics Data under column names used
+in the deidentifiedDB SQLite database
 }
 \description{
 Read CSV file containing COVID19 Diagnostics Data from REDDI

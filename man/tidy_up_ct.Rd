@@ -2,16 +2,17 @@
 % Please edit documentation in R/tidy_up_ct.R
 \name{tidy_up_ct}
 \alias{tidy_up_ct}
-\title{Format the}
+\title{Format the columns containing Ct values to remove non-numeric values}
 \usage{
 tidy_up_ct(ct_value)
 }
 \arguments{
-\item{ct_value}{}
+\item{ct_value}{Value from any of the columns containing Ct values from
+qRT-PCR in the diagnostics table}
 }
 \value{
 
 }
 \description{
-Format the
+Format the columns containing Ct values to remove non-numeric values
 }

@@ -2,7 +2,8 @@
 #'
 #' @param filepath Path to the CSV file containing COVID19 Diagnostics Data
 #'
-#' @return A tibble with the COVID19 Diagnostics Data under column names used in the deidentifiedDB SQLite database.
+#' @return A tibble with the COVID19 Diagnostics Data under column names used
+#' in the deidentifiedDB SQLite database
 read_diagnostics_csv <- function(filepath) {
   test_tbl <- read_csv(filepath,
     n_max = 1,
