@@ -8,12 +8,42 @@
 #' @return Tibble with diagnostics data from REDDI
 #' @export
 #'
-#' @examples
-compile_new_diagnostics <- function(filepath, run_date_fmt = c("mdy")) {
-  new_diagnostics <- read_diagnostics_csv(filepath) %>%
+#' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
+compile_diagnostics_data <- function(filepath, run_date_fmt = c("mdy")) {
+  diagnostics_tbl <- read_diagnostics_csv(filepath) %>%
     polish_diagnostics()
 
-  stopifnot(nrow(new_diagnostics) != 0)
+  stopifnot(nrow(diagnostics_tbl) != 0)
 
-  return(new_diagnostics)
+  stopifnot(all(c(
+    "testkit_id",
+    "run_date",
+    "ct_rnasep_rep1",
+    "ct_rnasep_rep2",
+    "ct_N_rep1",
+    "ct_N_rep2",
+    "result",
+    "machine",
+    "thermocycler",
+    "pcr_type",
+    "plate",
+    "control"
+  ) %in% colnames(diagnostics_tbl)))
+
+  diagnostics_tbl <- diagnostics_tbl %>%
+    dplyr::select("testkit_id",
+           "run_date",
+           "ct_rnasep_rep1",
+           "ct_rnasep_rep2",
+           "ct_N_rep1",
+           "ct_N_rep2",
+           "result",
+           "machine",
+           "thermocycler",
+           "pcr_type",
+           "plate",
+           "control")
+
+  return(diagnostics_tbl)
 }

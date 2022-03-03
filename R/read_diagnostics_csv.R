@@ -4,8 +4,9 @@
 #'
 #' @return A tibble with the COVID19 Diagnostics Data under column names used
 #' in the deidentifiedDB SQLite database
+#' @importFrom magrittr "%>%"
 read_diagnostics_csv <- function(filepath) {
-  test_tbl <- read_csv(filepath,
+  test_tbl <- readr::read_csv(filepath,
     n_max = 1,
     show_col_types = FALSE
   )
@@ -70,14 +71,14 @@ read_diagnostics_csv <- function(filepath) {
       "ct_N_rep1", "ct_N_rep2", "result"
     ) %>%
     dplyr::mutate(result = replace(
-      result,
-      str_to_lower(result) %in% c(
+      .data$result,
+      stringr::str_to_lower(.data$result) %in% c(
         "inconclusive",
         "invalid"
       ),
       NA_character_
     )) %>%
-    distinct()
+    dplyr::distinct()
 
   return(output_tbl)
 }

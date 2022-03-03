@@ -2,16 +2,21 @@
 % Please edit documentation in R/plot_diagnostics_daily.R
 \name{plot_diagnostics_daily}
 \alias{plot_diagnostics_daily}
-\title{Plot}
+\title{Plot Counts of Different Diagnostics Result Categories Over Time}
 \usage{
-plot_diagnostics_daily(diagnostics_tbl)
+plot_diagnostics_daily(diagnostics_tbl, start_date = NULL, end_date = NULL)
 }
 \arguments{
-\item{diagnostics_tbl}{}
+\item{diagnostics_tbl}{Tibble with diagnostics data (should contain at least
+two columns: 'run date' and 'result')}
+
+\item{start_date}{start date for the plot}
+
+\item{end_date}{end date for the plot}
 }
 \value{
 
 }
 \description{
-Plot
+Plot Counts of Different Diagnostics Result Categories Over Time
 }

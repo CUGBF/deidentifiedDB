@@ -5,13 +5,16 @@
 #'
 #' @return
 #'
-#' @examples
+#' @importFrom magrittr "%>%"
 tidy_up_ct <- function(ct_value) {
-  tidied_ct <- parse_number(replace(
+  if (is.numeric(ct_value)){
+    return(ct_value)
+  }
+  tidied_ct <- readr::parse_number(replace(
     ct_value,
-    !str_detect(
+    !stringr::str_detect(
       ct_value,
-      regex("^[0-9.]*$",
+      stringr::regex("^[0-9.]*$",
         ignore_case = T
       )
     ),

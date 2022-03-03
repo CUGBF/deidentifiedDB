@@ -24,4 +24,10 @@ Imports:
     stringr (>= 1.4.0),
     tibble (>= 3.0.0),
     tidyr (>= 1.2.0),
-    zoo (>= 1.8-9)
+    zoo (>= 1.8-9),
+    magrittr (>= 2.0),
+    tidyselect (>= 1.1.1),
+    rlang
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
