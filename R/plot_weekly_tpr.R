@@ -24,12 +24,12 @@ plot_weekly_tpr <- function(diagnostics_tbl,
   }
 
   diagnostics_tbl %>%
-    dplyr::filter(result %in% c("positive", "negative")) %>%
-    dplyr::mutate(result = factor(result,
+    dplyr::filter(.data$result %in% c("positive", "negative")) %>%
+    dplyr::mutate(result = factor(.data$result,
                            levels = c("positive", "negative")
     )) %>%
-    dplyr::group_by(run_date, result) %>%
-    dplyr::summarise(count = n()) %>%
+    dplyr::group_by(.data$run_date, .data$result) %>%
+    dplyr::summarise(count = dplyr::n()) %>%
     ggpubr::ggbarplot(
       x = "run_date",
       y = "count",

@@ -6,6 +6,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-9662-5501"))
 Description: An R package to manage and explore the COVID-19 surveillance data collected at Clemson University.
 Depends: R (>= 4.1.0)
+biocViews:
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -27,7 +28,8 @@ Imports:
     zoo (>= 1.8-9),
     magrittr (>= 2.0),
     tidyselect (>= 1.1.1),
-    rlang
+    rlang,
+    Biostrings
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
