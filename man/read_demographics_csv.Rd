@@ -5,7 +5,11 @@
 \title{Read CSV file containing COVID19 Sample Collection and
 deidentified Demographics Data from REDDI}
 \usage{
-read_demographics_csv(filepath)
+read_demographics_csv(
+  filepath,
+  date_fmt = c("\%m/\%d/\%y"),
+  time_zone = "America/New_York"
+)
 }
 \arguments{
 \item{filepath}{Path to the CSV file containing Sample Collection and

@@ -62,7 +62,8 @@ read_diagnostics_csv <- function(filepath) {
       "not applicable", "Not Applicable", "NO AMP", "Inconclusive",
       "Invalid"
     ),
-    skip = 1
+    skip = 1,
+    show_col_types = FALSE
   ) %>%
     dplyr::select(
       "testkit_id", "hashed_id", "run_date", "machine",
