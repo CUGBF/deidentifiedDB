@@ -1,4 +1,4 @@
-test_that("Testing prepare_demographics_sc() !", {
+test_that("Testing pull_demographics() !", {
   data_demographics <- system.file("extdata",
                                    "data_demographics_sc.csv",
                                    package = "deidentifiedDB")
