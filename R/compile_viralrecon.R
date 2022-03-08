@@ -1,5 +1,5 @@
 #' Compile Results from nf-core/viralrecon for
-#' inclusion to deidentifiedDB database
+#' inclusion in deidentifiedDB database
 #'
 #' @param filepath Path to the multiqc summary csv for the viralrecon run
 #' @param run_date Start Date  of the viralrecon run
@@ -7,7 +7,8 @@
 #' @param viralrecon_version Version of viralrecon used for this run
 #' @param variant_caller Was 'iVar' or 'BCFTools' used for variant calling ?
 #'
-#' @return
+#' @return Tibble containing results from nf-core/viralrecon for
+#' inclusion to deidentifiedDB database
 #' @export
 #'
 #' @importFrom magrittr "%>%"

@@ -3,7 +3,7 @@
 \name{compile_viralrecon}
 \alias{compile_viralrecon}
 \title{Compile Results from nf-core/viralrecon for
-inclusion to deidentifiedDB database}
+inclusion in deidentifiedDB database}
 \usage{
 compile_viralrecon(
   filepath,
@@ -23,9 +23,10 @@ compile_viralrecon(
 \item{variant_caller}{Was 'iVar' or 'BCFTools' used for variant calling ?}
 }
 \value{
-
+Tibble containing results from nf-core/viralrecon for
+inclusion to deidentifiedDB database
 }
 \description{
 Compile Results from nf-core/viralrecon for
-inclusion to deidentifiedDB database
+inclusion in deidentifiedDB database
 }
