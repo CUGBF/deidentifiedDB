@@ -144,5 +144,8 @@ get_metadata_genbank <- function(testkit_ids,
     stringr::str_c(out_dir, "/", "genbank_metadata.tsv")
   )
 
-  return(submission_tbl)
+  tbl_list = list(int_tbl = internal_tbl,
+                  ext_tbl = submission_tbl)
+
+  return(tbl_list)
 }

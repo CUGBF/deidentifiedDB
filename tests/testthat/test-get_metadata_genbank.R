@@ -1,4 +1,4 @@
-test_that("Testing compile_viralrecon() !", {
+test_that("Testing get_metadata_genbank() !", {
   data_viralrecon <- system.file("extdata",
                                  "data_viralrecon.csv",
                                  package = "deidentifiedDB")
@@ -31,14 +31,17 @@ test_that("Testing compile_viralrecon() !", {
                        '117M18D6B544FA90Y1',
                        '117M18D54A8819F81W',
                        'ABC',
-                       '117M18EEC32748BAJI')
+                       '117M18EEC32748BAJI',
+                       '117M18D5796486135Z')
 
-  output_tbl <- get_metadata_genbank(testkit_ids = sub_testkit_ids,
+  output_list <- get_metadata_genbank(testkit_ids = sub_testkit_ids,
                                      out_dir = '.',
                                      sample_collection_tbl = sample_collection_tbl,
                                      demographics_tbl = demographics_tbl,
                                      viralrecon_tbl = viralrecon_tbl,
                                      deidentifiedDB = NULL)
+  output_tbl <- output_list[['ext_tbl']]
+  internal_tbl <- output_list[['int_tbl']]
 
   expect_false('6B4187CF6CW' %in% output_tbl$sequence_ID)
   expect_false('117M18EEC32748BAJI' %in% output_tbl$sequence_ID)
@@ -66,6 +69,11 @@ test_that("Testing compile_viralrecon() !", {
                  dplyr::pull(host),
                "Homo sapiens; Female, age 20")
 
+  expect_equal(unique(internal_tbl$compiled_on),
+               lubridate::date(lubridate::now()))
+
+  expect_equal(length(internal_tbl$testkit_id),
+               2)
 
 })
 
