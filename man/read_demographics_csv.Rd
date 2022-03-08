@@ -13,7 +13,9 @@ read_demographics_csv(
 }
 \arguments{
 \item{filepath}{Path to the CSV file containing Sample Collection and
-deidentified Demographics Data}
+deidentified Demographics Data
+#' @param date_fmt Format used to specify dates (Default: MM/DD/YYYY)
+#' @param time_zone Time zone for collection time (Default: "America/New_York")}
 }
 \value{
 A tibble with the Sample Collection and

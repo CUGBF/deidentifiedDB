@@ -1,6 +1,8 @@
 #' Format the column containing birth year to remove invalid entries
 #'
 #' @param birth_year Value from birth_year column
+#' @param max_year Birth year above which the entry is considered invalid.
+#' (Default: the year in which the sample was collected)
 #' @return Birth year as a numeric data type or NA
 #'
 #' @importFrom magrittr "%>%"

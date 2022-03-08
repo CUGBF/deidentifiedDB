@@ -8,6 +8,9 @@ tidy_up_birth_year(birth_year, max_year)
 }
 \arguments{
 \item{birth_year}{Value from birth_year column}
+
+\item{max_year}{Birth year above which the entry is considered invalid.
+(Default: the year in which the sample was collected)}
 }
 \value{
 Birth year as a numeric data type or NA
