@@ -3,7 +3,6 @@
 #' @param zip_code input zip code
 #'
 #' @return 5 character long zip code
-#' @export
 #'
 tidy_up_zip <- function(zip_code){
 

@@ -4,7 +4,6 @@
 #' from https://unece.org/trade/cefact/UNLOCODE-Download)
 #'
 #' @return Vector containing names of US and International states/provinces
-#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data

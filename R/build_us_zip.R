@@ -4,7 +4,6 @@
 #' (downloaded from UnitedStatesZipCodes.org)
 #'
 #' @return Tibble containing US zip codes
-#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data

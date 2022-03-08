@@ -5,7 +5,6 @@
 #'
 #' @return Final tibble containing sample collection data ready to be appended
 #' to deidentifiedDB SQLite database
-#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data

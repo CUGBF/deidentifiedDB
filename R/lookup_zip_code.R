@@ -7,7 +7,6 @@
 #' from https://unece.org/trade/cefact/UNLOCODE-Download)
 #'
 #' @return Tibble with validated USPS location information
-#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
