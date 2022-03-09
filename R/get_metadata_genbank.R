@@ -1,7 +1,6 @@
 #' Compile Metadata for GenBank Submission
 #'
 #' @param testkit_ids Testkit IDs to include in the GenBank Submission
-#' @param out_dir Path to the Output Directory
 #' @param sample_collection_tbl Path to the tibble containing
 #' sample collection data
 #' @param demographics_tbl Path to the tibble containing
@@ -11,24 +10,23 @@
 #' @param deidentifiedDB  Path to the deidentifiedDB SQLite File
 #'
 #' @return Tibble containing metadata information for genbank submission.
-#' A tsv file is also written to out_dir
+#'
 #' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 get_metadata_genbank <- function(testkit_ids,
-                                 out_dir,
                                  sample_collection_tbl = NULL,
                                  demographics_tbl = NULL,
                                  viralrecon_tbl = NULL,
-                                 deidentifiedDB = NULL
-                                 ) {
+                                 deidentifiedDB = NULL) {
+  stopifnot(all(!is.null(c(
+    sample_collection_tbl,
+    demographics_tbl,
+    viralrecon_tbl
+  ))) | !is.null(deidentifiedDB))
 
-  stopifnot(all(!is.null(c(sample_collection_tbl,
-            demographics_tbl,
-            viralrecon_tbl))) | !is.null(deidentifiedDB))
-
-  if (!is.null(deidentifiedDB)){
+  if (!is.null(deidentifiedDB)) {
     db_build <- DBI::dbConnect(RSQLite::SQLite(), deidentifiedDB)
 
     stopifnot(all(c(
@@ -80,9 +78,11 @@ get_metadata_genbank <- function(testkit_ids,
   metadata_tbl <- metadata_tbl %>%
     dplyr::mutate(
       age = lubridate::year(.data$collection_date) - birth_year,
-      age = replace(.data$age,
-                    is.na(.data$age),
-                    "unknown"),
+      age = replace(
+        .data$age,
+        is.na(.data$age),
+        "unknown"
+      ),
       gender = dplyr::recode(.data$gender,
         "M" = "Male",
         "F" = "Female"
@@ -124,11 +124,6 @@ get_metadata_genbank <- function(testkit_ids,
     ) %>%
     dplyr::mutate(compiled_on = lubridate::date(lubridate::now()))
 
-  readr::write_tsv(
-    internal_tbl,
-    stringr::str_c(out_dir, "/", "genbank_metadata_internal.tsv")
-  )
-
   submission_tbl <- metadata_tbl %>%
     dplyr::select(
       "sequence_ID",
@@ -139,13 +134,10 @@ get_metadata_genbank <- function(testkit_ids,
       "isolation-source"
     )
 
-  readr::write_tsv(
-    submission_tbl,
-    stringr::str_c(out_dir, "/", "genbank_metadata.tsv")
+  tbl_list <- list(
+    int_tbl = internal_tbl,
+    ext_tbl = submission_tbl
   )
-
-  tbl_list = list(int_tbl = internal_tbl,
-                  ext_tbl = submission_tbl)
 
   return(tbl_list)
 }

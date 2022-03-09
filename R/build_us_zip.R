@@ -22,7 +22,8 @@ build_us_zip <- function(filepath) {
   ) %in% colnames(test_tbl)))
 
   output_tbl <- readr::read_csv(filepath,
-                                show_col_types = FALSE) %>%
+    show_col_types = FALSE
+  ) %>%
     dplyr::select(
       "zip",
       "primary_city",

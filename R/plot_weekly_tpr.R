@@ -26,7 +26,7 @@ plot_weekly_tpr <- function(diagnostics_tbl,
   diagnostics_tbl %>%
     dplyr::filter(.data$result %in% c("positive", "negative")) %>%
     dplyr::mutate(result = factor(.data$result,
-                           levels = c("positive", "negative")
+      levels = c("positive", "negative")
     )) %>%
     dplyr::group_by(.data$run_date, .data$result) %>%
     dplyr::summarise(count = dplyr::n()) %>%

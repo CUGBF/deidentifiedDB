@@ -36,8 +36,8 @@ tidy_up_location <- function(sc_tbl,
   for (n in seq_along(location_combinations$zip_code)) {
     loc_com_row <- location_combinations[n, ]
     rows_to_change <- which((out_tbl$zip_code == loc_com_row[["zip_code"]]) &
-                              (out_tbl$city == loc_com_row[["city"]]) &
-                              (out_tbl$state == loc_com_row[["state"]]))
+      (out_tbl$city == loc_com_row[["city"]]) &
+      (out_tbl$state == loc_com_row[["state"]]))
     out_tbl[rows_to_change, "zip_code_usps"] <- loc_com_row[["zip_code_usps"]]
     out_tbl[rows_to_change, "city_usps"] <- loc_com_row[["city_usps"]]
     out_tbl[rows_to_change, "county_usps"] <- loc_com_row[["county_usps"]]

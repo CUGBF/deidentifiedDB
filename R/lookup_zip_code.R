@@ -66,23 +66,20 @@ lookup_zip_code <- function(location_tbl,
       # Is the city in current record within acceptable city entries for the state ?
       acceptable_city_status <- sum(stringr::str_detect(
         (us_zip_codes %>%
-           dplyr::filter(.data$state == location_combination[["state"]]) %>%
-           dplyr::pull(.data$acceptable_cities)),
+          dplyr::filter(.data$state == location_combination[["state"]]) %>%
+          dplyr::pull(.data$acceptable_cities)),
         location_combination[["city"]]
       ), na.rm = TRUE) > 0
 
       if (location_combination["state"] %in% us_geo_entities) {
         cleaned_up_zip <- tidy_up_zip(location_combination[["zip_code"]])
         if (!is.na(cleaned_up_zip) && cleaned_up_zip %in% us_zip_codes$zip) {
-
           in_zip <- cleaned_up_zip
           zip_df <- us_zip_codes %>%
             dplyr::filter(.data$zip == cleaned_up_zip) %>%
             dplyr::slice_head()
-
         } else if (!is.na(location_combination[["city"]]) && !is.na(location_combination[["state"]]) &&
           (location_combination["city"] %in% (cities_in_state))) {
-
           zip_df <- us_zip_codes %>%
             dplyr::filter(
               .data$state == location_combination[["state"]],
@@ -91,10 +88,8 @@ lookup_zip_code <- function(location_tbl,
             dplyr::arrange(.data$zip) %>%
             dplyr::slice_head()
           in_zip <- zip_df$zip
-
         } else if (!is.na(location_combination[["city"]]) && !is.na(location_combination[["state"]]) &&
           (acceptable_city_status)) {
-
           zip_df <- us_zip_codes %>%
             dplyr::filter(
               .data$state == location_combination[["state"]],
@@ -103,27 +98,22 @@ lookup_zip_code <- function(location_tbl,
             dplyr::arrange(.data$zip) %>%
             dplyr::slice_head()
           in_zip <- zip_df$zip
-
         } else {
-
           zip_df <- tibble::tibble(
             zip = NA_integer_,
             state = location_combination[["state"]],
             county = NA_character_,
             city = location_combination[["city"]],
-            country = "US")
-            in_zip <- zip_df$zip
-
+            country = "US"
+          )
+          in_zip <- zip_df$zip
         }
         in_state <- zip_df$state
         in_county <- zip_df$county
         in_city <- zip_df$primary_city
         in_country <- zip_df$country
-
       } else if (!(is.na(location_combination[["state"]]) || (location_combination[["state"]] %in% us_geo_entities))) {
-
         if (location_combination[["state"]] %in% global_regions_vec) {
-
           in_country <- names(which(global_regions_vec == location_combination[["state"]]))[1]
         } else {
           in_country <- NA_character_
@@ -133,10 +123,8 @@ lookup_zip_code <- function(location_tbl,
         in_county <- NA_character_
         in_city <- location_combination[["city"]]
       } else {
-
         cleaned_up_zip <- tidy_up_zip(location_combination[["zip_code"]])
         if (!is.na(cleaned_up_zip) && cleaned_up_zip %in% us_zip_codes$zip) {
-
           in_zip <- cleaned_up_zip
           zip_df <- us_zip_codes %>%
             dplyr::filter(.data$zip == cleaned_up_zip) %>%
@@ -145,15 +133,12 @@ lookup_zip_code <- function(location_tbl,
           in_county <- zip_df$county
           in_city <- zip_df$primary_city
           in_country <- zip_df$country
-
         } else {
-
           in_zip <- NA_integer_
           in_state <- NA_character_
           in_county <- NA_character_
           in_city <- NA_character_
           in_country <- NA_character_
-
         }
       }
       location_memory_row <- tibble::tibble(
@@ -166,8 +151,10 @@ lookup_zip_code <- function(location_tbl,
         state_usps = in_state,
         country_usps = in_country
       )
-      location_memory <- dplyr::bind_rows(location_memory,
-                                          location_memory_row)
+      location_memory <- dplyr::bind_rows(
+        location_memory,
+        location_memory_row
+      )
     }
     location_tbl[n, "zip_code_usps"] <- as.integer(in_zip)
     location_tbl[n, "city_usps"] <- in_city

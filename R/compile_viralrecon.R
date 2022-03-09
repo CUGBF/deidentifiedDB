@@ -14,9 +14,9 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 compile_viralrecon <- function(filepath,
-                                run_date,
-                                viralrecon_version,
-                                variant_caller = "iVar") {
+                               run_date,
+                               viralrecon_version,
+                               variant_caller = "iVar") {
   test_tbl <- readr::read_csv(filepath,
     n_max = 1,
     show_col_types = FALSE
@@ -43,7 +43,7 @@ compile_viralrecon <- function(filepath,
   output_tbl <- readr::read_csv(filepath,
     na = c(
       "", "NA", "<NA>", "Missing",
-      "Error 404", "None", "null","NULL", "Null"
+      "Error 404", "None", "null", "NULL", "Null"
     ),
     show_col_types = FALSE
   ) %>%
@@ -66,22 +66,22 @@ compile_viralrecon <- function(filepath,
       clade = "Nextclade clade"
     ) %>%
     dplyr::select(
-      'testkit_id',
-      'num_input_reads',
-      'num_trimmed_reads_fastp',
-      'pc_non_host_read',
-      'pc_mapped_reads',
-      'num_mapped_reads',
-      'num_trimmed_reads_ivar',
-      'median_coverage',
-      'pc_coverage_gt1x',
-      'pc_coverage_gt10x',
-      'num_snps',
-      'num_indels',
-      'num_missense_var',
-      'Ns_per_100kb',
-      'lineage',
-      'clade'
+      "testkit_id",
+      "num_input_reads",
+      "num_trimmed_reads_fastp",
+      "pc_non_host_read",
+      "pc_mapped_reads",
+      "num_mapped_reads",
+      "num_trimmed_reads_ivar",
+      "median_coverage",
+      "pc_coverage_gt1x",
+      "pc_coverage_gt10x",
+      "num_snps",
+      "num_indels",
+      "num_missense_var",
+      "Ns_per_100kb",
+      "lineage",
+      "clade"
     ) %>%
     dplyr::mutate(
       variant_caller = factor(variant_caller,

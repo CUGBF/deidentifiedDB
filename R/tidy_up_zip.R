@@ -4,8 +4,7 @@
 #'
 #' @return 5 character long zip code
 #'
-tidy_up_zip <- function(zip_code){
-
+tidy_up_zip <- function(zip_code) {
   int_zip <- stringr::str_trim(
     stringr::str_replace_all(
       zip_code,
@@ -26,7 +25,7 @@ tidy_up_zip <- function(zip_code){
 
   int_zip <- stringr::str_trim(
     stringr::str_sub(int_zip,
-            end = 5L
+      end = 5L
     ),
     c("both")
   )
@@ -36,7 +35,7 @@ tidy_up_zip <- function(zip_code){
     !stringr::str_detect(
       int_zip,
       stringr::regex("^[0-9]{5}$",
-                     ignore_case = T
+        ignore_case = T
       )
     ),
     NA_integer_

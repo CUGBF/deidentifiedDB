@@ -16,10 +16,12 @@ read_demographics_csv <- function(filepath,
                                   date_fmt = c("%m/%d/%y"),
                                   time_zone = "America/New_York") {
   test_tbl <- readr::read_csv(filepath,
-                       na = c("", "NA", "N/A", "<NA>", "null",
-                              "Null", "Missing", "Error 404"),
-                       n_max = 1,
-                       show_col_types = FALSE
+    na = c(
+      "", "NA", "N/A", "<NA>", "null",
+      "Null", "Missing", "Error 404"
+    ),
+    n_max = 1,
+    show_col_types = FALSE
   )
   stopifnot(all(c(
     "Testing Group Name",
@@ -44,9 +46,11 @@ read_demographics_csv <- function(filepath,
   ) %in% colnames(test_tbl)))
 
   output_tbl <- readr::read_csv(filepath,
-                         na = c("", "NA", "N/A", "<NA>",
-                                "null", "Null", "Missing", "Error 404"),
-                         show_col_types = FALSE
+    na = c(
+      "", "NA", "N/A", "<NA>",
+      "null", "Null", "Missing", "Error 404"
+    ),
+    show_col_types = FALSE
   ) %>%
     dplyr::rename(
       "test_group" = "Testing Group Name",
@@ -68,29 +72,32 @@ read_demographics_csv <- function(filepath,
       "testing_facility" = "Tested by"
     )
 
-  if ("Time Zone" %in% colnames(output_tbl)){
+  if ("Time Zone" %in% colnames(output_tbl)) {
     stopifnot(length(unique(output_tbl$`Time Zone`)) == 1)
     output_tbl <- output_tbl %>%
       dplyr::select(-c("Time Zone"))
   }
 
   output_tbl <- output_tbl %>%
-    dplyr::mutate(dplyr::across(tidyselect::vars_select_helpers$where(is.character),
-                                stringr::str_trim),
-                  `Collection Date` = lubridate::parse_date_time(.data$`Collection Date`,
-                                                                 orders = date_fmt,
-                                                                 tz = time_zone
-                  )
+    dplyr::mutate(dplyr::across(
+      tidyselect::vars_select_helpers$where(is.character),
+      stringr::str_trim
+    ),
+    `Collection Date` = lubridate::parse_date_time(.data$`Collection Date`,
+      orders = date_fmt,
+      tz = time_zone
+    )
     ) %>%
     tidyr::unite(collection_date, .data$`Collection Date`, .data$`Collection Time`,
-                 sep = " ") %>%
+      sep = " "
+    ) %>%
     dplyr::mutate(
       collection_date = lubridate::as_datetime(.data$collection_date,
-                                               tz = time_zone
+        tz = time_zone
       ),
       result_date = lubridate::as_date(lubridate::parse_date_time(.data$result_date,
-                                                                    orders = date_fmt,
-                                                                    tz = time_zone
+        orders = date_fmt,
+        tz = time_zone
       ),
       tz = time_zone
       )
@@ -98,7 +105,8 @@ read_demographics_csv <- function(filepath,
 
   output_tbl <- output_tbl %>%
     dplyr::mutate(birth_year = tidy_up_birth_year(.data$birth_year,
-                                                  max_year = max(lubridate::year(.data$collection_date))))
+      max_year = max(lubridate::year(.data$collection_date))
+    ))
 
 
   return(output_tbl)

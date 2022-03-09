@@ -16,8 +16,8 @@ do_prelim_tidy_sc <- function(sample_collection_tbl,
                               time_zone = "America/New_York") {
   output_tbl <- sample_collection_tbl %>%
     dplyr::mutate(
-      population = .data[['teskit_sku']],
-      population = dplyr::recode(.data[['population']],
+      population = .data[["teskit_sku"]],
+      population = dplyr::recode(.data[["population"]],
         `CLM-SALIVA-00001` = "Athletics",
         `CLM-SALIVA-00002` = "University",
         `CLM-SALIVA-00003` = "Community",
@@ -28,19 +28,19 @@ do_prelim_tidy_sc <- function(sample_collection_tbl,
         `G7-PCR-Saliva` = NA_character_,
       ),
       dplyr::across(.cols = -c(
-        .data[['zip_code']],
-        .data[['patient_id']],
-        .data[['testkit_id']],
-        .data[['collection_date']],
-        .data[['result_date']],
-        .data[['birth_year']]
+        .data[["zip_code"]],
+        .data[["patient_id"]],
+        .data[["testkit_id"]],
+        .data[["collection_date"]],
+        .data[["result_date"]],
+        .data[["birth_year"]]
       ), stringr::str_to_upper),
-      order_priority = dplyr::recode(.data[['order_priority']],
+      order_priority = dplyr::recode(.data[["order_priority"]],
         "PRIORITY" = "EXPOSED",
         "STANDARD" = "SURVEILLANCE",
         "STAT" = "SYMPTOMATIC"
       ),
-      gender = dplyr::recode(.data[['gender']],
+      gender = dplyr::recode(.data[["gender"]],
         "MALE" = "M",
         "FEMALE" = "F"
       )

@@ -7,7 +7,7 @@
 #'
 #' @importFrom magrittr "%>%"
 tidy_up_ct <- function(ct_value) {
-  if (is.numeric(ct_value)){
+  if (is.numeric(ct_value)) {
     return(ct_value)
   }
   tidied_ct <- readr::parse_number(replace(

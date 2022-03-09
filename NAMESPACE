@@ -2,8 +2,10 @@
 
 export(compile_biorepo)
 export(compile_diagnostics_data)
+export(compile_genbank)
 export(compile_sc_data)
 export(compile_viralrecon)
+export(create_fasta_genbank)
 export(get_metadata_genbank)
 export(get_us_entities)
 export(inspect_patient)
