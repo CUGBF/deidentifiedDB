@@ -13,10 +13,12 @@ pull_demographics <- function(demographics_sc_tbl) {
     "patient_id",
     "birth_year",
     "race",
-    "ethnicity"
+    "ethnicity",
+    "collection_date"
   ) %in% colnames(demographics_sc_tbl)))
 
   output_tbl <- demographics_sc_tbl %>%
+    dplyr::arrange(patient_id, desc(collection_date)) %>%
     dplyr::select(
       "patient_id",
       "birth_year",
@@ -24,8 +26,8 @@ pull_demographics <- function(demographics_sc_tbl) {
       "ethnicity"
     ) %>%
     dplyr::filter(!is.na(patient_id)) %>%
-    dplyr::distinct() %>%
-    dplyr::arrange(patient_id)
+    dplyr::distinct()
+
 
   output_tbl <- output_tbl %>%
     dplyr::mutate(
