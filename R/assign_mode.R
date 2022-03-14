@@ -10,19 +10,19 @@
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
-assign_mode <- function(multi_data_patients_tbl){
-
+assign_mode <- function(multi_data_patients_tbl) {
   stopifnot("patient_id" %in% colnames(multi_data_patients_tbl))
 
   output_tbl <- multi_data_patients_tbl %>%
     dplyr::group_by(.data$patient_id) %>%
-    dplyr::mutate(dplyr::across(dplyr::everything(),
-                              get_mode)) %>%
+    dplyr::mutate(dplyr::across(
+      dplyr::everything(),
+      get_mode
+    )) %>%
     dplyr::distinct() %>%
     dplyr::ungroup()
 
   stopifnot(nrow(output_tbl) == length(unique(output_tbl$patient_id)))
 
   return(output_tbl)
-
 }

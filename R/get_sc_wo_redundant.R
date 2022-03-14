@@ -2,8 +2,10 @@
 #' probable single infection event
 #'
 #' @param sc_tbl Sample Collection table from deidentifiedDB database
-#' @param start_date Filter sample collection table for samples collected after
-#' this date. Provide date as in "2021-08-01" for August 1, 2021
+#' @param start_date Filter sample collection table for samples collected on or
+#' after this date. Provide date as in "2021-08-01" for August 1, 2021
+#' @param end_date Filter sample collection table for samples collected on or
+#' before this date. Provide date as in "2021-08-01" for August 1, 2021
 #' @param n_days Duration of time (in days) for which only the first collected
 #' COVID-19 positive sample  for a patient is retained
 #'
@@ -15,6 +17,7 @@
 #' @importFrom rlang .data
 get_sc_wo_redundant <- function(sc_tbl,
                                 start_date = "2021-01-01",
+                                end_date = lubridate::date(lubridate::now()),
                                 n_days = 30) {
   stopifnot(all(c(
     "testkit_id",
@@ -31,6 +34,7 @@ get_sc_wo_redundant <- function(sc_tbl,
     dplyr::mutate(
       collection_date = lubridate::date(lubridate::as_datetime(.data$collection_date)),
       collection_week = lubridate::week(collection_date),
+      collection_month = zoo::as.yearmon(collection_date),
       dplyr::across(
         c(
           .data$rymedi_result,
@@ -45,6 +49,7 @@ get_sc_wo_redundant <- function(sc_tbl,
     dplyr::filter(
       !(is.na(.data$collection_date) | is.na(.data$patient_id)),
       .data$collection_date >= start_date,
+      .data$collection_date <= end_date,
       stringr::str_detect(
         .data$performing_facility,
         "CLEMSON"
@@ -55,6 +60,7 @@ get_sc_wo_redundant <- function(sc_tbl,
       "testkit_id",
       "rymedi_result",
       "collection_week",
+      "collection_month",
       "collection_date",
       "population",
       "order_priority",

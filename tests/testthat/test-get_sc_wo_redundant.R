@@ -54,6 +54,7 @@ test_that("Testing get_sc_wo_redundant() !", {
       "testkit_id",
       "rymedi_result",
       "collection_week",
+      "collection_month",
       "collection_date",
       "population",
       "order_priority",

@@ -3,6 +3,8 @@
 #' @param sc_tbl Sample Collection table from deidentifiedDB database
 #' @param start_date Filter sample collection table for samples collected after
 #' this date. Provide date as in "2021-08-01" for August 1, 2021
+#' @param end_date Filter sample collection table for samples collected on or
+#' before this date. Provide date as in "2021-08-01" for August 1, 2021
 #' @param n_days Duration of time (in days) for which only the first collected
 #' COVID-19 positive sample  for a patient is retained
 #'
@@ -14,6 +16,7 @@
 #' @importFrom rlang .data
 get_positivity <- function(sc_tbl,
                            start_date = "2021-01-01",
+                           end_date = lubridate::date(lubridate::now()),
                            n_days = 30) {
   stopifnot(all(c(
     "testkit_id",
@@ -27,6 +30,7 @@ get_positivity <- function(sc_tbl,
 
   sc_tbl_no_missing <- get_sc_wo_redundant(sc_tbl,
     start_date = start_date,
+    end_date = end_date,
     n_days = n_days
   )
 
