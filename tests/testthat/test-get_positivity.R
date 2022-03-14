@@ -21,19 +21,64 @@ test_that("Testing get_positivity() !", {
     "ATHLETICS"
   ) %in% unique(output_tbl$population)))
 
-  expect_equal(output_tbl %>%
-    dplyr::filter(
-      collection_week == 4,
-      order_priority == "SURVEILLANCE",
-      population == "UNIVERSITY"
-    ) %>%
-    dplyr::pull(POSITIVITY), )
+  expect_true(dplyr::near(
+    output_tbl %>%
+      dplyr::filter(
+        collection_week == 18,
+        order_priority == "SURVEILLANCE",
+        population == "UNIVERSITY"
+      ) %>%
+      dplyr::pull(POSITIVE),
+    3
+  ))
+
+  expect_true(dplyr::near(
+    output_tbl %>%
+      dplyr::filter(
+        collection_week == 18,
+        order_priority == "SURVEILLANCE",
+        population == "UNIVERSITY"
+      ) %>%
+      dplyr::pull(NEGATIVE),
+    873
+  ))
+
+  expect_true(dplyr::near(
+    output_tbl %>%
+      dplyr::filter(
+        collection_week == 18,
+        order_priority == "SURVEILLANCE",
+        population == "UNIVERSITY"
+      ) %>%
+      dplyr::pull(POSITIVITY),
+    round((3 / 876) * 100), 2
+  ))
+
+  expect_equal(
+    output_tbl %>%
+      dplyr::filter(
+        collection_week == 25,
+        order_priority == "SURVEILLANCE",
+        population == "UNIVERSITY"
+      ) %>%
+      dplyr::pull(POSITIVITY),
+    0
+  )
+
 
   expect_equal(output_tbl %>%
     dplyr::filter(
-      collection_week == 5,
+      collection_week == 25,
       order_priority == "EXPOSED",
       population == "ATHLETICS"
     ) %>%
-    dplyr::pull(POSITIVITY), )
+    nrow(), 0)
+
+  expect_equal(output_tbl %>%
+    dplyr::filter(
+      collection_week == 25,
+      order_priority == "SYMPTOMATIC",
+      population == "UNIVERSITY"
+    ) %>%
+    dplyr::pull(NEGATIVE), 1)
 })
