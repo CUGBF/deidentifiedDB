@@ -1,4 +1,4 @@
-#' Get Nextclade Distribution of Sequenced Samples
+#' Get Pangolin Lineage Distribution of Sequenced Samples
 #'
 #' @param viralrecon_tbl viralrecon table from deidentifiedDB database
 #' @param sample_collection_tbl Sample Collection table from deidentifiedDB database
@@ -10,21 +10,21 @@
 #' COVID-19 positive sample  for a patient is retained
 #'
 #' @return Tibble containing monthly count of sequenced samples in
-#' each Nextclade
+#' each Pangolin lineage
 #' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
-get_nextclade_distribution <- function(viralrecon_tbl,
-                                       sample_collection_tbl,
-                                       start_date = "2021-01-01",
-                                       end_date = lubridate::date(lubridate::now()),
-                                       n_days = 30) {
+get_pangolin_distribution <- function(viralrecon_tbl,
+                                      sample_collection_tbl,
+                                      start_date = "2021-01-01",
+                                      end_date = lubridate::date(lubridate::now()),
+                                      n_days = 30) {
   stopifnot(nrow(viralrecon_tbl) > 0 &
     nrow(sample_collection_tbl) > 0)
   stopifnot(all(c(
     "testkit_id",
-    "clade",
+    "lineage",
     "run_date_time"
   ) %in% colnames(viralrecon_tbl)))
 
@@ -35,10 +35,10 @@ get_nextclade_distribution <- function(viralrecon_tbl,
     "collection_date"
   ) %in% colnames(sample_collection_tbl)))
 
-  clade_assignment_tbl <- viralrecon_tbl %>%
+  lineage_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
-      !is.na(clade),
-      stringr::str_to_lower(clade) != "none"
+      !is.na(lineage),
+      stringr::str_to_lower(lineage) != "none"
     ) %>%
     dplyr::group_by(.data$testkit_id) %>%
     dplyr::arrange(desc(.data$run_date_time)) %>%
@@ -46,7 +46,7 @@ get_nextclade_distribution <- function(viralrecon_tbl,
     dplyr::ungroup() %>%
     dplyr::select(
       "testkit_id",
-      "clade"
+      "lineage"
     )
 
   sc_tbl <- get_sc_wo_redundant(
@@ -59,7 +59,7 @@ get_nextclade_distribution <- function(viralrecon_tbl,
   sc_positive_tbl <- sc_tbl %>%
     dplyr::filter(
       .data$rymedi_result == c("POSITIVE"),
-      .data$testkit_id %in% clade_assignment_tbl$testkit_id
+      .data$testkit_id %in% lineage_assignment_tbl$testkit_id
     ) %>%
     dplyr::select(
       "testkit_id",
@@ -67,23 +67,23 @@ get_nextclade_distribution <- function(viralrecon_tbl,
       "collection_date"
     )
 
-  clade_assignment_tbl <- dplyr::inner_join(clade_assignment_tbl,
+  lineage_assignment_tbl <- dplyr::inner_join(lineage_assignment_tbl,
     sc_positive_tbl,
     by = "testkit_id"
   )
 
-  output_tbl <- clade_assignment_tbl %>%
+  output_tbl <- lineage_assignment_tbl %>%
     dplyr::group_by(
       .data$collection_month,
-      .data$clade
+      .data$lineage
     ) %>%
     dplyr::summarise(n_sequenced_samples = dplyr::n())
 
-  clades_present <- sort(unique(output_tbl$clade))
+  lineages_present <- sort(unique(output_tbl$lineage))
 
   output_tbl <- output_tbl %>%
-    dplyr::mutate(clade = factor(.data$clade,
-      levels = clades_present
+    dplyr::mutate(lineage = factor(.data$lineage,
+      levels = lineages_present
     ))
 
   return(output_tbl)
