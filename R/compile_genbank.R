@@ -30,10 +30,16 @@ compile_genbank <- function(testkit_ids,
     deidentifiedDB = deidentifiedDB
   )
 
+  stopifnot(names(output_list) == c("int_tbl", "ext_tbl"))
+  stopifnot(nrow(output_list[["int_tbl"]]) > 0)
+  stopifnot(nrow(output_list[["ext_tbl"]]) > 0)
+
   output_list[["seqs"]] <- create_fasta_genbank(
     input_dir = seq_dir,
     internal_metadata_tbl = output_list[["int_tbl"]]
   )
+
+  stopifnot(length(output_list[["seqs"]]) > 0)
 
   return(output_list)
 }

@@ -89,7 +89,7 @@ get_metadata_genbank <- function(testkit_ids,
       ),
       city = replace(
         .data$city,
-        !is.na(.data$city),
+        is.na(.data$city),
         "CLEMSON"
       ),
       city = replace(
