@@ -24,20 +24,18 @@ assign_mode <- function(multi_data_patients_tbl) {
   deduplicated_tbl <- multi_data_patients_tbl %>%
     dplyr::group_by(.data$patient_id) %>%
     dplyr::arrange(desc(.data$collection_date)) %>%
+    dplyr::select(
+      "patient_id",
+      "birth_year",
+      "race",
+      "ethnicity"
+    ) %>%
     dplyr::mutate(dplyr::across(
       dplyr::everything(),
       get_mode
     )) %>%
     dplyr::distinct() %>%
     dplyr::ungroup()
-
-  deduplicated_tbl <- deduplicated_tbl %>%
-    dplyr::select(
-      "patient_id",
-      "birth_year",
-      "race",
-      "ethnicity"
-    )
 
   output_tbl <- tidy_up_race(deduplicated_tbl)
 
