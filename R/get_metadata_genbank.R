@@ -45,7 +45,8 @@ get_metadata_genbank <- function(testkit_ids,
     dplyr::filter(
       .data$testkit_id %in% testkit_ids,
       !is.na(.data$median_coverage),
-      !is.na(.data$clade)
+      !is.na(.data$clade),
+      stringr::str_to_lower(.data$clade) != "none"
     )
 
   metadata_sc <- sample_collection_tbl %>%
