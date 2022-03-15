@@ -18,32 +18,36 @@ compile_diagnostics_data <- function(filepath, run_date_fmt = c("mdy")) {
 
   stopifnot(all(c(
     "testkit_id",
+    "hashed_id",
     "run_date",
+    "machine",
+    "plate",
+    "thermocycler",
+    "mastermix" ,
+    "pcr_type" ,
     "ct_rnasep_rep1",
     "ct_rnasep_rep2",
     "ct_N_rep1",
     "ct_N_rep2",
     "result",
-    "machine",
-    "thermocycler",
-    "pcr_type",
-    "plate",
     "control"
   ) %in% colnames(diagnostics_tbl)))
 
   diagnostics_tbl <- diagnostics_tbl %>%
     dplyr::select(
       "testkit_id",
+      "hashed_id",
       "run_date",
+      "machine",
+      "plate",
+      "thermocycler",
+      "mastermix" ,
+      "pcr_type" ,
       "ct_rnasep_rep1",
       "ct_rnasep_rep2",
       "ct_N_rep1",
       "ct_N_rep2",
       "result",
-      "machine",
-      "thermocycler",
-      "pcr_type",
-      "plate",
       "control"
     )
 

@@ -5,6 +5,11 @@ test_that("Testing compile_diagnostics_data() !", {
   output_tbl <- compile_diagnostics_data(data_diagnostics)
 
   expect_equal(
+    ncol(output_tbl),
+    14
+  )
+
+  expect_equal(
     output_tbl %>%
       dplyr::filter(testkit_id == "117M192AF961CF32JO") %>%
       dplyr::pull(ct_N_rep1),
