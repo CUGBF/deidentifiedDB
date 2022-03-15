@@ -17,7 +17,6 @@ compile_biorepo <- function(filepath) {
     show_col_types = FALSE
   )
   stopifnot(all(c(
-    "TestKit ID",
     "Box IDN",
     "Box Position 1",
     "Vial IDN 1",
@@ -26,6 +25,9 @@ compile_biorepo <- function(filepath) {
     "Box Position 3",
     "Vial IDN 3"
   ) %in% colnames(test_tbl)))
+
+  stopifnot(any(c("TestKit ID",
+                  "TestKitID") %in% colnames(test_tbl)))
 
   output_tbl <- readr::read_csv(filepath,
     col_names = c(
