@@ -103,7 +103,7 @@ lookup_zip_code <- function(location_tbl,
             zip = NA_integer_,
             state = location_combination[["state"]],
             county = NA_character_,
-            city = location_combination[["city"]],
+            primary_city = location_combination[["city"]],
             country = "US"
           )
           in_zip <- zip_df$zip
