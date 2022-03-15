@@ -29,9 +29,9 @@ create_fasta_genbank <- function(input_dir,
         .data$testkit_id,
         ".consensus.fa"
       ),
-      file_found = ifelse(.data$fasta_file %in% list_of_fasta_files,
-        TRUE,
-        FALSE
+      file_found = dplyr::case_when(
+        .data$fasta_file %in% list_of_fasta_files ~ TRUE,
+        !(.data$fasta_file %in% list_of_fasta_files) ~ FALSE
       )
     ))
 

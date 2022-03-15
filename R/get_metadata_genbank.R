@@ -47,7 +47,9 @@ get_metadata_genbank <- function(testkit_ids,
       !is.na(.data$median_coverage),
       !is.na(.data$clade),
       stringr::str_to_lower(.data$clade) != "none"
-    )
+    ) %>%
+    dplyr::select("testkit_id") %>%
+    dplyr::distinct()
 
   metadata_sc <- sample_collection_tbl %>%
     dplyr::filter(.data$testkit_id %in% metadata_vr$testkit_id) %>%
@@ -62,14 +64,16 @@ get_metadata_genbank <- function(testkit_ids,
     ) %>%
     dplyr::mutate(collection_date = lubridate::date(
       lubridate::as_datetime(.data$collection_date)
-    ))
+    )) %>%
+    dplyr::distinct()
 
   metadata_dem <- demographics_tbl %>%
     dplyr::filter(.data$patient_id %in% metadata_sc$patient_id) %>%
     dplyr::select(
       "patient_id",
       "birth_year"
-    )
+    ) %>%
+    dplyr::distinct()
 
   metadata_tbl <- dplyr::inner_join(metadata_sc,
     metadata_dem,
@@ -123,6 +127,7 @@ get_metadata_genbank <- function(testkit_ids,
       "testkit_id",
       "sequence_ID"
     ) %>%
+    dplyr::distinct() %>%
     dplyr::mutate(compiled_on = lubridate::date(lubridate::now()))
 
   submission_tbl <- metadata_tbl %>%
@@ -133,7 +138,8 @@ get_metadata_genbank <- function(testkit_ids,
       "host",
       "country",
       "isolation-source"
-    )
+    ) %>%
+    dplyr::distinct()
 
   tbl_list <- list(
     int_tbl = internal_tbl,
