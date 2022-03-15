@@ -22,6 +22,8 @@ test_that("Testing compile_sc_data() !", {
     intl_regions
   )
 
+  expect_equal(nrow(tidy_tbl), 19)
+
   # case I
   p1 <- tidy_tbl %>%
     dplyr::filter(testkit_id == "117M18EEC3274A55BS")

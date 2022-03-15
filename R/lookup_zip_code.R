@@ -180,12 +180,17 @@ lookup_zip_code <- function(location_tbl,
         location_memory,
         location_memory_row
       )
+
+      rm(location_memory_row)
     }
-    location_tbl[n, "zip_code_usps"] <- as.integer(in_zip)
-    location_tbl[n, "city_usps"] <- in_city
-    location_tbl[n, "county_usps"] <- in_county
-    location_tbl[n, "state_usps"] <- in_state
-    location_tbl[n, "country_usps"] <- in_country
+
+    if (any(!is.na(c(in_zip, in_city, in_county, in_state, in_country)))){
+      location_tbl[n, "zip_code_usps"] <- as.integer(in_zip)
+      location_tbl[n, "city_usps"] <- in_city
+      location_tbl[n, "county_usps"] <- in_county
+      location_tbl[n, "state_usps"] <- in_state
+      location_tbl[n, "country_usps"] <- in_country
+    }
 
     rm(list = c("in_zip",
                 "in_city",
