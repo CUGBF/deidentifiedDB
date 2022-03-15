@@ -1,6 +1,12 @@
 test_that("Testing assign_mode() !", {
   input_tbl <- tibble::tibble(
     patient_id = c("A", "B", "A", "C", "C", "A"),
+    collection_date = lubridate::as_date(c('2021-10-19',
+                                           '2021-10-19',
+                                           '2021-10-18',
+                                           '2021-10-19',
+                                           '2021-10-18',
+                                           '2021-10-17')),
     birth_year = c(1990, 2001, 1990, 2002, 2003, 1989),
     city = c("Clemson", "Central", "Seneca", "Clemson", "Anderson", "Clemson"),
     student = c(FALSE, TRUE, TRUE, FALSE, FALSE, TRUE),

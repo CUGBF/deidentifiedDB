@@ -15,6 +15,7 @@
 assign_mode <- function(multi_data_patients_tbl) {
   stopifnot(all(c(
     "patient_id",
+    "collection_date",
     "birth_year",
     "race",
     "ethnicity"
@@ -22,6 +23,7 @@ assign_mode <- function(multi_data_patients_tbl) {
 
   deduplicated_tbl <- multi_data_patients_tbl %>%
     dplyr::group_by(.data$patient_id) %>%
+    dplyr::arrange(desc(.data$collection_date)) %>%
     dplyr::mutate(dplyr::across(
       dplyr::everything(),
       get_mode
