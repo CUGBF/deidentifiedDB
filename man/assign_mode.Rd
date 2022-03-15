@@ -8,8 +8,9 @@ demographics information}
 assign_mode(multi_data_patients_tbl)
 }
 \arguments{
-\item{multi_data_patients_tbl}{Tibble containing demographics data for
-users with discrepancy in demographics information}
+\item{multi_data_patients_tbl}{Tibble containing demographics and
+sample_collection data for users with discrepancy in demographics
+information}
 }
 \value{
 Tibble containing demographics data for

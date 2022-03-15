@@ -9,7 +9,6 @@
 #' @return A tibble with the Sample Collection and
 #' the deidentified Demographics Data
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 read_demographics_csv <- function(filepath,

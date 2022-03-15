@@ -5,13 +5,21 @@
 \title{Get COVID-19 positive samples after excluding redundant samples in a
 probable single infection event}
 \usage{
-get_sc_wo_redundant(sc_tbl, start_date = "2021-01-01", n_days = 30)
+get_sc_wo_redundant(
+  sc_tbl,
+  start_date = "2021-01-01",
+  end_date = lubridate::date(lubridate::now()),
+  n_days = 30
+)
 }
 \arguments{
 \item{sc_tbl}{Sample Collection table from deidentifiedDB database}
 
-\item{start_date}{Filter sample collection table for samples collected after
-this date. Provide date as in "2021-08-01" for August 1, 2021}
+\item{start_date}{Filter sample collection table for samples collected on or
+after this date. Provide date as in "2021-08-01" for August 1, 2021}
+
+\item{end_date}{Filter sample collection table for samples collected on or
+before this date. Provide date as in "2021-08-01" for August 1, 2021}
 
 \item{n_days}{Duration of time (in days) for which only the first collected
 COVID-19 positive sample  for a patient is retained}

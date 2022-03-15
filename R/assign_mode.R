@@ -13,9 +13,14 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 assign_mode <- function(multi_data_patients_tbl) {
-  stopifnot("patient_id" %in% colnames(multi_data_patients_tbl))
+  stopifnot(all(c(
+    "patient_id",
+    "birth_year",
+    "race",
+    "ethnicity"
+  ) %in% colnames(multi_data_patients_tbl)))
 
-  output_tbl <- multi_data_patients_tbl %>%
+  deduplicated_tbl <- multi_data_patients_tbl %>%
     dplyr::group_by(.data$patient_id) %>%
     dplyr::mutate(dplyr::across(
       dplyr::everything(),
@@ -23,6 +28,16 @@ assign_mode <- function(multi_data_patients_tbl) {
     )) %>%
     dplyr::distinct() %>%
     dplyr::ungroup()
+
+  deduplicated_tbl <- deduplicated_tbl %>%
+    dplyr::select(
+      "patient_id",
+      "birth_year",
+      "race",
+      "ethnicity"
+    )
+
+  output_tbl <- tidy_up_race(deduplicated_tbl)
 
   stopifnot(nrow(output_tbl) == length(unique(output_tbl$patient_id)))
 
