@@ -1,8 +1,9 @@
 #' Assign most common user-provided value in case of discrepancy in patient
 #' demographics information
 #'
-#' @param multi_data_patients_tbl Tibble containing demographics data for
-#' users with discrepancy in demographics information
+#' @param multi_data_patients_tbl Tibble containing demographics and
+#' sample_collection data for users with discrepancy in demographics
+#' information
 #'
 #' @return Tibble containing demographics data for
 #' users with discrepancy in demographics information replace by mode values
