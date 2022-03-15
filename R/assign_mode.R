@@ -7,6 +7,7 @@
 #' @return Tibble containing demographics data for
 #' users with discrepancy in demographics information replace by mode values
 #' (most common value provided by the user)
+#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
