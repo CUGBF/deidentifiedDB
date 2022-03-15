@@ -1,6 +1,6 @@
 Package: deidentifiedDB
 Title: Utility to Manage Clemson University COVID-19 Surveillance Data
-Version: 0.9
+Version: 0.95
 Authors@R: 
     person("Stevin", "Wilson", , "stevinw@clemson.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9662-5501"))

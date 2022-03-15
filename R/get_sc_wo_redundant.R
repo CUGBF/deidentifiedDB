@@ -33,8 +33,8 @@ get_sc_wo_redundant <- function(sc_tbl,
   sc_tbl_no_missing <- sc_tbl %>%
     dplyr::mutate(
       collection_date = lubridate::date(lubridate::as_datetime(.data$collection_date)),
-      collection_week = lubridate::week(collection_date),
-      collection_month = zoo::as.yearmon(collection_date),
+      collection_week = lubridate::week(.data$collection_date),
+      collection_month = zoo::as.yearmon(.data$collection_date),
       dplyr::across(
         c(
           .data$rymedi_result,

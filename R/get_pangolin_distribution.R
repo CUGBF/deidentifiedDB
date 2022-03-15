@@ -37,11 +37,11 @@ get_pangolin_distribution <- function(viralrecon_tbl,
 
   lineage_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
-      !is.na(lineage),
-      stringr::str_to_lower(lineage) != "none"
+      !is.na(.data$lineage),
+      stringr::str_to_lower(.data$lineage) != "none"
     ) %>%
     dplyr::group_by(.data$testkit_id) %>%
-    dplyr::arrange(desc(.data$run_date_time)) %>%
+    dplyr::arrange(dplyr::desc(.data$run_date_time)) %>%
     dplyr::slice_head() %>%
     dplyr::ungroup() %>%
     dplyr::select(

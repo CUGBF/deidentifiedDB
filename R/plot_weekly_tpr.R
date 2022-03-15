@@ -5,11 +5,11 @@
 #' @param start_date start date for the plot
 #' @param end_date end date for the plot
 #'
-#' @return
+#' @return Bar Plot Conveying Weekly Test Positivity Rate
 #' @export
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 plot_weekly_tpr <- function(diagnostics_tbl,
                             start_date = NULL,
                             end_date = NULL) {

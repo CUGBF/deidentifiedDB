@@ -63,7 +63,6 @@ lookup_zip_code <- function(location_tbl,
     stopifnot(nrow(temp_location_info) <= 1)
 
     if (nrow(temp_location_info) == 1) {
-
       in_zip <- as.integer(temp_location_info %>%
         dplyr::pull(.data$zip_code_usps))
 
@@ -78,7 +77,6 @@ lookup_zip_code <- function(location_tbl,
 
       in_country <- temp_location_info %>%
         dplyr::pull(.data$country_usps)
-
     } else {
       # cities in the state of the current record
       cities_in_state <- us_zip_codes %>%
@@ -184,7 +182,7 @@ lookup_zip_code <- function(location_tbl,
       rm(location_memory_row)
     }
 
-    if (any(!is.na(c(in_zip, in_city, in_county, in_state, in_country)))){
+    if (any(!is.na(c(in_zip, in_city, in_county, in_state, in_country)))) {
       location_tbl[n, "zip_code_usps"] <- as.integer(in_zip)
       location_tbl[n, "city_usps"] <- in_city
       location_tbl[n, "county_usps"] <- in_county
@@ -192,11 +190,13 @@ lookup_zip_code <- function(location_tbl,
       location_tbl[n, "country_usps"] <- in_country
     }
 
-    rm(list = c("in_zip",
-                "in_city",
-                "in_county",
-                "in_state",
-                "in_country"))
+    rm(list = c(
+      "in_zip",
+      "in_city",
+      "in_county",
+      "in_state",
+      "in_country"
+    ))
   }
 
   return(location_tbl)

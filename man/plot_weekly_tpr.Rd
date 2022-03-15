@@ -15,7 +15,7 @@ two columns: 'run date' and 'result')}
 \item{end_date}{end date for the plot}
 }
 \value{
-
+Bar Plot Conveying Weekly Test Positivity Rate
 }
 \description{
 Plot Weekly Test Positivity Rate

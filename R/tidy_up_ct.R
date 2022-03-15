@@ -3,9 +3,10 @@
 #' @param ct_value Value from any of the columns containing Ct values from
 #' qRT-PCR in the diagnostics table
 #'
-#' @return
+#' @return ct value as a number (or NA if cannot be coerced to number)
 #'
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 tidy_up_ct <- function(ct_value) {
   if (is.numeric(ct_value)) {
     return(ct_value)

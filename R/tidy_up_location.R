@@ -37,11 +37,11 @@ tidy_up_location <- function(sc_tbl,
     loc_com_row <- location_combinations[n, ]
 
     rows_to_change <- which((out_tbl$zip_code == loc_com_row %>%
-                               dplyr::pull(.data$zip_code)) &
+      dplyr::pull(.data$zip_code)) &
       (out_tbl$city == loc_com_row %>%
-         dplyr::pull(.data$city)) &
+        dplyr::pull(.data$city)) &
       (out_tbl$state == loc_com_row %>%
-         dplyr::pull(.data$state)))
+        dplyr::pull(.data$state)))
 
     out_tbl[rows_to_change, "zip_code_usps"] <- loc_com_row %>%
       dplyr::pull(.data$zip_code_usps)

@@ -5,10 +5,10 @@
 #' @param start_date start date for the plot
 #' @param end_date end date for the plot
 #'
-#' @return
+#' @return Line plot with Counts of Different Diagnostics Result
+#' Categories Over Time
 #' @export
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 plot_diagnostics_daily <- function(diagnostics_tbl,

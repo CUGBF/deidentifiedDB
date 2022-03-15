@@ -43,7 +43,7 @@ get_positivity <- function(sc_tbl,
   ) %in% colnames(week_dates_info)))
 
   output_tbl <- sc_tbl_no_missing %>%
-    dplyr::filter(order_priority %in% c(
+    dplyr::filter(.data$order_priority %in% c(
       "SYMPTOMATIC",
       "EXPOSED",
       "SURVEILLANCE"

@@ -11,7 +11,7 @@ tidy_up_ct(ct_value)
 qRT-PCR in the diagnostics table}
 }
 \value{
-
+ct value as a number (or NA if cannot be coerced to number)
 }
 \description{
 Format the columns containing Ct values to remove non-numeric values

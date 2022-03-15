@@ -48,12 +48,12 @@ pull_sc <- function(demographics_sc_tbl) {
       "testing_facility"
     ) %>%
     dplyr::mutate(
-      state = stringr::str_trim(state, c("both")),
-      city = stringr::str_trim(city, c("both")),
-      zip_code = stringr::str_trim(zip_code, c("both")),
+      state = stringr::str_trim(.data$state, c("both")),
+      city = stringr::str_trim(.data$city, c("both")),
+      zip_code = stringr::str_trim(.data$zip_code, c("both")),
       city = stringr::str_trim(
         stringr::str_replace_all(
-          city,
+          .data$city,
           "[[:punct:]]+$|\\`+$",
           ""
         ),
@@ -61,7 +61,7 @@ pull_sc <- function(demographics_sc_tbl) {
       ),
       city = stringr::str_trim(
         stringr::str_replace_all(
-          city,
+          .data$city,
           "^[[:punct:]]+|^\\`+",
           ""
         ),
@@ -69,7 +69,7 @@ pull_sc <- function(demographics_sc_tbl) {
       ),
       state = stringr::str_trim(
         stringr::str_replace_all(
-          state,
+          .data$state,
           "[[:punct:]]+$|\\`+$",
           ""
         ),
@@ -77,7 +77,7 @@ pull_sc <- function(demographics_sc_tbl) {
       ),
       state = stringr::str_trim(
         stringr::str_replace_all(
-          state,
+          .data$state,
           "^[[:punct:]]+|^\\`+",
           ""
         ),
@@ -85,7 +85,7 @@ pull_sc <- function(demographics_sc_tbl) {
       )
     ) %>%
     dplyr::distinct() %>%
-    dplyr::arrange(collection_date)
+    dplyr::arrange(.data$collection_date)
 
   return(output_tbl)
 }

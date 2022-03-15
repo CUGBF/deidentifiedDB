@@ -78,12 +78,12 @@ get_metadata_genbank <- function(testkit_ids,
   metadata_tbl <- dplyr::inner_join(metadata_sc,
     metadata_dem,
     by = "patient_id"
-  )  %>%
+  ) %>%
     dplyr::distinct()
 
   metadata_tbl <- metadata_tbl %>%
     dplyr::mutate(
-      age = lubridate::year(.data$collection_date) - birth_year,
+      age = lubridate::year(.data$collection_date) - .data$birth_year,
       age = replace(
         .data$age,
         is.na(.data$age),
@@ -114,7 +114,7 @@ get_metadata_genbank <- function(testkit_ids,
 
   metadata_tbl <- metadata_tbl %>%
     dplyr::mutate(
-      sequence_ID = stringr::str_sub(testkit_id, start = 8L),
+      sequence_ID = stringr::str_sub(.data$testkit_id, start = 8L),
       isolate = .data$sequence_ID,
       host = stringr::str_c("Homo sapiens; ", .data$gender, ", age ", .data$age),
       country = stringr::str_c("USA:South Carolina, ", .data$city),

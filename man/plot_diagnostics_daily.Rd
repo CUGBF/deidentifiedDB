@@ -15,7 +15,8 @@ two columns: 'run date' and 'result')}
 \item{end_date}{end date for the plot}
 }
 \value{
-
+Line plot with Counts of Different Diagnostics Result
+Categories Over Time
 }
 \description{
 Plot Counts of Different Diagnostics Result Categories Over Time

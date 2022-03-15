@@ -37,11 +37,11 @@ get_nextclade_distribution <- function(viralrecon_tbl,
 
   clade_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
-      !is.na(clade),
-      stringr::str_to_lower(clade) != "none"
+      !is.na(.data$clade),
+      stringr::str_to_lower(.data$clade) != "none"
     ) %>%
     dplyr::group_by(.data$testkit_id) %>%
-    dplyr::arrange(desc(.data$run_date_time)) %>%
+    dplyr::arrange(dplyr::desc(.data$run_date_time)) %>%
     dplyr::slice_head() %>%
     dplyr::ungroup() %>%
     dplyr::select(
