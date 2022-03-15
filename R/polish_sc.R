@@ -25,7 +25,7 @@ polish_sc <- function(sc_tbl) {
 
   stopifnot(!(all(c("G7-PCR-SALIVA", "PCR- ANTERIOR-001") %in% unique(sc_tbl$population))))
   stopifnot(unique(sc_tbl$gender[!is.na(sc_tbl$gender)]) %in% c("M", "F"))
-  stopifnot("PICKENS COUNTY" %in% sc_tbl$county_usps)
+  stopifnot("PICKENS COUNTY" %in% unique(sc_tbl$county_usps))
 
   out_tbl <- sc_tbl %>%
     dplyr::select(
@@ -51,7 +51,14 @@ polish_sc <- function(sc_tbl) {
       state = "state_usps",
       country = "country_usps"
     ) %>%
-    dplyr::arrange(.data$collection_date)
+    dplyr::arrange(.data$collection_date) %>%
+    dplyr::distinct()
+
+  test_tbl <- out_tbl %>%
+    dplyr::group_by(.data$testkit_id) %>%
+    dplyr::filter(dplyr::n() > 1)
+
+  stopifnot(nrow(test_tbl) == 0)
 
   return(out_tbl)
 }

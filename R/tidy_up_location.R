@@ -33,15 +33,82 @@ tidy_up_location <- function(sc_tbl,
   out_tbl[["state_usps"]] <- NA_character_
   out_tbl[["country_usps"]] <- NA_character_
 
+  out_tbl <- out_tbl %>%
+    dplyr::arrange(
+      .data$zip_code,
+      .data$state,
+      .data$city
+    )
+
+  storage_tbl <-  out_tbl %>%
+    dplyr::select(c('testkit_id',
+                    'zip_code',
+                     'state',
+                    'city'))
+
+  location_combinations <- location_combinations %>%
+    dplyr::arrange(
+      .data$zip_code,
+      .data$state,
+      .data$city
+    ) %>%
+    dplyr::mutate(
+      zip_code = replace(
+        .data$zip_code,
+        is.na(.data$zip_code),
+        00000
+      ),
+      state = replace(
+        .data$state,
+        is.na(.data$state),
+        "NA"
+      ),
+      city = replace(
+        .data$city,
+        is.na(.data$city),
+        "NA"
+      ),
+    )
+
+  out_tbl <- out_tbl %>%
+    dplyr::mutate(
+      zip_code = replace(
+        .data$zip_code,
+        is.na(.data$zip_code),
+        00000
+      ),
+      state = replace(
+        .data$state,
+        is.na(.data$state),
+        "NA"
+      ),
+      city = replace(
+        .data$city,
+        is.na(.data$city),
+        "NA"
+      ),
+    )
+
+
   for (n in seq_along(location_combinations$zip_code)) {
     loc_com_row <- location_combinations[n, ]
 
-    rows_to_change <- which((out_tbl$zip_code == loc_com_row %>%
-      dplyr::pull(.data$zip_code)) &
-      (out_tbl$city == loc_com_row %>%
-        dplyr::pull(.data$city)) &
-      (out_tbl$state == loc_com_row %>%
-        dplyr::pull(.data$state)))
+    current_zip_code <- loc_com_row %>%
+      dplyr::pull(.data$zip_code)
+
+    current_city <- loc_com_row %>%
+      dplyr::pull(.data$city)
+
+    current_state <- loc_com_row %>%
+      dplyr::pull(.data$state)
+
+    rows_to_change <- which((out_tbl$zip_code == current_zip_code) &
+      (out_tbl$city == current_city) &
+      (out_tbl$state == current_state))
+
+    if (sum(rows_to_change) == 0) {
+      next
+    }
 
     out_tbl[rows_to_change, "zip_code_usps"] <- loc_com_row %>%
       dplyr::pull(.data$zip_code_usps)
@@ -57,7 +124,16 @@ tidy_up_location <- function(sc_tbl,
 
     out_tbl[rows_to_change, "country_usps"] <- loc_com_row %>%
       dplyr::pull(.data$country_usps)
+
+    rm(list = c("loc_com_row"))
   }
+
+  out_tbl <- out_tbl %>%
+    dplyr::select(-c('zip_code',
+                     'state',
+                     'city')) %>%
+    dplyr::left_join(storage_tbl,
+                     by = "testkit_id")
 
   return(out_tbl)
 }
