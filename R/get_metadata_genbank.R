@@ -78,7 +78,8 @@ get_metadata_genbank <- function(testkit_ids,
   metadata_tbl <- dplyr::inner_join(metadata_sc,
     metadata_dem,
     by = "patient_id"
-  )
+  )  %>%
+    dplyr::distinct()
 
   metadata_tbl <- metadata_tbl %>%
     dplyr::mutate(
