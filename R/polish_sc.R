@@ -30,16 +30,25 @@ polish_sc <- function(sc_tbl) {
 
   out_tbl <- sc_tbl %>%
     dplyr::select(
-      "testkit_id", "rymedi_result",
-      "population", "order_priority",
-      "collection_date", "result_date",
-      "gender", "pregnancy_status",
-      "zip_code_usps", "city_usps",
-      "county_usps", "state_usps",
-      "country_usps", "zip_code",
-      "city", "state",
+      "testkit_id",
+      "rymedi_result",
+      "population",
+      "order_priority",
+      "collection_date",
+      "result_date",
+      "gender",
+      "pregnancy_status",
+      "zip_code_usps",
+      "city_usps",
+      "county_usps",
+      "state_usps",
+      "country_usps",
+      "zip_code",
+      "city",
+      "state",
       "patient_id",
-      "teskit_sku", "performing_facility",
+      "teskit_sku",
+      "performing_facility",
       "testing_facility"
     ) %>%
     dplyr::rename(
