@@ -5,7 +5,6 @@
 #'
 #' @return A logical value : TRUE if sample was used as a control, else FALSE
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
 detect_control <- function(testkit_id, result) {
   s_testkit_id <- stringr::str_to_upper(testkit_id)

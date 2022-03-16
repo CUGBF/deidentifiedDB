@@ -8,7 +8,6 @@
 #' the deidentified Demographics Data organized to make it convenient to update
 #' deidentified DB database
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 do_prelim_tidy_sc <- function(sample_collection_tbl,

@@ -41,11 +41,13 @@ tidy_up_location <- function(sc_tbl,
       .data$city
     )
 
-  storage_tbl <-  out_tbl %>%
-    dplyr::select(c('testkit_id',
-                    'zip_code',
-                     'state',
-                    'city'))
+  storage_tbl <- out_tbl %>%
+    dplyr::select(c(
+      "testkit_id",
+      "zip_code",
+      "state",
+      "city"
+    ))
 
   location_combinations <- location_combinations %>%
     dplyr::arrange(
@@ -130,11 +132,18 @@ tidy_up_location <- function(sc_tbl,
   }
 
   out_tbl <- out_tbl %>%
-    dplyr::select(-c('zip_code',
-                     'state',
-                     'city')) %>%
+    dplyr::select(-c(
+      "zip_code",
+      "state",
+      "city"
+    )) %>%
     dplyr::left_join(storage_tbl,
-                     by = "testkit_id")
+      by = "testkit_id"
+    ) %>%
+    dplyr::group_by(.data$testkit_id) %>%
+    dplyr::arrange(.data$city) %>%
+    dplyr::slice_head() %>%
+    dplyr::ungroup()
 
   return(out_tbl)
 }

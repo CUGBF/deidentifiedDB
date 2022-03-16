@@ -11,7 +11,6 @@
 #' deidentified DB database
 #' @export
 #'
-#' @examples
 #' @importFrom magrittr "%>%"
 prepare_demographics_sc <- function(filepath,
                                     date_fmt = c("%m/%d/%y"),
