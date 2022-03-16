@@ -5,6 +5,7 @@
 #' from lookup_zip_code()
 #'
 #' @return Tidy Tibble with Location Information
+#' @export
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
