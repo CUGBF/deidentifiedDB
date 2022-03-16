@@ -4,6 +4,9 @@
 # deidentifiedDB
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/CUGBF/deidentifiedDB/branch/main/graph/badge.svg)](https://app.codecov.io/gh/CUGBF/deidentifiedDB?branch=main)
 <!-- badges: end -->
 
 ## Objective
