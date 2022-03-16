@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/CUGBF/deidentifiedDB/branch/main/graph/badge.svg)](https://app.codecov.io/gh/CUGBF/deidentifiedDB?branch=main)
+[![R-CMD-check](https://github.com/CUGBF/deidentifiedDB/workflows/R-CMD-check/badge.svg)](https://github.com/CUGBF/deidentifiedDB/actions)
 <!-- badges: end -->
 
 ## Objective
