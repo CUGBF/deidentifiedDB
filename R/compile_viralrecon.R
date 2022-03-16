@@ -6,6 +6,10 @@
 #' (for example, 2021-08-01 for August 1, 2021)
 #' @param viralrecon_version Version of viralrecon used for this run
 #' @param variant_caller Was 'iVar' or 'BCFTools' used for variant calling ?
+#' @param primer_set Name of the primer set used (eg. 'artic' , 'midnight')
+#' @param primer_set_version Primer set version (eg. 3, 4, 4.1)
+#' @param sequencing_platform Sequencing Technology Used (eg. 'illumina',
+#' 'nanopore')
 #'
 #' @return Tibble containing results from nf-core/viralrecon for
 #' inclusion to deidentifiedDB database
@@ -16,7 +20,10 @@
 compile_viralrecon <- function(filepath,
                                run_date,
                                viralrecon_version,
-                               variant_caller = "iVar") {
+                               primer_set_version,
+                               primer_set = "artic",
+                               variant_caller = "ivar",
+                               sequencing_platform = "illumina") {
   test_tbl <- readr::read_csv(filepath,
     n_max = 1,
     show_col_types = FALSE
@@ -84,13 +91,25 @@ compile_viralrecon <- function(filepath,
       "clade"
     ) %>%
     dplyr::mutate(
-      variant_caller = factor(variant_caller,
-        levels = c("iVar", "BCFTools")
-      ),
+      variant_caller = stringr::str_to_lower(variant_caller),
       viralrecon_version = as.character(viralrecon_version),
       run_date_time = lubridate::ymd(run_date,
         tz = "America/New_York"
+      ),
+      primer_set = stringr::str_to_lower(primer_set),
+      primer_set_version = stringr::str_to_lower(
+        as.character(primer_set_version)
+      ),
+      sequencing_platform = stringr::str_to_lower(
+        as.character(sequencing_platform)
       )
+    ) %>%
+    dplyr::relocate(c(
+      .data$primer_set,
+      .data$primer_set_version,
+      .data$sequencing_platform
+    ),
+    .after = .data$testkit_id
     )
 
   return(output_tbl)

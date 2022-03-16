@@ -9,7 +9,10 @@ compile_viralrecon(
   filepath,
   run_date,
   viralrecon_version,
-  variant_caller = "iVar"
+  primer_set_version,
+  primer_set = "artic",
+  variant_caller = "ivar",
+  sequencing_platform = "illumina"
 )
 }
 \arguments{
@@ -20,7 +23,14 @@ compile_viralrecon(
 
 \item{viralrecon_version}{Version of viralrecon used for this run}
 
+\item{primer_set_version}{Primer set version (eg. 3, 4, 4.1)}
+
+\item{primer_set}{Name of the primer set used (eg. 'artic' , 'midnight')}
+
 \item{variant_caller}{Was 'iVar' or 'BCFTools' used for variant calling ?}
+
+\item{sequencing_platform}{Sequencing Technology Used (eg. 'illumina',
+'nanopore')}
 }
 \value{
 Tibble containing results from nf-core/viralrecon for

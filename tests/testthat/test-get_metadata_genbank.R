@@ -29,7 +29,8 @@ test_that("Testing get_metadata_genbank() !", {
   viralrecon_tbl <- compile_viralrecon(data_viralrecon,
     run_date = "2022-03-01",
     viralrecon_version = "2.4.1",
-    variant_caller = "iVar"
+    primer_set_version = 3,
+    variant_caller = "ivar"
   )
 
   sub_testkit_ids <- c(
