@@ -72,7 +72,6 @@ read_demographics_csv <- function(filepath,
     )
 
   if ("Time Zone" %in% colnames(output_tbl)) {
-    stopifnot(length(unique(output_tbl$`Time Zone`)) == 1)
     output_tbl <- output_tbl %>%
       dplyr::select(-c("Time Zone"))
   }
