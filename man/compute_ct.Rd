@@ -2,16 +2,16 @@
 % Please edit documentation in R/compute_ct.R
 \name{compute_ct}
 \alias{compute_ct}
-\title{Title}
+\title{Calculate Mean and Median Ct values}
 \usage{
 compute_ct(ct_tbl)
 }
 \arguments{
-\item{ct_tbl}{}
+\item{ct_tbl}{Tibble with "testkit_id", "ct_rep1", and "ct_rep2" columns}
 }
 \value{
-
+Tibble with mean and median Ct value for each \code{testkit_id}
 }
 \description{
-Title
+Calculate Mean and Median Ct values
 }

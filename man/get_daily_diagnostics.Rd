@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_daily_diagnostics.R
 \name{get_daily_diagnostics}
 \alias{get_daily_diagnostics}
-\title{Title}
+\title{Get Daily Diangostics Counts}
 \usage{
 get_daily_diagnostics(
   diagnostics_tbl,
@@ -12,11 +12,17 @@ get_daily_diagnostics(
 )
 }
 \arguments{
-\item{add_variables}{}
+\item{start_date}{Filter sample collection table for samples collected after
+this date. Provide date as in "2021-08-01" for August 1, 2021}
+
+\item{end_date}{Filter sample collection table for samples collected on or
+before this date. Provide date as in "2021-08-01" for August 1, 2021}
+
+\item{add_variables}{variables to group_by}
 }
 \value{
 
 }
 \description{
-Title
+Get Daily Diangostics Counts
 }

@@ -1,9 +1,11 @@
-#' Title
+#' Get Daily Diangostics Counts
 #'
 #' @param diagnostics_tbl
-#' @param start_date
-#' @param end_date
-#' @param add_variables
+#' @param start_date Filter sample collection table for samples collected after
+#' this date. Provide date as in "2021-08-01" for August 1, 2021
+#' @param end_date Filter sample collection table for samples collected on or
+#' before this date. Provide date as in "2021-08-01" for August 1, 2021
+#' @param add_variables variables to group_by
 #'
 #' @return
 #' @export

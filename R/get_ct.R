@@ -1,23 +1,30 @@
-#' Title
+#' Get Ct values for Query Testkit IDs from Diagnostic Testing
 #'
-#' @param testkit_id
-#' @param diagnostics_tbl
+#' @param testkit_id Testkit IDs for which Ct values is to be found
+#' @param diagnostics_tbl Tibble with diagnostics data
 #'
-#' @return
+#' @return List with two elements: 1) Tibble with Ct N
+#' 2) Tibble with Ct RNase P
 #' @export
-#'
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 get_ct <- function(testkit_id,
                    diagnostics_tbl) {
-  stopifnot(all(
+  stopifnot(all(c(
     "testkit_id",
     "ct_N_rep1",
     "ct_N_rep2",
     "ct_rnasep_rep1",
     "ct_rnasep_rep2"
-  ) %in% colnames(diagnostics_tbl))
+  ) %in% colnames(diagnostics_tbl)))
+
+  stopifnot(is.numeric(c(
+    diagnostics_tbl$ct_N_rep1,
+    diagnostics_tbl$ct_N_rep2,
+    diagnostics_tbl$ct_rnasep_rep1,
+    diagnostics_tbl$ct_rnasep_rep2
+  )))
 
   tibble_interest <- diagnostics_tbl %>%
     dplyr::filter(.data$testkit_id %in% testkit_id)

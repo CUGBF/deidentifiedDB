@@ -2,16 +2,19 @@
 % Please edit documentation in R/get_ct.R
 \name{get_ct}
 \alias{get_ct}
-\title{Title}
+\title{Get Ct values for Query Testkit IDs from Diagnostic Testing}
 \usage{
 get_ct(testkit_id, diagnostics_tbl)
 }
 \arguments{
-\item{diagnostics_tbl}{}
+\item{testkit_id}{Testkit IDs for which Ct values is to be found}
+
+\item{diagnostics_tbl}{Tibble with diagnostics data}
 }
 \value{
-
+List with two elements: 1) Tibble with Ct N
+2) Tibble with Ct RNase P
 }
 \description{
-Title
+Get Ct values for Query Testkit IDs from Diagnostic Testing
 }
