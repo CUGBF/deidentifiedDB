@@ -31,7 +31,7 @@ get_daily_diagnostics <- function(diagnostics_tbl,
   end_date <- lubridate::as_date(end_date)
 
   diagnostics_tbl <- diagnostics_tbl %>%
-    dplyr::mutate(control = as.logical(control)) %>%
+    dplyr::mutate(control = as.logical(.data$control)) %>%
     dplyr::filter(
       !.data$control,
       .data$run_date >= start_date,
