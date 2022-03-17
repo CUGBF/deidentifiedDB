@@ -2,14 +2,9 @@
 % Please edit documentation in R/get_daily_diagnostics.R
 \name{get_daily_diagnostics}
 \alias{get_daily_diagnostics}
-\title{Get Daily Diangostics Counts}
+\title{Get Daily Diagnostics Counts}
 \usage{
-get_daily_diagnostics(
-  diagnostics_tbl,
-  start_date,
-  end_date,
-  add_variables = NULL
-)
+get_daily_diagnostics(diagnostics_tbl, start_date, end_date, ...)
 }
 \arguments{
 \item{diagnostics_tbl}{Tibble containing the following columns 1)testkit_id,
@@ -22,11 +17,11 @@ this date. Provide date as in "2021-08-01" for August 1, 2021}
 \item{end_date}{Filter sample collection table for samples collected on or
 before this date. Provide date as in "2021-08-01" for August 1, 2021}
 
-\item{add_variables}{variables to group_by}
+\item{...}{Names of columns to group_by}
 }
 \value{
 Tibble with daily counts of different diagnostics result categories
 }
 \description{
-Get Daily Diangostics Counts
+Get Daily Diagnostics Counts
 }
