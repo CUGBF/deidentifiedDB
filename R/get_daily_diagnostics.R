@@ -1,4 +1,4 @@
-#' Get Daily Diangostics Counts
+#' Get Daily Diagnostics Counts
 #'
 #' @param diagnostics_tbl Tibble containing the following columns 1)testkit_id,
 #' 2) run_Date
@@ -7,7 +7,7 @@
 #' this date. Provide date as in "2021-08-01" for August 1, 2021
 #' @param end_date Filter sample collection table for samples collected on or
 #' before this date. Provide date as in "2021-08-01" for August 1, 2021
-#' @param add_variables variables to group_by
+#' @param ... Names of columns to group_by
 #'
 #' @return Tibble with daily counts of different diagnostics result categories
 #' @export
@@ -17,8 +17,10 @@
 get_daily_diagnostics <- function(diagnostics_tbl,
                                   start_date,
                                   end_date,
-                                  add_variables = NULL) {
-  stopifnot(all(c("testkit_id", "run_date", "result") %in% colnames(diagnostics_tbl)))
+                                  ...) {
+  stopifnot(all(c("testkit_id", "run_date", "result",
+                  "control") %in% colnames(diagnostics_tbl)))
+
 
   if (!(lubridate::is.Date(diagnostics_tbl$run_date))) {
     diagnostics_tbl <- diagnostics_tbl %>%
@@ -29,25 +31,17 @@ get_daily_diagnostics <- function(diagnostics_tbl,
   end_date <- lubridate::as_date(end_date)
 
   diagnostics_tbl <- diagnostics_tbl %>%
+    dplyr::mutate(control = as.logical(control)) %>%
     dplyr::filter(
+      !.data$control,
       .data$run_date >= start_date,
       .data$run_date <= end_date
     )
 
-  grouping_variable <- c(
-    "run_date",
-    "result"
-  )
-
-  if (!is.null(add_variables)) {
-    grouping_variable <- c(
-      grouping_variable,
-      add_variables
-    )
-  }
+  # https://stackoverflow.com/questions/57704792/is-it-possible-to-pass-multible-variables-to-the-same-curly-curly
 
   count_tbl <- diagnostics_tbl %>%
-    dplyr::group_by(grouping_variable) %>%
+    dplyr::group_by(!!!dplyr::ensyms(...)) %>%
     dplyr::summarise(count = dplyr::n()) %>%
     dplyr::ungroup()
 
