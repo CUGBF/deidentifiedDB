@@ -33,8 +33,8 @@ devtools::install_github("CUGBF/deidentifiedDB")
 
 ## Requirements
 
-The package uses the following packages (the above-mentioned
-installation command will install dependencies):
+The above-mentioned installation command will install the following
+dependencies, if not already installed:
 
         DBI (>= 1.1.0),
         dplyr (>= 1.0.0),
@@ -357,3 +357,76 @@ R list with the following elements:
 
         writeXStringSet(Output[['seqs']], 
                         'genbank_submission.fasta')
+
+#### `get_pangolin_distribution()`
+
+##### Input
+
+1.  `sample_collection`and `viralrecon` tables discussed above.
+
+##### Output
+
+Monthly count of sequenced samples belonging to each Pangolin lineage.
+
+Tibble with the following columns:
+
+      collection_month
+      lineage
+      n_sequenced_samples
+
+##### Procedure
+
+1.  `deidentifiedDB::get_pangolin_distribution()` → Output
+
+#### `get_nextclade_distribution()`
+
+##### Input
+
+1.  `sample_collection`and `viralrecon` tables discussed above.
+
+##### Output
+
+Monthly count of sequenced samples belonging to each Nextclade
+
+Tibble with the following columns:
+
+      collection_month
+      clade
+      n_sequenced_samples
+
+##### Procedure
+
+1.  `deidentifiedDB::get_nextclade_distribution()` → Output
+
+#### `get_positivity()`
+
+Computes Weekly Test Positivity Rate (TPR)
+
+##### Input
+
+1.  `sample_collection`and `viralrecon` table discussed above.
+
+##### Output
+
+Tibble with the following columns:
+
+          collection_week
+          week_start
+          week_end
+          order_priority
+          TOTAL
+          POSITIVE
+          NEGATIVE
+          POSITIVITY
+
+##### Procedure
+
+1.  `deidentifiedDB::get_positivity()` → Output
+
+#### `get_daily_diagnostics()`
+
+##### Input
+
+##### Output
+
+##### Procedure
