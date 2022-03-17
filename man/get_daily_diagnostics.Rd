@@ -12,6 +12,10 @@ get_daily_diagnostics(
 )
 }
 \arguments{
+\item{diagnostics_tbl}{Tibble containing the following columns 1)testkit_id,
+2) run_Date
+3)result}
+
 \item{start_date}{Filter sample collection table for samples collected after
 this date. Provide date as in "2021-08-01" for August 1, 2021}
 
@@ -21,7 +25,7 @@ before this date. Provide date as in "2021-08-01" for August 1, 2021}
 \item{add_variables}{variables to group_by}
 }
 \value{
-
+Tibble with daily counts of different diagnostics result categories
 }
 \description{
 Get Daily Diangostics Counts
