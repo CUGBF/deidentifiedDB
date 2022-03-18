@@ -30,7 +30,7 @@ viralrecon results}
 \item{time_zone}{Time zone for collection time (Default: "America/New_York")}
 }
 \value{
-Tibble containing metadata information for genbank submission.
+Tibble containing metadata information for GenBank submission.
 }
 \description{
 Compile Metadata for GenBank Submission
