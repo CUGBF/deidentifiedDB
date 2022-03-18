@@ -4,11 +4,13 @@
 \alias{week_dates_info}
 \title{Tibble with Collection Week Info}
 \usage{
-week_dates_info(sc_tbl_no_missing)
+week_dates_info(sc_tbl_no_missing, time_zone = "America/New_York")
 }
 \arguments{
 \item{sc_tbl_no_missing}{tibble containing sample collection information
 no patient ID or collection date missing}
+
+\item{time_zone}{Time zone for collection time (Default: "America/New_York")}
 }
 \value{
 Tibble with Collection Week Number, Start and End dates

@@ -9,7 +9,8 @@ get_metadata_genbank(
   sample_collection_tbl = NULL,
   demographics_tbl = NULL,
   viralrecon_tbl = NULL,
-  deidentifiedDB = NULL
+  deidentifiedDB = NULL,
+  time_zone = "America/New_York"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ demographics data}
 viralrecon results}
 
 \item{deidentifiedDB}{Path to the deidentifiedDB SQLite File}
+
+\item{time_zone}{Time zone for collection time (Default: "America/New_York")}
 }
 \value{
 Tibble containing metadata information for genbank submission.

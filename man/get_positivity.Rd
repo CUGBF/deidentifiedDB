@@ -7,8 +7,9 @@
 get_positivity(
   sc_tbl,
   start_date = "2021-01-01",
-  end_date = lubridate::date(lubridate::now()),
-  n_days = 30
+  end_date = as.character(lubridate::date(lubridate::now())),
+  n_days = 30,
+  time_zone = "America/New_York"
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ before this date. Provide date as in "2021-08-01" for August 1, 2021}
 
 \item{n_days}{Duration of time (in days) for which only the first collected
 COVID-19 positive sample  for a patient is retained}
+
+\item{time_zone}{Time zone for collection time (Default: "America/New_York")}
 }
 \value{
 Tibble containing Weekly Test Positivity Rate (TPR) data after

@@ -63,17 +63,17 @@ test_that("Testing get_daily_diagnostics() !", {
         run_date == "2022-03-15",
         result == "POSITIVE",
         machine == "Tim",
-      )) ,
+      )),
     0
   )
 
   expect_equal(
     output_list[["count_tbl"]] %>%
-           dplyr::filter(
-             run_date == "2022-03-15",
-             result == "NEGATIVE",
-             machine == "Tim",
-           ) %>%
+      dplyr::filter(
+        run_date == "2022-03-15",
+        result == "NEGATIVE",
+        machine == "Tim",
+      ) %>%
       dplyr::pull(count),
     1
   )
@@ -156,6 +156,6 @@ test_that("Testing get_daily_diagnostics() !", {
       dplyr::pull(
         testkit_id
       ) %>%
-      unique() %in% c('B', 'H', 'K')
-  ))
+      unique() %in% c("B", "H", "K"))
+  )
 })

@@ -71,7 +71,7 @@ test_that("Testing compile_viralrecon() !", {
       "clade",
       "variant_caller",
       "viralrecon_version",
-      "run_date_time"
+      "run_date"
     )
   )
 })

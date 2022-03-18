@@ -18,8 +18,10 @@ get_daily_diagnostics <- function(diagnostics_tbl,
                                   start_date,
                                   end_date,
                                   ...) {
-  stopifnot(all(c("testkit_id", "run_date", "result",
-                  "control") %in% colnames(diagnostics_tbl)))
+  stopifnot(all(c(
+    "testkit_id", "run_date", "result",
+    "control"
+  ) %in% colnames(diagnostics_tbl)))
 
 
   if (!(lubridate::is.Date(diagnostics_tbl$run_date))) {

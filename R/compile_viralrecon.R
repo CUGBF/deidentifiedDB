@@ -93,7 +93,7 @@ compile_viralrecon <- function(filepath,
     dplyr::mutate(
       variant_caller = stringr::str_to_lower(variant_caller),
       viralrecon_version = as.character(viralrecon_version),
-      run_date_time = lubridate::ymd(run_date,
+      run_date = lubridate::ymd(run_date,
         tz = "America/New_York"
       ),
       primer_set = stringr::str_to_lower(primer_set),

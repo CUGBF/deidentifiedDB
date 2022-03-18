@@ -31,7 +31,7 @@ test_that("Testing get_pangolin_distribution() !", {
   )
   expect_equal(
     sum(output_tbl$n_sequenced_samples),
-    28
+    29
   )
 
   output_tbl <- get_pangolin_distribution(vr_tbl,

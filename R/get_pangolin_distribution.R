@@ -8,6 +8,7 @@
 #' before this date. Provide date as in "2021-08-01" for August 1, 2021
 #' @param n_days Duration of time (in days) for which only the first collected
 #' COVID-19 positive sample  for a patient is retained
+#' @param time_zone Time zone for collection time (Default: "America/New_York")
 #'
 #' @return Tibble containing monthly count of sequenced samples in
 #' each Pangolin lineage
@@ -18,14 +19,17 @@
 get_pangolin_distribution <- function(viralrecon_tbl,
                                       sample_collection_tbl,
                                       start_date = "2021-01-01",
-                                      end_date = lubridate::date(lubridate::now()),
-                                      n_days = 30) {
+                                      end_date = as.character(
+                                        lubridate::date(lubridate::now())
+                                      ),
+                                      n_days = 30,
+                                      time_zone = "America/New_York") {
   stopifnot(nrow(viralrecon_tbl) > 0 &
     nrow(sample_collection_tbl) > 0)
   stopifnot(all(c(
     "testkit_id",
     "lineage",
-    "run_date_time"
+    "run_date"
   ) %in% colnames(viralrecon_tbl)))
 
   stopifnot(all(c(
@@ -35,13 +39,25 @@ get_pangolin_distribution <- function(viralrecon_tbl,
     "collection_date"
   ) %in% colnames(sample_collection_tbl)))
 
+  if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
+    sample_collection_tbl <- sample_collection_tbl %>%
+      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
+        tz = time_zone
+      ))
+  }
+
+  if (!(lubridate::is.Date(viralrecon_tbl$run_date))) {
+    viralrecon_tbl <- viralrecon_tbl %>%
+      dplyr::mutate(run_date = lubridate::as_date(.data$run_date))
+  }
+
   lineage_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
       !is.na(.data$lineage),
       stringr::str_to_lower(.data$lineage) != "none"
     ) %>%
     dplyr::group_by(.data$testkit_id) %>%
-    dplyr::arrange(dplyr::desc(.data$run_date_time)) %>%
+    dplyr::arrange(dplyr::desc(.data$run_date)) %>%
     dplyr::slice_head() %>%
     dplyr::ungroup() %>%
     dplyr::select(

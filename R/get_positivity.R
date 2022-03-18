@@ -7,6 +7,7 @@
 #' before this date. Provide date as in "2021-08-01" for August 1, 2021
 #' @param n_days Duration of time (in days) for which only the first collected
 #' COVID-19 positive sample  for a patient is retained
+#' @param time_zone Time zone for collection time (Default: "America/New_York")
 #'
 #' @return Tibble containing Weekly Test Positivity Rate (TPR) data after
 #' excluding redundant COVID-19 positive samples
@@ -16,8 +17,11 @@
 #' @importFrom rlang .data
 get_positivity <- function(sc_tbl,
                            start_date = "2021-01-01",
-                           end_date = lubridate::date(lubridate::now()),
-                           n_days = 30) {
+                           end_date = as.character(
+                             lubridate::date(lubridate::now())
+                           ),
+                           n_days = 30,
+                           time_zone = "America/New_York") {
   stopifnot(all(c(
     "testkit_id",
     "rymedi_result",
@@ -31,10 +35,13 @@ get_positivity <- function(sc_tbl,
   sc_tbl_no_missing <- get_sc_wo_redundant(sc_tbl,
     start_date = start_date,
     end_date = end_date,
-    n_days = n_days
+    n_days = n_days,
+    time_zone = time_zone
   )
 
-  week_dates_info <- week_dates_info(sc_tbl_no_missing)
+  week_dates_info <- week_dates_info(sc_tbl_no_missing,
+    time_zone = time_zone
+  )
 
   stopifnot(all(c(
     "collection_week",

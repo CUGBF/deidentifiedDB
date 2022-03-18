@@ -113,7 +113,7 @@ Tibble with the following structure:
         clade,
         variant_caller,
         viralrecon_version,
-        run_date_time
+        run_date
 
 ##### Procedure
 
@@ -404,7 +404,7 @@ Computes Weekly Test Positivity Rate (TPR)
 
 ##### Input
 
-1.  `sample_collection`and `viralrecon` table discussed above.
+1.  `sample_collection`and `viralrecon` tables discussed above.
 
 ##### Output
 
@@ -427,6 +427,25 @@ Tibble with the following columns:
 
 ##### Input
 
+1.  `diagnostics` table discussed above.
+
 ##### Output
 
+Tibble with the following columns:
+
+      <grouping_variables>
+      count
+
 ##### Procedure
+
+1.  `deidentifiedDB::get_daily_diagnostics()` → Output
+
+Make sure <grouping_variables> are specified in the function call.
+
+For example:
+
+    deidentifiedDB::get_daily_diagnostics(diagnostics_tbl,
+                                      start_date,
+                                      end_date,
+                                      *run_date*,
+                                      *result*)

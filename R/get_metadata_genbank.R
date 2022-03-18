@@ -8,8 +8,9 @@
 #' @param viralrecon_tbl Path to the tibble containing
 #' viralrecon results
 #' @param deidentifiedDB  Path to the deidentifiedDB SQLite File
+#' @param time_zone Time zone for collection time (Default: "America/New_York")
 #'
-#' @return Tibble containing metadata information for genbank submission.
+#' @return Tibble containing metadata information for GenBank submission.
 #'
 #' @export
 #'
@@ -19,7 +20,8 @@ get_metadata_genbank <- function(testkit_ids,
                                  sample_collection_tbl = NULL,
                                  demographics_tbl = NULL,
                                  viralrecon_tbl = NULL,
-                                 deidentifiedDB = NULL) {
+                                 deidentifiedDB = NULL,
+                                 time_zone = "America/New_York") {
   stopifnot(all(!is.null(c(
     sample_collection_tbl,
     demographics_tbl,
@@ -51,6 +53,13 @@ get_metadata_genbank <- function(testkit_ids,
     dplyr::select("testkit_id") %>%
     dplyr::distinct()
 
+  if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
+    sample_collection_tbl <- sample_collection_tbl %>%
+      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
+        tz = time_zone
+      ))
+  }
+
   metadata_sc <- sample_collection_tbl %>%
     dplyr::filter(.data$testkit_id %in% metadata_vr$testkit_id) %>%
     dplyr::select(
@@ -62,9 +71,6 @@ get_metadata_genbank <- function(testkit_ids,
       "city",
       "gender"
     ) %>%
-    dplyr::mutate(collection_date = lubridate::date(
-      lubridate::as_datetime(.data$collection_date)
-    )) %>%
     dplyr::distinct()
 
   metadata_dem <- demographics_tbl %>%
@@ -118,7 +124,7 @@ get_metadata_genbank <- function(testkit_ids,
       isolate = .data$sequence_ID,
       host = stringr::str_c("Homo sapiens; ", .data$gender, ", age ", .data$age),
       country = stringr::str_c("USA:South Carolina, ", .data$city),
-      collection_date = as.character(.data$collection_date)
+      collection_date = as.character(lubridate::date(.data$collection_date))
     ) %>%
     dplyr::arrange(.data$collection_date) %>%
     dplyr::rename(`collection-date` = "collection_date")
