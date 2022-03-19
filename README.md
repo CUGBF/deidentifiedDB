@@ -416,7 +416,7 @@ Tibble with the following columns:
 
 ##### Input
 
-1.  `sample_collection`and `viralrecon` tables discussed above.
+1.  `sample_collection` and `viralrecon` tables discussed above.
 
 ##### Output
 
