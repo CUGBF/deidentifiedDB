@@ -92,6 +92,14 @@ tidy_up_location <- function(sc_tbl,
       ),
     )
 
+  prog_bar <- progress::progress_bar$new(
+    format = "  Fixing Patient Locations [:bar] :percent eta: :eta",
+    total = length(location_combinations$zip_code),
+    clear = FALSE,
+    width = 80
+  )
+
+  prog_bar$tick(0)
 
   for (n in seq_along(location_combinations$zip_code)) {
     loc_com_row <- location_combinations[n, ]
@@ -110,6 +118,7 @@ tidy_up_location <- function(sc_tbl,
       (out_tbl$state == current_state))
 
     if (sum(rows_to_change) == 0) {
+      prog_bar$tick()
       next
     }
 
@@ -129,6 +138,8 @@ tidy_up_location <- function(sc_tbl,
       dplyr::pull(.data$country_usps)
 
     rm(list = c("loc_com_row"))
+
+    prog_bar$tick()
   }
 
   out_tbl <- out_tbl %>%

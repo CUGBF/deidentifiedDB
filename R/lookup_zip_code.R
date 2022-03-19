@@ -41,6 +41,13 @@ lookup_zip_code <- function(location_tbl,
   location_tbl[["state_usps"]] <- NA_character_
   location_tbl[["country_usps"]] <- NA_character_
 
+  pb <- progress::progress_bar$new(
+    format = "  Compiling Location Data [:bar] :percent eta: :eta",
+    total = length(location_tbl$zip_code),
+    clear = FALSE,
+    width = 80
+  )
+  pb$tick(0)
   for (n in seq_along(location_tbl$zip_code)) {
     location_combination <- location_tbl[n, c("zip_code", "state", "city")]
 
@@ -197,6 +204,8 @@ lookup_zip_code <- function(location_tbl,
       "in_state",
       "in_country"
     ))
+
+    pb$tick()
   }
 
   return(location_tbl)

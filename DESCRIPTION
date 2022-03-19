@@ -30,7 +30,8 @@ Imports:
     tidyselect (>= 1.1.1),
     rlang,
     Biostrings,
-    stats
+    stats,
+    progress (>= 1.2.2)
 Suggests: 
     covr,
     testthat (>= 3.0.0)

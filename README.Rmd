@@ -318,6 +318,39 @@ Tibble with the following structure:
 
 1. Input &rarr; `deidentifiedDB::compile_biorepo()` &rarr; Output
 
+### `genbank`
+
+All sequenced samples that were submitted to GenBank are recorded in the the `genbank` table of deidentifiedDB database
+
+##### Input
+
+1. Accession Report TSV from GenBank. There are three columns in this file:
+
+```
+  Accession	
+  Sequence ID	
+  Release Date
+```
+
+2. `Output_list[['int_tbl']]` returned by `deidentifiedDB::compile_genbank()`
+
+##### Output
+
+Tibble with the following structure:
+
+```
+  testkit_id
+  sequence_ID
+  genbank_accession
+  pipeline
+  submission_date
+  release_date
+```
+
+##### Procedure
+
+1. Input &rarr; `deidentifiedDB::compile_genbank_table()` &rarr; Output
+
 ### Other Useful Functions
 
 #### GenBank Submission

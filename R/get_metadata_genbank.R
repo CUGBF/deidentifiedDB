@@ -61,7 +61,11 @@ get_metadata_genbank <- function(testkit_ids,
   }
 
   metadata_sc <- sample_collection_tbl %>%
-    dplyr::filter(.data$testkit_id %in% metadata_vr$testkit_id) %>%
+    dplyr::filter(
+      .data$testkit_id %in% metadata_vr$testkit_id,
+      !is.na(.data$collection_date),
+      !is.na(.data$patient_id)
+    ) %>%
     dplyr::select(
       "testkit_id",
       "patient_id",
@@ -98,6 +102,11 @@ get_metadata_genbank <- function(testkit_ids,
       gender = dplyr::recode(.data$gender,
         "M" = "Male",
         "F" = "Female"
+      ),
+      gender = replace(
+        .data$gender,
+        is.na(.data$gender),
+        "gender unknown"
       ),
       city = replace(
         .data$city,
