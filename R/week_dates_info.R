@@ -39,8 +39,10 @@ week_dates_info <- function(sc_tbl_no_missing,
       week_end = max(.data$collection_date),
       collection_week = as.factor(.data$collection_week)
     ) %>%
+    dplyr::ungroup() %>%
     dplyr::select(-c(.data$collection_date)) %>%
-    dplyr::distinct()
+    dplyr::distinct() %>%
+    dplyr::arrange(.data$collection_week)
 
   return(output_tbl)
 }
