@@ -56,4 +56,9 @@ test_that("Testing compile_genbank_table() !", {
     unique(output_tbl$release_date),
     "immediate"
   )
+
+  expect_equal(
+    unique(output_tbl$submission_date),
+    lubridate::as_date("2022-03-19")
+  )
 })

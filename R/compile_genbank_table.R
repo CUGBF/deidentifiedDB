@@ -46,7 +46,7 @@ compile_genbank_table <- function(accession_report_filpath,
         as.character(pipeline_version),
         sep = " "
       ),
-      submission_date = submission_date
+      submission_date = lubridate::as_date(submission_date)
     ) %>%
     dplyr::select(
       "testkit_id",
