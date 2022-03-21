@@ -38,12 +38,7 @@ dependencies, if not already installed:
 
         DBI (>= 1.1.0),
         dplyr (>= 1.0.0),
-        forcats (>= 0.5.0),
-        ggplot2 (>= 3.2.0),
-        ggpubr (>= 0.4.0),
-        khroma (>= 1.8.0),
         lubridate (>= 1.8.0),
-        purrr (>= 0.3.0),
         RSQLite (>= 2.2.9),
         readr (>= 2.0.0),
         stringr (>= 1.4.0),
@@ -53,7 +48,9 @@ dependencies, if not already installed:
         magrittr (>= 2.0),
         tidyselect (>= 1.1.1),
         rlang,
-        Biostrings
+        Biostrings,
+        stats,
+        progress (>= 1.2.2)
 
 ## Usage
 

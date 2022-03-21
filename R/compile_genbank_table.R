@@ -32,10 +32,10 @@ compile_genbank_table <- function(accession_report_filpath,
 
   stopifnot(nrow(accession_report) > 0 & nrow(int_tbl) > 0)
 
-  stopifnot(all(colnames(int_tbl) %in% c(
+  stopifnot(all(c(
     "testkit_id",
     "sequence_ID"
-  )))
+  ) %in% colnames(int_tbl)))
 
   output_tbl <- dplyr::inner_join(accession_report,
     int_tbl,
