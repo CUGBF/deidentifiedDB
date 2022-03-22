@@ -29,6 +29,7 @@ test_that("Testing week_dates_info() !", {
   output_tbl <- week_dates_info(input_tbl)
 
   expect_Tbl <- tibble::tibble(
+    collection_year = c(2022, 2022),
     collection_week = c(9, 10),
     week_start = lubridate::as_date(c(
       "2022-03-01",

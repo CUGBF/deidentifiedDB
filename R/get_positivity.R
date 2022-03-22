@@ -44,6 +44,7 @@ get_positivity <- function(sc_tbl,
   )
 
   stopifnot(all(c(
+    "collection_year",
     "collection_week",
     "week_start",
     "week_end"
@@ -56,6 +57,7 @@ get_positivity <- function(sc_tbl,
       "SURVEILLANCE"
     )) %>%
     dplyr::group_by(
+      .data$collection_year,
       .data$collection_week,
       .data$population,
       .data$order_priority,
@@ -87,10 +89,14 @@ get_positivity <- function(sc_tbl,
       POSITIVITY = round((.data$POSITIVE / .data$TOTAL) * 100, 2),
       collection_week = as.factor(.data$collection_week)
     ) %>%
-    dplyr::full_join(week_dates_info,
-      by = "collection_week"
+    dplyr::left_join(week_dates_info,
+      by = c(
+        "collection_year",
+        "collection_week"
+      )
     ) %>%
     dplyr::relocate(
+      "collection_year",
       "collection_week",
       "week_start",
       "week_end",
@@ -101,6 +107,7 @@ get_positivity <- function(sc_tbl,
       "POSITIVITY"
     ) %>%
     dplyr::arrange(
+      .data$collection_year,
       .data$collection_week,
       .data$population,
       .data$order_priority

@@ -48,6 +48,7 @@ get_sc_wo_redundant <- function(sc_tbl,
 
   sc_tbl_no_missing <- sc_tbl %>%
     dplyr::mutate(
+      collection_year = lubridate::year(.data$collection_date),
       collection_week = lubridate::week(.data$collection_date),
       collection_month = zoo::as.yearmon(.data$collection_date),
       dplyr::across(
@@ -74,6 +75,7 @@ get_sc_wo_redundant <- function(sc_tbl,
     dplyr::select(
       "testkit_id",
       "rymedi_result",
+      "collection_year",
       "collection_week",
       "collection_month",
       "collection_date",

@@ -30,6 +30,13 @@ test_that("Testing get_sc_wo_redundant() !", {
 
   expect_equal(
     output_tbl %>%
+      dplyr::filter(patient_id == "069667d5e94ed55ba44fca4a") %>%
+      dplyr::pull(collection_year),
+    2021
+  )
+
+  expect_equal(
+    output_tbl %>%
       dplyr::filter(
         rymedi_result == "POSITIVE",
         patient_id == "41ebd6e24b1877e111792a70"
@@ -53,6 +60,7 @@ test_that("Testing get_sc_wo_redundant() !", {
     c(
       "testkit_id",
       "rymedi_result",
+      "collection_year",
       "collection_week",
       "collection_month",
       "collection_date",

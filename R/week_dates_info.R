@@ -29,11 +29,22 @@ week_dates_info <- function(sc_tbl_no_missing,
     sc_tbl_no_missing <- sc_tbl_no_missing %>%
       dplyr::mutate(collection_week = lubridate::week(.data$collection_date))
   }
+  if (!("collection_year" %in% colnames(sc_tbl_no_missing))) {
+    sc_tbl_no_missing <- sc_tbl_no_missing %>%
+      dplyr::mutate(collection_year = lubridate::year(.data$collection_date))
+  }
 
   output_tbl <- sc_tbl_no_missing %>%
-    dplyr::select("collection_week", "collection_date") %>%
+    dplyr::select(
+      "collection_year",
+      "collection_week",
+      "collection_date"
+    ) %>%
     dplyr::distinct() %>%
-    dplyr::group_by(.data$collection_week) %>%
+    dplyr::group_by(
+      .data$collection_year,
+      .data$collection_week
+    ) %>%
     dplyr::mutate(
       week_start = min(.data$collection_date),
       week_end = max(.data$collection_date),
@@ -42,7 +53,10 @@ week_dates_info <- function(sc_tbl_no_missing,
     dplyr::ungroup() %>%
     dplyr::select(-c(.data$collection_date)) %>%
     dplyr::distinct() %>%
-    dplyr::arrange(.data$collection_week)
+    dplyr::arrange(
+      .data$collection_year,
+      .data$collection_week
+    )
 
   return(output_tbl)
 }
