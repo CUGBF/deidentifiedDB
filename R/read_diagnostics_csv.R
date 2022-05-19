@@ -62,7 +62,7 @@ read_diagnostics_csv <- function(filepath) {
       "Q1_Tech", "Q2_Tech", "Q3_Tech", "Q4_Tech", "Control_Tech", "Result_Tech_1",
       "Result_Tech_2", "Certification_R"
     ),
-    col_types = paste(rep("c", 31), collapse = ""),
+    col_types = paste(rep("c", 36), collapse = ""),
     na = c(
       "", "NA", "<NA>", "Missing", "Error 404", "N/A",
       "not applicable", "Not Applicable", "NO AMP", "Inconclusive",
