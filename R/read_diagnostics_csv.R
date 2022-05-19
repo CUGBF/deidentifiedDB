@@ -19,6 +19,7 @@ read_diagnostics_csv <- function(filepath) {
     "Thermocycler",
     "Mastermix",
     "PCR_Type",
+    "Protocol_Version",
     "Rymedi_Job",
     "P1_A",
     "P1_B",
@@ -29,11 +30,15 @@ read_diagnostics_csv <- function(filepath) {
     "Int_N1_A",
     "Int_N1_B",
     "Case",
+    "N1_Code",
     "Rymedi_Result",
     "Plate_Result",
     "Run_Number",
-    "Prior_Result",
+    "Prior_Code",
+    "Sample_Notes",
     "Plate_Validity",
+    "Plate_Notes",
+    "Certification_A",
     "Q1_Tech",
     "Q2_Tech",
     "Q3_Tech",
@@ -41,20 +46,21 @@ read_diagnostics_csv <- function(filepath) {
     "Control_Tech",
     "Result_Tech_1",
     "Result_Tech_2",
-    "Amp_Tech"
+    "Certification_R"
   )))
 
   output_tbl <- readr::read_csv(filepath,
     col_names = c(
       "testkit_id", "hashed_id", "run_date", "machine",
-      "plate", "thermocycler", "mastermix", "pcr_type", "rymedi_job",
+      "plate", "thermocycler", "mastermix", "pcr_type", "protocol_version", "rymedi_job",
       "ct_rnasep_rep1", "ct_rnasep_rep2",
       "ct_N_rep1", "ct_N_rep2",
-      "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B", "Case",
+      "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B", "Case", "N1_Code",
       "result",
-      "Plate_Result", "Run_Number", "Prior_Result", "Plate_Validity", "Q1_Tech",
-      "Q2_Tech", "Q3_Tech", "Q4_Tech", "Control_Tech", "Result_Tech_1",
-      "Result_Tech_2", "Amp_Tech"
+      "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes", "Plate_Validity", "Plate_Notes",
+      "Certification_A", 
+      "Q1_Tech", "Q2_Tech", "Q3_Tech", "Q4_Tech", "Control_Tech", "Result_Tech_1",
+      "Result_Tech_2", "Certification_R"
     ),
     col_types = paste(rep("c", 31), collapse = ""),
     na = c(
