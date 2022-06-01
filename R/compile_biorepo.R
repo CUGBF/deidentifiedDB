@@ -37,7 +37,9 @@ compile_biorepo <- function(filepath) {
       "testkit_id", "box_idn", "box_position_1",
       "vial_idn_1", "box_position_2",
       "vial_idn_2", "box_position_3",
-      "vial_idn_3"
+      "vial_idn_3", "sample_id", "date",
+      "p1_a", "p1_a", "n1_a", "n1_b",
+      "rymedi_result"
     ),
     na = c(
       "", "NA", "<NA>", "Missing",
@@ -46,6 +48,12 @@ compile_biorepo <- function(filepath) {
     show_col_types = FALSE,
     skip = 1
   ) %>%
+    dplyr::select(
+      "testkit_id", "box_idn", "box_position_1",
+      "vial_idn_1", "box_position_2",
+      "vial_idn_2", "box_position_3",
+      "vial_idn_3"
+    ) %>%
     dplyr::mutate_at(
       c("vial_idn_1", "vial_idn_2", "vial_idn_3"),
       ~ replace(., which(. == "NES"), "not_enough_sample")
