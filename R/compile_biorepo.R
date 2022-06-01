@@ -38,12 +38,12 @@ compile_biorepo <- function(filepath) {
       "vial_idn_1", "box_position_2",
       "vial_idn_2", "box_position_3",
       "vial_idn_3", "sample_id", "date",
-      "p1_a", "p1_a", "n1_a", "n1_b",
+      "p1_a", "p1_b", "n1_a", "n1_b",
       "rymedi_result"
     ),
     na = c(
       "", "NA", "<NA>", "Missing",
-      "Error 404", "None", "null", "NULL", "Null"
+      "Error 404", "None", "null", "NULL", "Null", "NO AMP", "NOAMP"
     ),
     show_col_types = FALSE,
     skip = 1
