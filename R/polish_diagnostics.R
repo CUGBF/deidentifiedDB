@@ -22,7 +22,7 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
     "plate"
   ) %in% colnames(diagnostics_tbl)))
 
-  if (grepl("-", diagnostic_tbl$run_date[1])) {  
+  if (grepl("-", diagnostics_tbl$run_date[1])) {  
     output_tbl <- diagnostics_tbl %>%
       dplyr::mutate(
         run_date = lubridate::date(.data$run_date),
