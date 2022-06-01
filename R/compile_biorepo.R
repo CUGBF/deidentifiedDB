@@ -28,7 +28,8 @@ compile_biorepo <- function(filepath) {
 
   stopifnot(any(c(
     "TestKit ID",
-    "TestKitID"
+    "TestKitID",
+    "TestKitId"
   ) %in% colnames(test_tbl)))
 
   output_tbl <- readr::read_csv(filepath,
