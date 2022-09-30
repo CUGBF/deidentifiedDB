@@ -35,18 +35,7 @@ read_diagnostics_csv <- function(filepath) {
     "Plate_Result",
     "Run_Number",
     "Prior_Code",
-    "Sample_Notes",
-    "Plate_Validity",
-    "Plate_Notes",
-    "Certification_A",
-    "Q1_Tech",
-    "Q2_Tech",
-    "Q3_Tech",
-    "Q4_Tech",
-    "Control_Tech",
-    "Result_Tech_1",
-    "Result_Tech_2",
-    "Certification_R"
+    "Sample_Notes"
   )))
 
   output_tbl <- readr::read_csv(filepath,
@@ -57,12 +46,9 @@ read_diagnostics_csv <- function(filepath) {
       "ct_N_rep1", "ct_N_rep2",
       "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B", "Case", "N1_Code",
       "result",
-      "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes", "Plate_Validity", "Plate_Notes",
-      "Certification_A", 
-      "Q1_Tech", "Q2_Tech", "Q3_Tech", "Q4_Tech", "Control_Tech", "Result_Tech_1",
-      "Result_Tech_2", "Certification_R"
+      "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes"
     ),
-    col_types = paste(rep("c", 36), collapse = ""),
+    col_types = paste(rep("c", 25), collapse = ""),
     na = c(
       "", "NA", "<NA>", "Missing", "Error 404", "N/A",
       "not applicable", "Not Applicable", "NO AMP", "Inconclusive",
