@@ -16,9 +16,6 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
     "ct_N_rep1",
     "ct_N_rep2",
     "result",
-    "machine",
-    "thermocycler",
-    "pcr_type",
     "plate"
   ) %in% colnames(diagnostics_tbl)))
 
@@ -35,10 +32,7 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
           .data$ct_N_rep2
         ), tidy_up_ct),
         dplyr::across(c(
-          .data$result,
-          .data$machine,
-          .data$thermocycler,
-          .data$pcr_type
+          .data$result
         ), stringr::str_to_lower),
         plate = as.numeric(.data$plate)
       ) %>%
@@ -56,10 +50,7 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
           .data$ct_N_rep2
         ), tidy_up_ct),
         dplyr::across(c(
-          .data$result,
-          .data$machine,
-          .data$thermocycler,
-          .data$pcr_type
+          .data$result
         ), stringr::str_to_lower),
         plate = as.numeric(.data$plate)
       ) %>%
