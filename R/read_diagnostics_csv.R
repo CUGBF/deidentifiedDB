@@ -48,7 +48,7 @@ read_diagnostics_csv <- function(filepath) {
       "result",
       "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes"
     ),
-    col_types = paste(rep("c", 31), collapse = ""),
+    col_types = paste(rep("c", 25), collapse = ""),
     na = c(
       "", "NA", "<NA>", "Missing", "Error 404", "N/A",
       "not applicable", "Not Applicable", "NO AMP", "Inconclusive",
