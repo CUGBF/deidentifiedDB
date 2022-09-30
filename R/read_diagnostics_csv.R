@@ -51,8 +51,8 @@ read_diagnostics_csv <- function(filepath) {
     show_col_types = FALSE
   ) %>%
     dplyr::select(
-      "testkit_id", "hashed_id", "run_date", "machine",
-      "plate", "thermocycler", "mastermix", "pcr_type",
+      "testkit_id", "hashed_id", "run_date",
+      "plate", 
       "ct_rnasep_rep1", "ct_rnasep_rep2",
       "ct_N_rep1", "ct_N_rep2", "result"
     ) %>%
