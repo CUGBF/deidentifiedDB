@@ -37,7 +37,7 @@ read_diagnostics_csv <- function(filepath) {
       "testkit_id", "hashed_id", "run_date", "plate", 
       "ct_rnasep_rep1", "ct_rnasep_rep2",
       "ct_N_rep1", "ct_N_rep2",
-      "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B", "Case", "N1_Code",
+      "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B", "P1_Code", "N1_Code",
       "result",
       "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes"
     ),
