@@ -131,12 +131,7 @@ Data from COVID-19 diagnostics testing is housed in the `diagnostics` table of t
     TestKitId,
     Sample_ID,
     Date,
-    Robot,
-    Plate,
-    Thermocycler,
-    Mastermix,
-    PCR_Type,
-    Rymedi_Job,
+    PlateId,
     P1_A,
     P1_B,
     N1_A,
@@ -145,21 +140,14 @@ Data from COVID-19 diagnostics testing is housed in the `diagnostics` table of t
     Int_P1_B,
     Int_N1_A,
     Int_N1_B,
-    Case,
+    P1_Code,
+    N1_Code,
     Rymedi_Result,
     Plate_Result,
     Run_Number,
-    Prior_Result,
-    Plate_Validity,
-    Q1_Tech,
-    Q2_Tech,
-    Q3_Tech,
-    Q4_Tech,
-    Control_Tech,
-    Result_Tech_1,
-    Result_Tech_2,
-    Amp_Tech
-```
+    Prior_Code,
+    Sample_Notes
+``
 
 ##### Output
 
@@ -169,15 +157,7 @@ Tibble with the following structure:
     testkit_id,
     hashed_id,
     run_date,
-    machine,
     plate,
-    thermocycler,
-    mastermix,
-    pcr_type,
-    ct_rnasep_rep1,
-    ct_rnasep_rep2,
-    ct_N_rep1,
-    ct_N_rep2,
     result,
     control
 ```

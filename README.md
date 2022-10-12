@@ -127,360 +127,306 @@ table of the SQLite database.
     following columns must be in the *csv* file:
 
 <!-- -->
-    TestKitId,
-    Sample_ID,
-    Date,
-    Robot,
-    Plate,
-    Thermocycler,
-    Mastermix,
-    PCR_Type,
-    Protocol_Version,
-    Rymedi_Job,
-    P1_A,
-    P1_B,
-    N1_A,
-    N1_B,
-    Int_P1_A,
-    Int_P1_B,
-    Int_N1_A,
-    Int_N1_B,
-    Case,
-    N1_Code,
-    Rymedi_Result,
-    Plate_Result,
-    Run_Number,
-    Prior_Code,
-    Sample_Notes,
-    Plate_Validity,
-    Plate_Notes,
-    Certification_A,
-    Q1_Tech,
-    Q2_Tech,
-    Q3_Tech,
-    Q4_Tech,
-    Control_Tech,
-    Result_Tech_1,
-    Result_Tech_2,
-    Certification_R
 
-##### Output
+        TestKitId,
+        Sample_ID,
+        Date,
+        PlateId,
+        P1_A,
+        P1_B,
+        N1_A,
+        N1_B,
+        Int_P1_A,
+        Int_P1_B,
+        Int_N1_A,
+        Int_N1_B,
+        P1_Code,
+        N1_Code,
+        Rymedi_Result,
+        Plate_Result,
+        Run_Number,
+        Prior_Code,
+        Sample_Notes
+    ``
 
-Tibble with the following structure:
+    ##### Output
 
-        testkit_id,
-        hashed_id,
-        run_date,
-        machine,
-        plate,
-        thermocycler,
-        mastermix,
-        pcr_type,
-        ct_rnasep_rep1,
-        ct_rnasep_rep2,
-        ct_N_rep1,
-        ct_N_rep2,
-        result,
-        control
+    Tibble with the following structure:
 
-##### Procedure
+    testkit_id,
+    hashed_id,
+    run_date,
+    plate,
+    result,
+    control
 
-Input → `deidentifiedDB::compile_diagnostics_data()` → Output
 
-### `demographics` and `sample_collection`
+    ##### Procedure
 
-##### Input
+    Input &rarr; `deidentifiedDB::compile_diagnostics_data()` &rarr; Output
 
-1.  *csv* file from CCIT (via CU REDDI lab) containing the demographics
-    and sample collection data. The following columns must be in the
-    *csv* file:
+    ### `demographics` and `sample_collection`
 
-<!-- -->
+    ##### Input
 
-        Testing Group Name,
-        Patient City,
-        Patient Zip Code,
-        Patient State,
-        Year of Birth,
-        Patient Gender,
-        Pregnant,
-        Patient Ethnic Group,
-        Patient Race,
-        Patient ID,
-        TestKit ID,
-        Result description,
-        Result Date,
-        Collection Date,
-        Collection Time,
-        SKU,
-        Order Priority,
-        Performing Facility,
-        Tested by
+    1. *csv* file from CCIT (via CU REDDI lab) containing the demographics and sample collection data. The following columns must be in the *csv* file:
 
-2.  *csv* file containing USPS zip codes and associated location
-    information. Downloadable for academic use from
-    [unitedstateszipcodes.org](https://www.unitedstateszipcodes.org/zip-code-database/)
+    Testing Group Name,
+    Patient City,
+    Patient Zip Code,
+    Patient State,
+    Year of Birth,
+    Patient Gender,
+    Pregnant,
+    Patient Ethnic Group,
+    Patient Race,
+    Patient ID,
+    TestKit ID,
+    Result description,
+    Result Date,
+    Collection Date,
+    Collection Time,
+    SKU,
+    Order Priority,
+    Performing Facility,
+    Tested by
 
-3.  *csv* file containing list of all global regions and countries
-    downloadable from
-    [UNECE](https://unece.org/trade/cefact/UNLOCODE-Download)
 
-#### `demographics`
+    2. *csv* file containing USPS zip codes and associated location information. Downloadable for academic use from [unitedstateszipcodes.org](https://www.unitedstateszipcodes.org/zip-code-database/)
 
-##### Output
+    3. *csv* file containing list of all global regions and countries downloadable from [UNECE](https://unece.org/trade/cefact/UNLOCODE-Download)
 
-Tibble with the following structure:
+    #### `demographics`
 
-        patient_id
-        birth_year
-        ethnicity
-        race_white
-        race_asian
-        race_black_or_african_american
-        race_american_indian_or_alaskan_native
-        race_native_hawaiian_or_pacific_islander
+    ##### Output
 
-##### Procedure
+    Tibble with the following structure:
 
-1.  Input → `deidentifiedDB::prepare_demographics_sc()` →
-    `deidentifiedDB::pull_demographics()` → Output
-2.  If there are `patient_id`s with discrepant information (`patient_id`
-    is the primery key for the `demographics` table), extract (and
-    remove) the rows for such `patient_id`s from the output, then run
-    `deidentifiedDB::assign_mode()` on the extracted tibble. Output
-3.  Append the output tibble of `assign_mode()` to the original tibble
-    containing demographics information for all other `patient_id`s
+    patient_id
+    birth_year
+    ethnicity
+    race_white
+    race_asian
+    race_black_or_african_american
+    race_american_indian_or_alaskan_native
+    race_native_hawaiian_or_pacific_islander
 
-#### `sample_collection`
 
-##### Output
+    ##### Procedure
 
-Tibble with the following structure:
+    1. Input &rarr; `deidentifiedDB::prepare_demographics_sc()` &rarr; `deidentifiedDB::pull_demographics()` &rarr; Output
+    2. If there are `patient_id`s with discrepant information (`patient_id` is the primery key for the `demographics` table), extract (and remove) the rows for such `patient_id`s from the output, then run `deidentifiedDB::assign_mode()` on the extracted tibble. 
+       Output
+    3. Append the output tibble of `assign_mode()` to the original tibble containing demographics information for all other `patient_id`s
 
-        testkit_id,
-        rymedi_result,
-        population,
-        order_priority,
-        collection_date,
-        result_date,
-        gender,
-        pregnancy_status,
-        zip_code,
-        city,
-        county,
-        state,
-        country,
-        zip_code_user_input,
-        city_user_input,
-        state_user_input,
-        patient_id,
-        teskit_sku,
-        performing_facility,
-        testing_facility
+    #### `sample_collection`
 
-##### Procedure
+    ##### Output
 
-1.  Input → `deidentifiedDB::prepare_demographics_sc()` →
-    `deidentifiedDB::pull_sc()`
-2.  Create a vector of US states/territories codes using
-    `deidentifiedDB::get_us_entities()` and manually check the output
-    from *step 1* if any US state name was used by a user instead of the
-    code. Make manual corrections if needed.
-3.  Output from step 2 → `deidentifiedDB::compile_sc_data()` → Final
-    Output
+    Tibble with the following structure:
 
-### `biorepository`
+    testkit_id,
+    rymedi_result,
+    population,
+    order_priority,
+    collection_date,
+    result_date,
+    gender,
+    pregnancy_status,
+    zip_code,
+    city,
+    county,
+    state,
+    country,
+    zip_code_user_input,
+    city_user_input,
+    state_user_input,
+    patient_id,
+    teskit_sku,
+    performing_facility,
+    testing_facility
 
-The `biorepository` table in the SQLite database contains information
-regarding the storage position in -80C for a subset of COVID-19 positive
-samples.
 
-##### Input
+    ##### Procedure
 
-1.  *csv* file from CU REDDI lab the following columns:
+    1. Input &rarr; `deidentifiedDB::prepare_demographics_sc()` &rarr; `deidentifiedDB::pull_sc()`
+    2. Create a vector of US states/territories codes using `deidentifiedDB::get_us_entities()` and manually check the output from *step 1* if any US state name was used by a user instead of the code. Make manual corrections if needed.
+    3. Output from step 2 &rarr; `deidentifiedDB::compile_sc_data()` &rarr; Final Output
 
-<!-- -->
+    ### `biorepository`
 
-        TestKit ID
-        Box IDN,
-        Box Position 1,
-        Vial IDN 1,
-        Box Position 2,
-        Vial IDN 2,
-        Box Position 3,
-        Vial IDN 3
+    The `biorepository` table in the SQLite database contains information regarding the storage position in -80C for a subset of COVID-19 positive samples.
 
-##### Output
+    ##### Input
 
-Tibble with the following structure:
+    1. *csv* file from CU REDDI lab the following columns:
 
-        testkit_id, 
-        box_idn, 
-        box_position_1,
-        vial_idn_1, 
-        box_position_2,
-        vial_idn_2, 
-        box_position_3,
-        vial_idn_3
+    TestKit ID
+    Box IDN,
+    Box Position 1,
+    Vial IDN 1,
+    Box Position 2,
+    Vial IDN 2,
+    Box Position 3,
+    Vial IDN 3
 
-##### Procedure
 
-1.  Input → `deidentifiedDB::compile_biorepo()` → Output
+    ##### Output
 
-### `genbank`
+    Tibble with the following structure:
 
-All sequenced samples that were submitted to GenBank are recorded in the
-the `genbank` table of deidentifiedDB database
+    testkit_id, 
+    box_idn, 
+    box_position_1,
+    vial_idn_1, 
+    box_position_2,
+    vial_idn_2, 
+    box_position_3,
+    vial_idn_3
 
-##### Input
 
-1.  Accession Report TSV from GenBank. There are three columns in this
-    file:
+    ##### Procedure
 
-<!-- -->
+    1. Input &rarr; `deidentifiedDB::compile_biorepo()` &rarr; Output
 
-      Accession 
-      Sequence ID   
-      Release Date
+    ### `genbank`
 
-2.  `Output_list[['int_tbl']]` returned by
-    `deidentifiedDB::compile_genbank()`
+    All sequenced samples that were submitted to GenBank are recorded in the the `genbank` table of deidentifiedDB database
 
-##### Output
+    ##### Input
 
-Tibble with the following structure:
+    1. Accession Report TSV from GenBank. There are three columns in this file:
 
-      testkit_id
-      sequence_ID
-      genbank_accession
-      pipeline
-      submission_date
-      release_date
+Accession Sequence ID  
+Release Date
 
-##### Procedure
 
-1.  Input → `deidentifiedDB::compile_genbank_table()` → Output
+    2. `Output_list[['int_tbl']]` returned by `deidentifiedDB::compile_genbank()`
 
-### Other Useful Functions
+    ##### Output
 
-#### GenBank Submission
+    Tibble with the following structure:
 
-##### Input
+testkit_id sequence_ID genbank_accession pipeline submission_date
+release_date
 
-1.  Vector containing `testkit_id`s to be submitted
-2.  Path to the directory containing single-sequence FASTA files with
-    consensus sequence for each `testkit_id` (found in
-    <viralrecon_run_dir>/variants/ivar/consensus/bcftools/)
-3.  `sample_collection`, `demographics` and `viralrecon` tables
-    discussed above.
 
-##### Output
+    ##### Procedure
 
-R list with the following elements:
+    1. Input &rarr; `deidentifiedDB::compile_genbank_table()` &rarr; Output
 
-1.  `int_tbl` - Tibble for internal records
-2.  `ext_tbl` - Tibble containing metadata in the format required by
-    GenBank
-3.  `seqs` - DNAStringSet containing the consensus sequences.
+    ### Other Useful Functions
 
-##### Procedure
+    #### GenBank Submission
 
-1.  `deidentifiedDB::compile_genbank()` → Output
+    ##### Input
 
-2.  The DNAStringSet can be written to a multi-sequence FASTA file by
-    using the following command:
+    1. Vector containing `testkit_id`s to be submitted
+    2. Path to the directory containing single-sequence FASTA files with consensus sequence for each `testkit_id` (found in <viralrecon_run_dir>/variants/ivar/consensus/bcftools/)
+    3. `sample_collection`, `demographics` and `viralrecon` tables discussed above.
 
+    ##### Output
+
+    R list with the following elements:
+
+    1. `int_tbl` - Tibble for internal records
+    2. `ext_tbl` - Tibble containing metadata in the format required by GenBank
+    3. `seqs` - DNAStringSet containing the consensus sequences. 
+
+    ##### Procedure
+
+    1. `deidentifiedDB::compile_genbank()` &rarr; Output
+    2. The DNAStringSet can be written to a multi-sequence FASTA file by using the following command:
+
+        ```
         writeXStringSet(Output[['seqs']], 
                         'genbank_submission.fasta')
+        ```
 
-#### `get_pangolin_distribution()`
+    #### `get_pangolin_distribution()`
 
-##### Input
+    ##### Input
 
-1.  `sample_collection`and `viralrecon` tables discussed above.
+    1. `sample_collection`and `viralrecon` tables discussed above.
 
-##### Output
+    ##### Output
 
-Monthly count of sequenced samples belonging to each Pangolin lineage.
+    Monthly count of sequenced samples belonging to each Pangolin lineage.
 
-Tibble with the following columns:
+    Tibble with the following columns:
 
-      collection_month
-      lineage
-      n_sequenced_samples
+collection_month lineage n_sequenced_samples
 
-##### Procedure
 
-1.  `deidentifiedDB::get_pangolin_distribution()` → Output
+    ##### Procedure
 
-#### `get_nextclade_distribution()`
+    1. `deidentifiedDB::get_pangolin_distribution()` &rarr; Output
 
-##### Input
+    #### `get_nextclade_distribution()`
 
-1.  `sample_collection` and `viralrecon` tables discussed above.
+    ##### Input
 
-##### Output
+    1. `sample_collection` and `viralrecon` tables discussed above.
 
-Monthly count of sequenced samples belonging to each Nextclade
+    ##### Output
 
-Tibble with the following columns:
+    Monthly count of sequenced samples belonging to each Nextclade
 
-      collection_month
-      clade
-      n_sequenced_samples
+    Tibble with the following columns:
 
-##### Procedure
+collection_month clade n_sequenced_samples
 
-1.  `deidentifiedDB::get_nextclade_distribution()` → Output
 
-#### `get_positivity()`
+    ##### Procedure
 
-Computes Weekly Test Positivity Rate (TPR)
+    1. `deidentifiedDB::get_nextclade_distribution()` &rarr; Output
 
-##### Input
+    #### `get_positivity()`
 
-1.  `sample_collection`and `viralrecon` tables discussed above.
+    Computes Weekly Test Positivity Rate (TPR)
 
-##### Output
+    ##### Input
 
-Tibble with the following columns:
+    1. `sample_collection`and `viralrecon` tables discussed above.
 
-          collection_week
-          week_start
-          week_end
-          order_priority
-          TOTAL
-          POSITIVE
-          NEGATIVE
-          POSITIVITY
+    ##### Output
 
-##### Procedure
+    Tibble with the following columns:
 
-1.  `deidentifiedDB::get_positivity()` → Output
+      collection_week
+      week_start
+      week_end
+      order_priority
+      TOTAL
+      POSITIVE
+      NEGATIVE
+      POSITIVITY
 
-#### `get_daily_diagnostics()`
 
-##### Input
+    ##### Procedure
 
-1.  `diagnostics` table discussed above.
+    1. `deidentifiedDB::get_positivity()` &rarr; Output
 
-##### Output
+    #### `get_daily_diagnostics()`
 
-Tibble with the following columns:
+    ##### Input
 
-      <grouping_variables>
-      count
+    1. `diagnostics` table discussed above.
 
-##### Procedure
+    ##### Output
 
-1.  `deidentifiedDB::get_daily_diagnostics()` → Output
+    Tibble with the following columns:
 
-Make sure <grouping_variables> are specified in the function call.
+<grouping_variables> count
 
-For example:
 
-    deidentifiedDB::get_daily_diagnostics(diagnostics_tbl,
-                                      start_date,
-                                      end_date,
-                                      *run_date*,
-                                      *result*)
+    ##### Procedure
+
+    1. `deidentifiedDB::get_daily_diagnostics()` &rarr; Output
+
+    Make sure <grouping_variables> are specified in the function call.
+
+    For example:
+
+deidentifiedDB::get_daily_diagnostics(diagnostics_tbl, start_date,
+end_date, *run_date*, *result*) \`\`\`
