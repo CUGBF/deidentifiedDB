@@ -67,5 +67,3 @@ read_diagnostics_csv <- function(filepath) {
   return(output_tbl)
 }
 
-
-test<-read_diagnostics_csv("REDDI Data from 2022-09-12 to 2022-09-18.csv")
