@@ -147,7 +147,7 @@ Data from COVID-19 diagnostics testing is housed in the `diagnostics` table of t
     Run_Number,
     Prior_Code,
     Sample_Notes
-``
+```
 
 ##### Output
 
@@ -159,6 +159,10 @@ Tibble with the following structure:
     run_date,
     plate,
     result,
+    ct_rnasep_rep1,
+    ct_rnasep_rep2,
+    ct_N_rep1,
+    ct_N_rep2,
     control
 ```
 
