@@ -21,6 +21,10 @@ compile_diagnostics_data <- function(filepath, run_date_fmt = c("mdy")) {
     "hashed_id",
     "run_date",
     "plate",
+    "ct_rnasep_rep1",
+    "ct_rnasep_rep2",
+    "ct_N_rep1",
+    "ct_N_rep2",
     "result",
     "control"
   ) %in% colnames(diagnostics_tbl)))
@@ -31,6 +35,10 @@ compile_diagnostics_data <- function(filepath, run_date_fmt = c("mdy")) {
       "hashed_id",
       "run_date",
       "plate",
+      "ct_rnasep_rep1",
+      "ct_rnasep_rep2",
+      "ct_N_rep1",
+      "ct_N_rep2",
       "result",
       "control"
     )

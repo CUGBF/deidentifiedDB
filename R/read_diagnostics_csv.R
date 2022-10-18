@@ -36,7 +36,7 @@ read_diagnostics_csv <- function(filepath) {
     col_names = c(
       "testkit_id", "hashed_id", "run_date",
       "plate",
-      "P1_A","P1_B","N1_A","N1_B",
+      "ct_rnasep_rep1","ct_rnasep_rep2","ct_N_rep1","ct_N_rep2",
       "Int_P1_A", "Int_P1_B", "Int_N1_A", "Int_N1_B","P1_Code","N1_Code",
       "result",
       "Plate_Result", "Run_Number", "Prior_Code", "Sample_Notes"
@@ -52,7 +52,8 @@ read_diagnostics_csv <- function(filepath) {
   ) %>%
     dplyr::select(
       "testkit_id", "hashed_id", "run_date",
-      "plate","result"
+      "plate","ct_rnasep_rep1", "ct_rnasep_rep2",
+      "ct_N_rep1", "ct_N_rep2","result"
     ) %>%
     dplyr::mutate(result = replace(
       .data$result,
