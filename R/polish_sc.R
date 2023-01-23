@@ -20,8 +20,7 @@ polish_sc <- function(sc_tbl) {
     "country_usps", "zip_code",
     "city", "state",
     "patient_id",
-    "teskit_sku", "performing_facility",
-    "testing_facility"
+    "teskit_sku"
   ) %in% colnames(sc_tbl)))
 
   stopifnot(!(all(c("G7-PCR-SALIVA", "PCR- ANTERIOR-001") %in% unique(sc_tbl$population))))
@@ -47,9 +46,7 @@ polish_sc <- function(sc_tbl) {
       "city",
       "state",
       "patient_id",
-      "teskit_sku",
-      "performing_facility",
-      "testing_facility"
+      "teskit_sku"
     ) %>%
     dplyr::rename(
       zip_code_user_input = "zip_code",
