@@ -23,7 +23,9 @@ pull_sc <- function(demographics_sc_tbl) {
     "state",
     "patient_id",
     "teskit_sku",
-    "order_priority"
+    "order_priority",
+    "performing_facility",
+    "testing_facility"
   ) %in% colnames(demographics_sc_tbl)))
 
   output_tbl <- demographics_sc_tbl %>%
@@ -41,7 +43,9 @@ pull_sc <- function(demographics_sc_tbl) {
       "state",
       "patient_id",
       "teskit_sku",
-      "order_priority"
+      "order_priority",
+      "performing_facility",
+      "testing_facility"
     ) %>%
     dplyr::mutate(
       state = stringr::str_trim(.data$state, c("both")),
