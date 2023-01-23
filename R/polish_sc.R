@@ -24,7 +24,7 @@ polish_sc <- function(sc_tbl) {
   ) %in% colnames(sc_tbl)))
 
   stopifnot(!(all(c("G7-PCR-SALIVA", "PCR- ANTERIOR-001") %in% unique(sc_tbl$population))))
-  stopifnot(unique(sc_tbl$gender[!is.na(sc_tbl$gender)]) %in% c("M", "F", "0"))
+  stopifnot(unique(sc_tbl$gender[!is.na(sc_tbl$gender)]) %in% c("M", "F", "O"))
   stopifnot("PICKENS COUNTY" %in% unique(sc_tbl$county_usps))
 
   out_tbl <- sc_tbl %>%
