@@ -37,11 +37,8 @@ read_demographics_csv <- function(filepath,
     "Result description",
     "Result Date",
     "Collection Date",
-    "Collection Time",
     "SKU",
-    "Order Priority",
-    "Performing Facility",
-    "Tested by"
+    "Order Priority"
   ) %in% colnames(test_tbl)))
 
   output_tbl <- readr::read_csv(filepath,
@@ -66,9 +63,7 @@ read_demographics_csv <- function(filepath,
       "rymedi_result" = "Result description",
       "result_date" = "Result Date",
       "teskit_sku" = "SKU",
-      "order_priority" = "Order Priority",
-      "performing_facility" = "Performing Facility",
-      "testing_facility" = "Tested by"
+      "order_priority" = "Order Priority"
     )
 
   if ("Time Zone" %in% colnames(output_tbl)) {
