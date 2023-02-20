@@ -105,11 +105,11 @@ compile_viralrecon <- function(filepath,
       )
     ) %>%
     dplyr::relocate(c(
-      .data$primer_set,
-      .data$primer_set_version,
-      .data$sequencing_platform
+      primer_set,
+      primer_set_version,
+      sequencing_platform
     ),
-    .after = .data$testkit_id
+    .after = testkit_id
     )
 
   return(output_tbl)
