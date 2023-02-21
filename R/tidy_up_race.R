@@ -42,7 +42,7 @@ tidy_up_race <- function(demographics_tbl) {
         )
       )
     ) %>%
-    dplyr::select(-c(data$race))
+    dplyr::select(-c(.data$race))
 
   return(output_tbl)
 }
