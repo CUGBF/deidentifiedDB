@@ -12,31 +12,31 @@ tidy_up_race <- function(demographics_tbl) {
   output_tbl <- demographics_tbl %>%
     dplyr::mutate(
       race_white = stringr::str_detect(
-        race,
+        .data$race,
         stringr::regex("White",
           ignore_case = T
         )
       ),
       race_asian = stringr::str_detect(
-        race,
+        .date$race,
         stringr::regex("Asian",
           ignore_case = T
         )
       ),
       race_black_or_african_american = stringr::str_detect(
-        race,
+        .date$race,
         stringr::regex("Black|African",
           ignore_case = T
         )
       ),
       race_american_indian_or_alaskan_native = stringr::str_detect(
-        race,
+        .date$race,
         stringr::regex("Indian|Alaska",
           ignore_case = T
         )
       ),
       race_native_hawaiian_or_pacific_islander = stringr::str_detect(
-        race,
+        .date$race,
         stringr::regex("Hawaiian|Pacific|Islander",
           ignore_case = T
         )
