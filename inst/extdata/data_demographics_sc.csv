@@ -1,4 +1,4 @@
-Organization,Testing Group Name,Patient City,Patient Zip Code,Patient State,Year of Birth,Patient Gender,Vaccination Status,Pregnant,Patient Ethnic Group,Patient Race,Patient ID,TestKit ID,Result description,Collection Date,Result Date,CLIA Number,SKU,Order Priority
+Organization,Testing Group Name,Patient City,Patient Zip Code,Patient State,Year of Birth,Patient Gender,Vaccination,Pregnant,Patient Ethnic Group,Patient Race,Patient ID,TestKit ID,Result description,Collection Date,Result Date,CLIA Number,SKU,Order Priority
 Clemson Community,Testing-Sept2020,Inman,29349,SC,2002,Female,,No,Not Hispanic or Latino,White,bbf1afe006acb664bcbcaa78,117M18EC13CB630F0Z,Negative,3/31/21,4/1/21,4202193465,CLM-SALIVA-00003,Standard
 Clemson Community,Clemson Community ,Anderson ,29621,SC,1994,Female,,No,Not Hispanic or Latino,White,613267f87ba03c48f864d4b3,117M18EEC32748BAJI,Negative,3/31/21,4/1/21,4202193465,CLM-SALIVA-00002,Standard
 Clemson Community,Clemson Community ,Central,29630,SC,1959,Female,,No,Not Hispanic or Latino,White,db3c7b68f6fe499f44f6e794,117M18EEC3274A55BS,Negative,3/31/21,4/1/21,4202193465,CLM-SALIVA-00002,Standard
