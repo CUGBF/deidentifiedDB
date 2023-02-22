@@ -80,7 +80,11 @@ read_demographics_csv <- function(filepath,
       orders = date_fmt,
       tz = time_zone
     )
-    ) ,
+    ) %>%
+    dplyr::mutate(
+      collection_date = lubridate::as_datetime(.data$collection_date,
+        tz = time_zone
+      ),
       result_date = lubridate::as_date(lubridate::parse_date_time(.data$result_date,
         orders = date_fmt,
         tz = time_zone
