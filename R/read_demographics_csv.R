@@ -81,6 +81,9 @@ read_demographics_csv <- function(filepath,
       tz = time_zone
     )
     ) %>%
+    tidyr::unite("collection_date", .data$`Collection Date`, .data$`Collection Time`,
+      sep = " "
+    ) %>%
     dplyr::mutate(
       collection_date = lubridate::as_datetime(.data$collection_date,
         tz = time_zone
