@@ -32,8 +32,8 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
           .data$ct_N_rep2
         ), tidy_up_ct),
         dplyr::across(c(
-          .data$result,
-          .data$plate
+          starts_with('result'),
+          starts_with('plate')
         ), stringr::str_to_lower)
       ) %>%
       dplyr::arrange(.data$run_date)
@@ -44,14 +44,14 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
         control = detect_control(.data$testkit_id, .data$result),
         dplyr::across(tidyselect::vars_select_helpers$where(is.character), stringr::str_trim),
         dplyr::across(c(
-          .data$ct_rnasep_rep1,
-          .data$ct_rnasep_rep2,
-          .data$ct_N_rep1,
-          .data$ct_N_rep2
+          starts_with('ct_rnasep_rep1'),
+          starts_with('ct_rnasep_rep2'),
+          starts_with('ct_N_rep1'),
+          .starts_with('ct_N_rep2')
         ), tidy_up_ct),
         dplyr::across(c(
-          .data$result,
-          .data$plate
+          starts_with('result'),
+          starts_with('plate')
         ), stringr::str_to_lower)
       ) %>%
       dplyr::arrange(.data$run_date)
