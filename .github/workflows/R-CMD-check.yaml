@@ -23,6 +23,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: rcmdcheck, dplyr, tidyselect
+          extra-packages: rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v2
