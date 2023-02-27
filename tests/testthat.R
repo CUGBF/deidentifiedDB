@@ -1,4 +1,5 @@
 library(testthat)
+library(devtools)
 githubinstall(dplyr)
 githubinstall(tidyselect)
 library(dplyr)
