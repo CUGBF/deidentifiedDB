@@ -1,6 +1,6 @@
 library(testthat)
 library(dplyr)
-library(tidyselect)
+#library(tidyselect)
 library(deidentifiedDB)
 
 test_check("deidentifiedDB")
