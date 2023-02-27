@@ -47,7 +47,7 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
           starts_with('ct_rnasep_rep1'),
           starts_with('ct_rnasep_rep2'),
           starts_with('ct_N_rep1'),
-          .starts_with('ct_N_rep2')
+          starts_with('ct_N_rep2')
         ), tidy_up_ct),
         dplyr::across(c(
           starts_with('result'),
