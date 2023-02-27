@@ -1,4 +1,5 @@
 test_that("Testing compile_viralrecon() !", {
+  library(dplyr)
   data_viralrecon <- system.file("extdata",
     "data_viralrecon.csv",
     package = "deidentifiedDB"
