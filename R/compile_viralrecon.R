@@ -109,7 +109,7 @@ compile_viralrecon <- function(filepath,
       primer_set_version,
       sequencing_platform
     ),
-    .after = any_of('testkit_id')
+    .after = starts_with('testkit_id')
     )
 
   return(output_tbl)
