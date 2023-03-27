@@ -10,5 +10,6 @@ library(tibble)
 library(tidyr)
 library(zoo)
 library(magrittr)
+library(tidyselect)
 
 test_check("deidentifiedDB")
