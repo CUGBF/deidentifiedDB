@@ -8,5 +8,6 @@ library(readr)
 library(stringr)
 library(tibble)
 library(tidyr)
+library(zoo)
 
 test_check("deidentifiedDB")
