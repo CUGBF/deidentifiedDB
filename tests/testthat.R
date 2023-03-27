@@ -11,5 +11,6 @@ library(tidyr)
 library(zoo)
 library(magrittr)
 library(tidyselect)
+library(rlang)
 
 test_check("deidentifiedDB")
