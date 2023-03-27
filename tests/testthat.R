@@ -12,5 +12,6 @@ library(zoo)
 library(magrittr)
 library(tidyselect)
 library(rlang)
+library(Biostrings)
 
 test_check("deidentifiedDB")
