@@ -6,5 +6,6 @@ library(lubridate)
 library(RSQLite)
 library(readr)
 library(stringr)
+library(tibble)
 
 test_check("deidentifiedDB")
