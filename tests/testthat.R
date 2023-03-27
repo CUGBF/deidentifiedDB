@@ -13,5 +13,6 @@ library(magrittr)
 library(tidyselect)
 library(rlang)
 library(Biostrings)
+library(stats)
 
 test_check("deidentifiedDB")
