@@ -9,5 +9,6 @@ library(stringr)
 library(tibble)
 library(tidyr)
 library(zoo)
+library(magrittr)
 
 test_check("deidentifiedDB")
