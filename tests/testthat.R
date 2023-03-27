@@ -7,5 +7,6 @@ library(RSQLite)
 library(readr)
 library(stringr)
 library(tibble)
+library(tidyr)
 
 test_check("deidentifiedDB")
