@@ -5,5 +5,6 @@ library(dplyr)
 library(lubridate)
 library(RSQLite)
 library(readr)
+library(stringr)
 
 test_check("deidentifiedDB")
