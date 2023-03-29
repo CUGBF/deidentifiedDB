@@ -13,7 +13,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     DBI (>= 1.1.0),
-    dplyr (>= 1.0.0),
+    dplyr (>= 1.1.0),
     lubridate (>= 1.8.0),
     RSQLite (>= 2.2.9),
     readr (>= 2.0.0),
