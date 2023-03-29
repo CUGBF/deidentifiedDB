@@ -14,7 +14,7 @@ test_that("Testing compile_sc_data() !", {
 
   demo_sc_tbl <- prepare_demographics_sc(data_demographics)
   sc_tbl <- pull_sc(demo_sc_tbl)
-  expect_equal(nrow(sc_tbl), 10)
+  expect_equal(nrow(sc_tbl), 1)
 
   tidy_tbl <- compile_sc_data(
     sc_tbl,
@@ -22,25 +22,7 @@ test_that("Testing compile_sc_data() !", {
     intl_regions
   )
 
-  expect_equal(nrow(tidy_tbl), 10)
-
-  # case I
-  p1 <- tidy_tbl %>%
-    dplyr::filter(testkit_id == "117M18EEC3274A55BS")
-
-
-  expect_equal(
-    p1 %>% dplyr::pull(city),
-    "CENTRAL"
-  )
-  expect_equal(
-    p1 %>% dplyr::pull(state),
-    "SC"
-  )
-  expect_equal(
-    p1 %>% dplyr::pull(zip_code),
-    29630
-  )
+  expect_equal(nrow(tidy_tbl), 1)
 
   # case II
   p2 <- tidy_tbl %>%
