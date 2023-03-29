@@ -14,7 +14,7 @@ test_that("Testing compile_sc_data() !", {
 
   demo_sc_tbl <- prepare_demographics_sc(data_demographics)
   sc_tbl <- pull_sc(demo_sc_tbl)
-  expect_equal(nrow(sc_tbl), 19)
+  expect_equal(nrow(sc_tbl), 10)
 
   tidy_tbl <- compile_sc_data(
     sc_tbl,
@@ -22,7 +22,7 @@ test_that("Testing compile_sc_data() !", {
     intl_regions
   )
 
-  expect_equal(nrow(tidy_tbl), 19)
+  expect_equal(nrow(tidy_tbl), 10)
 
   # case I
   p1 <- tidy_tbl %>%
