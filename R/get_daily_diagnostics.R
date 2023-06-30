@@ -58,4 +58,5 @@ get_daily_diagnostics <- function(diagnostics_tbl,
   )
 
   return(output_list)
+  
 }
