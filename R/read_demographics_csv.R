@@ -76,12 +76,12 @@ read_demographics_csv <- function(filepath,
       tidyselect::vars_select_helpers$where(is.character),
       stringr::str_trim
     ),
-    `Collection Date` = lubridate::parse_date_time(.data$`Collection Date`,
+    `Collection Date` = lubridate::parse_date_time("Collection Date",
       orders = date_fmt,
       tz = time_zone
     )
     ) %>%
-    tidyr::unite("collection_date", .data$`Collection Date`, .data$`Collection Time`,
+    tidyr::unite("collection_date", "Collection Date", "Collection Time",
       sep = " "
     ) %>%
     dplyr::mutate(
