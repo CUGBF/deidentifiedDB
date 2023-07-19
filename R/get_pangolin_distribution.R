@@ -41,7 +41,7 @@ get_pangolin_distribution <- function(viralrecon_tbl,
 
   if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
     sample_collection_tbl <- sample_collection_tbl %>%
-      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
+      dplyr::mutate(collection_date = lubridate::as_datetime("collection_date",
         tz = time_zone
       ))
   }

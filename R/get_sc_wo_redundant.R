@@ -37,7 +37,7 @@ get_sc_wo_redundant <- function(sc_tbl,
   if (!(lubridate::is.timepoint(sc_tbl$collection_date))) {
     sc_tbl <- sc_tbl %>%
       dplyr::mutate(collection_date = lubridate::date(
-        lubridate::as_datetime(.data$collection_date,
+        lubridate::as_datetime("collection_date",
           tz = time_zone
         )
       ))
@@ -48,9 +48,9 @@ get_sc_wo_redundant <- function(sc_tbl,
 
   sc_tbl_no_missing <- sc_tbl %>%
     dplyr::mutate(
-      collection_year = lubridate::year(.data$collection_date),
-      collection_week = lubridate::week(.data$collection_date),
-      collection_month = zoo::as.yearmon(.data$collection_date),
+      collection_year = lubridate::year("collection_date"),
+      collection_week = lubridate::week("collection_date"),
+      collection_month = zoo::as.yearmon("collection_date"),
       dplyr::across(
         c(
           .data$rymedi_result,
@@ -63,9 +63,9 @@ get_sc_wo_redundant <- function(sc_tbl,
       )
     ) %>%
     dplyr::filter(
-      !(is.na(.data$collection_date) | is.na(.data$patient_id)),
-      .data$collection_date >= start_date,
-      .data$collection_date <= end_date,
+      !(is.na("collection_date") | is.na(.data$patient_id)),
+      "collection_date" >= start_date,
+      "collection_date" <= end_date,
       stringr::str_detect(
         .data$performing_facility,
         "CLEMSON"
@@ -86,7 +86,7 @@ get_sc_wo_redundant <- function(sc_tbl,
       "performing_facility"
     ) %>%
     dplyr::arrange(
-      .data$collection_date,
+      "collection_date",
       .data$rymedi_result,
       .data$population,
       .data$order_priority,
