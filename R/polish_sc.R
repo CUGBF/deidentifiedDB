@@ -58,7 +58,7 @@ polish_sc <- function(sc_tbl) {
       state = "state_usps",
       country = "country_usps"
     ) %>%
-    dplyr::arrange("collection_date") %>%
+    dplyr::arrange(.data$collection_date) %>%
     dplyr::distinct()
 
   test_tbl <- out_tbl %>%

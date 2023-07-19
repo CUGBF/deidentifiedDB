@@ -81,7 +81,7 @@ pull_sc <- function(demographics_sc_tbl) {
       )
     ) %>%
     dplyr::distinct() %>%
-    dplyr::arrange("collection_date")
+    dplyr::arrange(.data$collection_date)
 
   return(output_tbl)
 }

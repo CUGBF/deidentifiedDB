@@ -36,7 +36,7 @@ get_redundant_samples <- function(sc_tbl_no_missing,
     dplyr::filter(dplyr::n() > 1) %>%
     dplyr::arrange(
       .data$patient_id,
-      "collection_date"
+      .data$collection_date
     ) %>%
     dplyr::group_split()
 
@@ -44,7 +44,7 @@ get_redundant_samples <- function(sc_tbl_no_missing,
 
   for (n in seq_along(multi_positive_patients)) {
     temp_tbl <- multi_positive_patients[[n]] %>%
-      dplyr::arrange("collection_date")
+      dplyr::arrange(.data$collection_date)
     diff_days <- diff(temp_tbl[["collection_date"]])
 
     for (m in seq_along(diff_days)) {
