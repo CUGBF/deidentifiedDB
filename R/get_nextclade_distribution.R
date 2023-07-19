@@ -41,23 +41,23 @@ get_nextclade_distribution <- function(viralrecon_tbl,
 
   if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
     sample_collection_tbl <- sample_collection_tbl %>%
-      dplyr::mutate(collection_date = lubridate::as_datetime(collection_date,
+      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
         tz = time_zone
       ))
   }
 
   if (!(lubridate::is.Date(viralrecon_tbl$run_date))) {
     viralrecon_tbl <- viralrecon_tbl %>%
-      dplyr::mutate(run_date = lubridate::as_date(run_date))
+      dplyr::mutate(run_date = lubridate::as_date(.data$run_date))
   }
 
   clade_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
-      !is.na(clade),
-      stringr::str_to_lower(clade) != "none"
+      !is.na(.data$clade),
+      stringr::str_to_lower(.data$clade) != "none"
     ) %>%
-    dplyr::group_by(testkit_id) %>%
-    dplyr::arrange(dplyr::desc(run_date)) %>%
+    dplyr::group_by(.data$testkit_id) %>%
+    dplyr::arrange(dplyr::desc(.data$run_date)) %>%
     dplyr::slice_head() %>%
     dplyr::ungroup() %>%
     dplyr::select(
@@ -74,8 +74,8 @@ get_nextclade_distribution <- function(viralrecon_tbl,
 
   sc_positive_tbl <- sc_tbl %>%
     dplyr::filter(
-      rymedi_result == c("POSITIVE"),
-      testkit_id %in% clade_assignment_tbl$testkit_id
+      .data$rymedi_result == c("POSITIVE"),
+      .data$testkit_id %in% clade_assignment_tbl$testkit_id
     ) %>%
     dplyr::select(
       "testkit_id",
@@ -90,15 +90,15 @@ get_nextclade_distribution <- function(viralrecon_tbl,
 
   output_tbl <- clade_assignment_tbl %>%
     dplyr::group_by(
-      collection_month,
-      clade
+      .data$collection_month,
+      .data$clade
     ) %>%
     dplyr::summarise(n_sequenced_samples = dplyr::n())
 
   clades_present <- sort(unique(output_tbl$clade))
 
   output_tbl <- output_tbl %>%
-    dplyr::mutate(clade = factor(clade,
+    dplyr::mutate(clade = factor(.data$clade,
       levels = clades_present
     ))
 

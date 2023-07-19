@@ -52,48 +52,48 @@ lookup_zip_code <- function(location_tbl,
     location_combination <- location_tbl[n, c("zip_code", "state", "city")]
 
     current_zip <- location_combination %>%
-      dplyr::pull(zip_code)
+      dplyr::pull(.data$zip_code)
 
     current_state <- location_combination %>%
-      dplyr::pull(state)
+      dplyr::pull(.data$state)
 
     current_city <- location_combination %>%
-      dplyr::pull(city)
+      dplyr::pull(.data$city)
 
     temp_location_info <- location_memory %>%
       dplyr::filter(
-        zip_code == current_zip,
-        state == current_state,
-        city == current_city
+        .data$zip_code == current_zip,
+        .data$state == current_state,
+        .data$city == current_city
       )
 
     stopifnot(nrow(temp_location_info) <= 1)
 
     if (nrow(temp_location_info) == 1) {
       in_zip <- as.integer(temp_location_info %>%
-        dplyr::pull(zip_code_usps))
+        dplyr::pull(.data$zip_code_usps))
 
       in_state <- temp_location_info %>%
-        dplyr::pull(state_usps)
+        dplyr::pull(.data$state_usps)
 
       in_county <- temp_location_info %>%
-        dplyr::pull(county_usps)
+        dplyr::pull(.data$county_usps)
 
       in_city <- temp_location_info %>%
-        dplyr::pull(city_usps)
+        dplyr::pull(.data$city_usps)
 
       in_country <- temp_location_info %>%
-        dplyr::pull(country_usps)
+        dplyr::pull(.data$country_usps)
     } else {
       # cities in the state of the current record
       cities_in_state <- us_zip_codes %>%
-        dplyr::filter(state == current_state) %>%
-        dplyr::pull(primary_city)
+        dplyr::filter(.data$state == current_state) %>%
+        dplyr::pull(.data$primary_city)
 
       # Is the city in current record within acceptable city entries for the state ?
       acceptable_cities_in_state <- us_zip_codes %>%
-        dplyr::filter(state == current_state) %>%
-        dplyr::pull(acceptable_cities)
+        dplyr::filter(.data$state == current_state) %>%
+        dplyr::pull(.data$acceptable_cities)
 
       acceptable_city_status <- sum(stringr::str_detect(
         acceptable_cities_in_state,
@@ -106,26 +106,26 @@ lookup_zip_code <- function(location_tbl,
         if (!is.na(cleaned_up_zip) && cleaned_up_zip %in% us_zip_codes$zip) {
           in_zip <- cleaned_up_zip
           zip_df <- us_zip_codes %>%
-            dplyr::filter(zip == cleaned_up_zip) %>%
+            dplyr::filter(.data$zip == cleaned_up_zip) %>%
             dplyr::slice_head()
         } else if (!is.na(current_city) && !is.na(current_state) &&
           (current_city %in% (cities_in_state))) {
           zip_df <- us_zip_codes %>%
             dplyr::filter(
-              state == current_state,
-              primary_city == current_city
+              .data$state == current_state,
+              .data$primary_city == current_city
             ) %>%
-            dplyr::arrange(zip) %>%
+            dplyr::arrange(.data$zip) %>%
             dplyr::slice_head()
           in_zip <- zip_df$zip
         } else if (!is.na(current_city) && !is.na(current_state) &&
           (acceptable_city_status)) {
           zip_df <- us_zip_codes %>%
             dplyr::filter(
-              state == current_state,
-              stringr::str_detect(acceptable_cities, current_city)
+              .data$state == current_state,
+              stringr::str_detect(.data$acceptable_cities, current_city)
             ) %>%
-            dplyr::arrange(zip) %>%
+            dplyr::arrange(.data$zip) %>%
             dplyr::slice_head()
           in_zip <- zip_df$zip
         } else {
@@ -157,7 +157,7 @@ lookup_zip_code <- function(location_tbl,
         if (!is.na(cleaned_up_zip) && cleaned_up_zip %in% us_zip_codes$zip) {
           in_zip <- cleaned_up_zip
           zip_df <- us_zip_codes %>%
-            dplyr::filter(zip == cleaned_up_zip) %>%
+            dplyr::filter(.data$zip == cleaned_up_zip) %>%
             dplyr::slice_head()
           in_state <- zip_df$state
           in_county <- zip_df$county

@@ -39,12 +39,12 @@ build_us_zip <- function(filepath) {
           locale = "en"
         )
       ),
-      zip = as.character(zip)
+      zip = as.character(.data$zip)
     ) %>%
     dplyr::arrange(
-      country,
-      state,
-      county,
-      primary_city
+      .data$country,
+      .data$state,
+      .data$county,
+      .data$primary_city
     )
 }

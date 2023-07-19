@@ -85,10 +85,10 @@ read_demographics_csv <- function(filepath,
       sep = " "
     ) %>%
     dplyr::mutate(
-      collection_date = lubridate::as_datetime(collection_date,
+      collection_date = lubridate::as_datetime(.data$collection_date,
         tz = time_zone
       ),
-      result_date = lubridate::as_date(lubridate::parse_date_time(result_date,
+      result_date = lubridate::as_date(lubridate::parse_date_time(.data$result_date,
         orders = date_fmt,
         tz = time_zone
       ),
@@ -97,8 +97,8 @@ read_demographics_csv <- function(filepath,
     )
 
   output_tbl <- output_tbl %>%
-    dplyr::mutate(birth_year = tidy_up_birth_year(birth_year,
-      max_year = max(lubridate::year(collection_date))
+    dplyr::mutate(birth_year = tidy_up_birth_year(.data$birth_year,
+      max_year = max(lubridate::year(.data$collection_date))
     ))
 
 

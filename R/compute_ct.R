@@ -22,8 +22,8 @@ compute_ct <- function(ct_tbl) {
   output_tbl <- ct_tbl %>%
     dplyr::rowwise() %>%
     dplyr::mutate(ct = base::mean(c(
-      ct_rep1,
-      ct_rep2
+      .data$ct_rep1,
+      .data$ct_rep2
     ),
     na.rm = TRUE
     )) %>%
@@ -32,16 +32,16 @@ compute_ct <- function(ct_tbl) {
       "testkit_id",
       "ct"
     ) %>%
-    dplyr::group_by(testkit_id) %>%
+    dplyr::group_by(.data$testkit_id) %>%
     dplyr::summarise(
-      mean_ct = base::mean(ct, na.rm = TRUE),
-      median_ct = stats::median(ct, na.rm = TRUE)
+      mean_ct = base::mean(.data$ct, na.rm = TRUE),
+      median_ct = stats::median(.data$ct, na.rm = TRUE)
     ) %>%
     dplyr::ungroup() %>%
-    dplyr::arrange(testkit_id)
+    dplyr::arrange(.data$testkit_id)
 
   test_tbl <- output_tbl %>%
-    dplyr::group_by(testkit_id) %>%
+    dplyr::group_by(.data$testkit_id) %>%
     dplyr::filter(dplyr::n() > 1)
 
   stopifnot(nrow(test_tbl) == 0)

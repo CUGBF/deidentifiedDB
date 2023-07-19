@@ -26,18 +26,18 @@ get_daily_diagnostics <- function(diagnostics_tbl,
 
   if (!(lubridate::is.Date(diagnostics_tbl$run_date))) {
     diagnostics_tbl <- diagnostics_tbl %>%
-      dplyr::mutate(run_date = lubridate::as_date(run_date))
+      dplyr::mutate(run_date = lubridate::as_date(.data$run_date))
   }
 
   start_date <- lubridate::as_date(start_date)
   end_date <- lubridate::as_date(end_date)
 
   diagnostics_tbl <- diagnostics_tbl %>%
-    dplyr::mutate(control = as.logical(control)) %>%
+    dplyr::mutate(control = as.logical(.data$control)) %>%
     dplyr::filter(
-      !control,
-      run_date >= start_date,
-      run_date <= end_date
+      !.data$control,
+      .data$run_date >= start_date,
+      .data$run_date <= end_date
     )
 
   # https://stackoverflow.com/questions/57704792/is-it-possible-to-pass-multible-variables-to-the-same-curly-curly
@@ -48,7 +48,7 @@ get_daily_diagnostics <- function(diagnostics_tbl,
     dplyr::ungroup()
 
   repeat_samples <- diagnostics_tbl %>%
-    dplyr::group_by(testkit_id) %>%
+    dplyr::group_by(.data$testkit_id) %>%
     dplyr::filter(dplyr::n() > 1) %>%
     dplyr::ungroup()
 

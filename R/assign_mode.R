@@ -22,8 +22,8 @@ assign_mode <- function(multi_data_patients_tbl) {
   ) %in% colnames(multi_data_patients_tbl)))
 
   deduplicated_tbl <- multi_data_patients_tbl %>%
-    dplyr::group_by(patient_id) %>%
-    dplyr::arrange(dplyr::desc(collection_date)) %>%
+    dplyr::group_by(.data$patient_id) %>%
+    dplyr::arrange(dplyr::desc(.data$collection_date)) %>%
     dplyr::select(
       "patient_id",
       "birth_year",

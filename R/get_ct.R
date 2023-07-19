@@ -27,7 +27,7 @@ get_ct <- function(testkit_id,
   )))
 
   tibble_interest <- diagnostics_tbl %>%
-    dplyr::filter(testkit_id %in% testkit_id)
+    dplyr::filter(.data$testkit_id %in% testkit_id)
 
   tibble_n <- tibble_interest %>%
     dplyr::select(

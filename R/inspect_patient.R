@@ -31,15 +31,15 @@ inspect_patient <- function(demographics_tbl,
       "race_american_indian_or_alaskan_native",
       "race_native_hawaiian_or_pacific_islander"
     ) %>%
-    dplyr::filter(patient_id %in% poi) %>%
+    dplyr::filter(.data$patient_id %in% poi) %>%
     dplyr::arrange(
-      birth_year,
-      ethnicity,
-      race_white,
-      race_black_or_african_american,
-      race_asian,
-      race_american_indian_or_alaskan_native,
-      race_native_hawaiian_or_pacific_islander
+      .data$birth_year,
+      .data$ethnicity,
+      .data$race_white,
+      .data$race_black_or_african_american,
+      .data$race_asian,
+      .data$race_american_indian_or_alaskan_native,
+      .data$race_native_hawaiian_or_pacific_islander
     )
 
   return(output_tbl)

@@ -37,7 +37,7 @@ get_sc_wo_redundant <- function(sc_tbl,
   if (!(lubridate::is.timepoint(sc_tbl$collection_date))) {
     sc_tbl <- sc_tbl %>%
       dplyr::mutate(collection_date = lubridate::date(
-        lubridate::as_datetime(collection_date,
+        lubridate::as_datetime(.data$collection_date,
           tz = time_zone
         )
       ))
@@ -48,29 +48,29 @@ get_sc_wo_redundant <- function(sc_tbl,
 
   sc_tbl_no_missing <- sc_tbl %>%
     dplyr::mutate(
-      collection_year = lubridate::year(collection_date),
-      collection_week = lubridate::week(collection_date),
-      collection_month = zoo::as.yearmon(collection_date),
+      collection_year = lubridate::year(.data$collection_date),
+      collection_week = lubridate::week(.data$collection_date),
+      collection_month = zoo::as.yearmon(.data$collection_date),
       dplyr::across(
         c(
-          rymedi_result,
-          population,
-          order_priority,
-          gender,
-          performing_facility
+          .data$rymedi_result,
+          .data$population,
+          .data$order_priority,
+          .data$gender,
+          .data$performing_facility
         ),
         stringr::str_to_upper
       )
     ) %>%
     dplyr::filter(
-      !(is.na(collection_date) | is.na(patient_id)),
-      collection_date >= start_date,
-      collection_date <= end_date,
+      !(is.na(.data$collection_date) | is.na(.data$patient_id)),
+      .data$collection_date >= start_date,
+      .data$collection_date <= end_date,
       stringr::str_detect(
-        performing_facility,
+        .data$performing_facility,
         "CLEMSON"
       ),
-      rymedi_result %in% c("POSITIVE", "NEGATIVE")
+      .data$rymedi_result %in% c("POSITIVE", "NEGATIVE")
     ) %>%
     dplyr::select(
       "testkit_id",
@@ -86,11 +86,11 @@ get_sc_wo_redundant <- function(sc_tbl,
       "performing_facility"
     ) %>%
     dplyr::arrange(
-      collection_date,
-      rymedi_result,
-      population,
-      order_priority,
-      performing_facility
+      .data$collection_date,
+      .data$rymedi_result,
+      .data$population,
+      .data$order_priority,
+      .data$performing_facility
     )
 
 
@@ -103,7 +103,7 @@ get_sc_wo_redundant <- function(sc_tbl,
   )
 
   output_tbl <- sc_tbl_no_missing %>%
-    dplyr::filter(!(testkit_id %in% testkit_ids_to_exclude))
+    dplyr::filter(!(.data$testkit_id %in% testkit_ids_to_exclude))
 
   return(output_tbl)
 }

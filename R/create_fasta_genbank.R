@@ -26,12 +26,12 @@ create_fasta_genbank <- function(input_dir,
   (status_tbl <- internal_metadata_tbl %>%
     dplyr::mutate(
       fasta_file = stringr::str_c(
-        testkit_id,
+        .data$testkit_id,
         ".consensus.fa"
       ),
       file_found = dplyr::case_when(
-        fasta_file %in% list_of_fasta_files ~ TRUE,
-        !(fasta_file %in% list_of_fasta_files) ~ FALSE
+        .data$fasta_file %in% list_of_fasta_files ~ TRUE,
+        !(.data$fasta_file %in% list_of_fasta_files) ~ FALSE
       )
     ))
 

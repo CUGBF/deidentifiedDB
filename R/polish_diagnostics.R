@@ -22,39 +22,39 @@ polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
   if (grepl("-", diagnostics_tbl$run_date[1])) {  
     output_tbl <- diagnostics_tbl %>%
       dplyr::mutate(
-        run_date = lubridate::date(run_date),
-        control = detect_control(testkit_id, result),
+        run_date = lubridate::date(.data$run_date),
+        control = detect_control(.data$testkit_id, .data$result),
         dplyr::across(tidyselect::vars_select_helpers$where(is.character), stringr::str_trim),
         dplyr::across(c(
-          ct_rnasep_rep1,
-          ct_rnasep_rep2,
-          ct_N_rep1,
-          ct_N_rep2
+          .data$ct_rnasep_rep1,
+          .data$ct_rnasep_rep2,
+          .data$ct_N_rep1,
+          .data$ct_N_rep2
         ), tidy_up_ct),
         dplyr::across(c(
-          result,
-          plate
+          .data$result,
+          .data$plate
         ), stringr::str_to_lower)
       ) %>%
-      dplyr::arrange(run_date)
+      dplyr::arrange(.data$run_date)
   } else {
     output_tbl <- diagnostics_tbl %>%
       dplyr::mutate(
-        run_date = lubridate::date(lubridate::parse_date_time(run_date, orders = run_date_fmt)),
-        control = detect_control(testkit_id, result),
+        run_date = lubridate::date(lubridate::parse_date_time(.data$run_date, orders = run_date_fmt)),
+        control = detect_control(.data$testkit_id, .data$result),
         dplyr::across(tidyselect::vars_select_helpers$where(is.character), stringr::str_trim),
         dplyr::across(c(
-          ct_rnasep_rep1,
-          ct_rnasep_rep2,
-          ct_N_rep1,
-          ct_N_rep2
+          .data$ct_rnasep_rep1,
+          .data$ct_rnasep_rep2,
+          .data$ct_N_rep1,
+          .data$ct_N_rep2
         ), tidy_up_ct),
         dplyr::across(c(
-          result,
-          plate
+          .data$result,
+          .data$plate
         ), stringr::str_to_lower)
       ) %>%
-      dplyr::arrange(run_date)
+      dplyr::arrange(.data$run_date)
   }
 
 
