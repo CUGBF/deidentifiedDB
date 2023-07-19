@@ -41,23 +41,23 @@ get_pangolin_distribution <- function(viralrecon_tbl,
 
   if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
     sample_collection_tbl <- sample_collection_tbl %>%
-      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
+      dplyr::mutate(collection_date = lubridate::as_datetime(collection_date,
         tz = time_zone
       ))
   }
 
   if (!(lubridate::is.Date(viralrecon_tbl$run_date))) {
     viralrecon_tbl <- viralrecon_tbl %>%
-      dplyr::mutate(run_date = lubridate::as_date(.data$run_date))
+      dplyr::mutate(run_date = lubridate::as_date(run_date))
   }
 
   lineage_assignment_tbl <- viralrecon_tbl %>%
     dplyr::filter(
-      !is.na(.data$lineage),
-      stringr::str_to_lower(.data$lineage) != "none"
+      !is.na(lineage),
+      stringr::str_to_lower(lineage) != "none"
     ) %>%
-    dplyr::group_by(.data$testkit_id) %>%
-    dplyr::arrange(dplyr::desc(.data$run_date)) %>%
+    dplyr::group_by(testkit_id) %>%
+    dplyr::arrange(dplyr::desc(run_date)) %>%
     dplyr::slice_head() %>%
     dplyr::ungroup() %>%
     dplyr::select(
@@ -74,8 +74,8 @@ get_pangolin_distribution <- function(viralrecon_tbl,
 
   sc_positive_tbl <- sc_tbl %>%
     dplyr::filter(
-      .data$rymedi_result == c("POSITIVE"),
-      .data$testkit_id %in% lineage_assignment_tbl$testkit_id
+      rymedi_result == c("POSITIVE"),
+      testkit_id %in% lineage_assignment_tbl$testkit_id
     ) %>%
     dplyr::select(
       "testkit_id",
@@ -90,15 +90,15 @@ get_pangolin_distribution <- function(viralrecon_tbl,
 
   output_tbl <- lineage_assignment_tbl %>%
     dplyr::group_by(
-      .data$collection_month,
-      .data$lineage
+      collection_month,
+      lineage
     ) %>%
     dplyr::summarise(n_sequenced_samples = dplyr::n())
 
   lineages_present <- sort(unique(output_tbl$lineage))
 
   output_tbl <- output_tbl %>%
-    dplyr::mutate(lineage = factor(.data$lineage,
+    dplyr::mutate(lineage = factor(lineage,
       levels = lineages_present
     ))
 

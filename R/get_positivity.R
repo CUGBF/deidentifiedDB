@@ -51,26 +51,26 @@ get_positivity <- function(sc_tbl,
   ) %in% colnames(week_dates_info)))
 
   output_tbl <- sc_tbl_no_missing %>%
-    dplyr::filter(.data$order_priority %in% c(
+    dplyr::filter(order_priority %in% c(
       "SYMPTOMATIC",
       "EXPOSED",
       "SURVEILLANCE"
     )) %>%
     dplyr::group_by(
-      .data$collection_year,
-      .data$collection_week,
-      .data$population,
-      .data$order_priority,
-      .data$rymedi_result
+      collection_year,
+      collection_week,
+      population,
+      order_priority,
+      rymedi_result
     ) %>%
     dplyr::summarize(count = dplyr::n()) %>%
     dplyr::mutate(
       count = replace(
-        .data$count, .data$rymedi_result == "NEGATIVE" &
-          .data$count == 0,
+        count, rymedi_result == "NEGATIVE" &
+          count == 0,
         1
       ),
-      order_priority = factor(.data$order_priority,
+      order_priority = factor(order_priority,
         levels = c(
           "SYMPTOMATIC",
           "EXPOSED",
@@ -79,15 +79,15 @@ get_positivity <- function(sc_tbl,
       )
     ) %>%
     tidyr::pivot_wider(
-      names_from = .data$rymedi_result,
-      values_from = .data$count
+      names_from = rymedi_result,
+      values_from = count
     ) %>%
     dplyr::mutate(
-      POSITIVE = replace(.data$POSITIVE, is.na(.data$POSITIVE), 0),
-      NEGATIVE = replace(.data$NEGATIVE, is.na(.data$NEGATIVE), 0),
-      TOTAL = .data$NEGATIVE + .data$POSITIVE,
-      POSITIVITY = round((.data$POSITIVE / .data$TOTAL) * 100, 2),
-      collection_week = as.factor(.data$collection_week)
+      POSITIVE = replace(POSITIVE, is.na(POSITIVE), 0),
+      NEGATIVE = replace(NEGATIVE, is.na(NEGATIVE), 0),
+      TOTAL = NEGATIVE + POSITIVE,
+      POSITIVITY = round((POSITIVE / TOTAL) * 100, 2),
+      collection_week = as.factor(collection_week)
     ) %>%
     dplyr::left_join(week_dates_info,
       by = c(
@@ -107,10 +107,10 @@ get_positivity <- function(sc_tbl,
       "POSITIVITY"
     ) %>%
     dplyr::arrange(
-      .data$collection_year,
-      .data$collection_week,
-      .data$population,
-      .data$order_priority
+      collection_year,
+      collection_week,
+      population,
+      order_priority
     )
 
   stopifnot(nrow(output_tbl) > 0)

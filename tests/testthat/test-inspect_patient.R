@@ -13,7 +13,7 @@ test_that("Testing inspect_patient() !", {
 
   expect_equal(
     p_1 %>%
-      dplyr::pull(.data$ethnicity) %>%
+      dplyr::pull(ethnicity) %>%
       unique(),
     stringr::str_to_upper("Not Hispanic or Latino")
   )
@@ -24,11 +24,11 @@ test_that("Testing inspect_patient() !", {
   )
 
   expect_false(p_2 %>%
-    dplyr::pull(.data$race_white) %>%
+    dplyr::pull(race_white) %>%
     unique())
 
   expect_true(p_2 %>%
-    dplyr::pull(.data$race_asian) %>%
+    dplyr::pull(race_asian) %>%
     unique())
 
   p_3 <- inspect_patient(
@@ -38,7 +38,7 @@ test_that("Testing inspect_patient() !", {
 
   expect_equal(
     p_3 %>%
-      dplyr::pull(.data$birth_year) %>%
+      dplyr::pull(birth_year) %>%
       unique(),
     2003
   )

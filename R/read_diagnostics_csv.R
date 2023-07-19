@@ -56,8 +56,8 @@ read_diagnostics_csv <- function(filepath) {
       "ct_N_rep1", "ct_N_rep2","result"
     ) %>%
     dplyr::mutate(result = replace(
-      .data$result,
-      stringr::str_to_lower(.data$result) %in% c(
+      result,
+      stringr::str_to_lower(result) %in% c(
         "inconclusive",
         "invalid"
       ),

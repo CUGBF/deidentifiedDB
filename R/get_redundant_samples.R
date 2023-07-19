@@ -26,17 +26,17 @@ get_redundant_samples <- function(sc_tbl_no_missing,
 
 
   positive_samples <- sc_tbl_no_missing %>%
-    dplyr::filter(stringr::str_to_upper(.data$rymedi_result) == "POSITIVE")
+    dplyr::filter(stringr::str_to_upper(rymedi_result) == "POSITIVE")
 
   ## Only retain the first COVID19 +ve sample from a patient in a period of n_days days
   ## Number of such multi-test possibly-single-infection samples :
 
   multi_positive_patients <- positive_samples %>%
-    dplyr::group_by(.data$patient_id) %>%
+    dplyr::group_by(patient_id) %>%
     dplyr::filter(dplyr::n() > 1) %>%
     dplyr::arrange(
-      .data$patient_id,
-      .data$collection_date
+      patient_id,
+      collection_date
     ) %>%
     dplyr::group_split()
 
@@ -44,7 +44,7 @@ get_redundant_samples <- function(sc_tbl_no_missing,
 
   for (n in seq_along(multi_positive_patients)) {
     temp_tbl <- multi_positive_patients[[n]] %>%
-      dplyr::arrange(.data$collection_date)
+      dplyr::arrange(collection_date)
     diff_days <- diff(temp_tbl[["collection_date"]])
 
     for (m in seq_along(diff_days)) {
