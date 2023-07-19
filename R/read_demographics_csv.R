@@ -37,8 +37,6 @@ read_demographics_csv <- function(filepath,
     "Result description",
     "Result Date",
     "Collection Date",
-    "Performing Facility",
-    "Tested by",
     "SKU",
     "Order Priority"
   ) %in% colnames(test_tbl)))
@@ -64,8 +62,6 @@ read_demographics_csv <- function(filepath,
       "testkit_id" = "TestKit ID",
       "rymedi_result" = "Result description",
       "result_date" = "Result Date",
-      "performing_facility" = "Performing Facility",
-      "testing_facility" = "Tested by",
       "teskit_sku" = "SKU",
       "order_priority" = "Order Priority"
     )
