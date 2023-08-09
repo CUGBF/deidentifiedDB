@@ -8,6 +8,7 @@
 #' @importFrom magrittr "%>%"
 tidy_up_birth_year <- function(birth_year,
                                max_year) {
+  max_year <- 2025
   birth_year <- as.character(birth_year)
   birth_year <- stringr::str_remove_all(
     as.character(birth_year),
@@ -21,7 +22,7 @@ tidy_up_birth_year <- function(birth_year,
     !stringr::str_detect(
       birth_year,
       stringr::regex("^[0-9]{4}$",
-        ignore_case = T
+        ignore_case = TRUE
       )
     ),
     NA_integer_
