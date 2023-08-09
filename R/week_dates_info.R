@@ -19,7 +19,7 @@ week_dates_info <- function(sc_tbl_no_missing,
     all(lubridate::is.timepoint(sc_tbl_no_missing$collection_date)))) {
     sc_tbl_no_missing <- sc_tbl_no_missing %>%
       dplyr::mutate(collection_date = lubridate::date(
-        lubridate::as_datetime("collection_date",
+        lubridate::as_datetime(.data$collection_date,
           tz = time_zone
         )
       ))
@@ -27,11 +27,11 @@ week_dates_info <- function(sc_tbl_no_missing,
 
   if (!("collection_week" %in% colnames(sc_tbl_no_missing))) {
     sc_tbl_no_missing <- sc_tbl_no_missing %>%
-      dplyr::mutate(collection_week = lubridate::week("collection_date"))
+      dplyr::mutate(collection_week = lubridate::week(.data$collection_date))
   }
   if (!("collection_year" %in% colnames(sc_tbl_no_missing))) {
     sc_tbl_no_missing <- sc_tbl_no_missing %>%
-      dplyr::mutate(collection_year = lubridate::year("collection_date"))
+      dplyr::mutate(collection_year = lubridate::year(.data$collection_date))
   }
 
   output_tbl <- sc_tbl_no_missing %>%
@@ -46,12 +46,12 @@ week_dates_info <- function(sc_tbl_no_missing,
       .data$collection_week
     ) %>%
     dplyr::mutate(
-      week_start = min("collection_date"),
-      week_end = max("collection_date"),
+      week_start = min(.data$collection_date),
+      week_end = max(.data$collection_date),
       collection_week = as.factor(.data$collection_week)
     ) %>%
     dplyr::ungroup() %>%
-    dplyr::select(-c("collection_date")) %>%
+    dplyr::select(-c(.data$collection_date)) %>%
     dplyr::distinct() %>%
     dplyr::arrange(
       .data$collection_year,

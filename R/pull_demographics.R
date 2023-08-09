@@ -18,7 +18,7 @@ pull_demographics <- function(demographics_sc_tbl) {
   ) %in% colnames(demographics_sc_tbl)))
 
   output_tbl <- demographics_sc_tbl %>%
-    dplyr::arrange(.data$patient_id, dplyr::desc("collection_date")) %>%
+    dplyr::arrange(.data$patient_id, dplyr::desc(.data$collection_date)) %>%
     dplyr::select(
       "patient_id",
       "birth_year",

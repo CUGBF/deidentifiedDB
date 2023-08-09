@@ -55,7 +55,7 @@ get_metadata_genbank <- function(testkit_ids,
 
   if (!(lubridate::is.timepoint(sample_collection_tbl$collection_date))) {
     sample_collection_tbl <- sample_collection_tbl %>%
-      dplyr::mutate(collection_date = lubridate::as_datetime("collection_date",
+      dplyr::mutate(collection_date = lubridate::as_datetime(.data$collection_date,
         tz = time_zone
       ))
   }
@@ -63,7 +63,7 @@ get_metadata_genbank <- function(testkit_ids,
   metadata_sc <- sample_collection_tbl %>%
     dplyr::filter(
       .data$testkit_id %in% metadata_vr$testkit_id,
-      !is.na("collection_date"),
+      !is.na(.data$collection_date),
       !is.na(.data$patient_id)
     ) %>%
     dplyr::select(
@@ -93,7 +93,7 @@ get_metadata_genbank <- function(testkit_ids,
 
   metadata_tbl <- metadata_tbl %>%
     dplyr::mutate(
-      age = lubridate::year("collection_date") - .data$birth_year,
+      age = lubridate::year(.data$collection_date) - .data$birth_year,
       age = replace(
         .data$age,
         is.na(.data$age),
@@ -133,9 +133,9 @@ get_metadata_genbank <- function(testkit_ids,
       isolate = .data$sequence_ID,
       host = stringr::str_c("Homo sapiens; ", .data$gender, ", age ", .data$age),
       country = stringr::str_c("USA:South Carolina, ", .data$city),
-      collection_date = as.character(lubridate::date("collection_date"))
+      collection_date = as.character(lubridate::date(.data$collection_date))
     ) %>%
-    dplyr::arrange("collection_date") %>%
+    dplyr::arrange(.data$collection_date) %>%
     dplyr::rename(`collection-date` = "collection_date")
 
   internal_tbl <- metadata_tbl %>%
