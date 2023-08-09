@@ -29,7 +29,7 @@ tidy_up_birth_year <- function(birth_year,
   ))
 
   birth_year <- ifelse(!(is.na(birth_year) |
-    (birth_year %in% 1900L:as.integer(max_year))),
+    (birth_year %in% 1900L:max_year)),
   NA_integer_,
   birth_year
   )
