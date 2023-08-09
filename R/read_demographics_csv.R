@@ -85,7 +85,7 @@ read_demographics_csv <- function(filepath,
       tz = time_zone
     )
     ) %>%
-    tidyr::unite("collection_date", .data$`Collection Date`, .data$`Collection Time`, # nolint
+    tidyr::unite("collection_date", `Collection Date`, `Collection Time`,
       sep = " "
     ) %>%
     dplyr::mutate(
