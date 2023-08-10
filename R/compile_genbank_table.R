@@ -57,7 +57,7 @@ compile_genbank_table <- function(accession_report_filpath,
       "release_date"
     ) %>%
     dplyr::rename(genbank_sample_id = "sequence_ID") %>%
-    dplyr::arrange(.data$testkit_id)
+    dplyr::arrange(testkit_id)
 
   return(output_tbl)
 }

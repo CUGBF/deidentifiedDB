@@ -25,12 +25,12 @@ get_global_entities <- function(filepath) {
     show_col_types = FALSE
   ) %>%
     dplyr::mutate(
-      region_name = stringr::str_to_upper(.data$region_name,
+      region_name = stringr::str_to_upper(region_name,
         locale = "en"
       ),
       region_name = stringr::str_trim(
         stringr::str_replace_all(
-          .data$region_name,
+          region_name,
           "\\[.*\\]",
           ""
         ),
@@ -43,8 +43,8 @@ get_global_entities <- function(filepath) {
     ) %>%
     tidyr::drop_na() %>%
     dplyr::distinct() %>%
-    dplyr::pull(.data$region_name,
-      name = .data$country_code
+    dplyr::pull(region_name,
+      name = country_code
     )
 
   return(global_regions_vec)

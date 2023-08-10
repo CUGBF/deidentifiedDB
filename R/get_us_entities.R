@@ -17,8 +17,8 @@ get_us_entities <- function(filepath) {
   stopifnot(c("US") %in% us_zip_codes_tbl$country)
 
   us_geo_entities <- us_zip_codes_tbl %>%
-    dplyr::filter(.data$country == "US") %>%
-    dplyr::distinct(.data$state) %>%
+    dplyr::filter(country == "US") %>%
+    dplyr::distinct(state) %>%
     dplyr::pull() %>%
     sort()
 
