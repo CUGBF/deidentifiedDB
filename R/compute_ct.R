@@ -5,7 +5,7 @@
 #' @return Tibble with mean and median Ct value for each `testkit_id`
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compute_ct <- function(ct_tbl) {
   stopifnot(all(c(
     "testkit_id",

@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 assign_mode <- function(multi_data_patients_tbl) {
   stopifnot(all(c(
     "patient_id",

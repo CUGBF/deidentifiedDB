@@ -7,7 +7,7 @@
 #' @return Tibble with Collection Week Number, Start and End dates
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 week_dates_info <- function(sc_tbl_no_missing,
                             time_zone = "America/New_York") {
   stopifnot(

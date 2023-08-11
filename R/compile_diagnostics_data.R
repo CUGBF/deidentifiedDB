@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compile_diagnostics_data <- function(filepath, run_date_fmt = c("mdy")) {
   diagnostics_tbl <- read_diagnostics_csv(filepath) %>%
     polish_diagnostics()

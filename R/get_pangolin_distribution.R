@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_pangolin_distribution <- function(viralrecon_tbl,
                                       sample_collection_tbl,
                                       start_date = "2021-01-01",

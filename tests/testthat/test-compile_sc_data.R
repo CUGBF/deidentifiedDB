@@ -85,7 +85,7 @@ test_that("Testing compile_sc_data() !", {
   )
   expect_equal(
     p2 %>% dplyr::pull(collection_date) %>% as.character(),
-    "2021-09-30 08:20:27"
+    "2021-09-30"
   )
   expect_equal(
     p2 %>% dplyr::pull(result_date) %>% as.character(),

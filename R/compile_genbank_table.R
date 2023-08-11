@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compile_genbank_table <- function(accession_report_filpath,
                                   int_tbl,
                                   submission_date,

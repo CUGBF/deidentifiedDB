@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_ct <- function(testkit_id,
                    diagnostics_tbl) {
   stopifnot(all(c(

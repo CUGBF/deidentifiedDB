@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 pull_demographics <- function(demographics_sc_tbl) {
   stopifnot(all(c(
     "patient_id",

@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_us_entities <- function(filepath) {
   us_zip_codes_tbl <- build_us_zip(filepath)
   stopifnot(all(c(

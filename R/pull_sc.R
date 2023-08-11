@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 pull_sc <- function(demographics_sc_tbl) {
   stopifnot(all(c(
     "testkit_id",

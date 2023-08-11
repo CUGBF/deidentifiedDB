@@ -5,7 +5,7 @@
 #' @return Tibble with demographics data with race information tidied up
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 tidy_up_race <- function(demographics_tbl) {
   stopifnot("race" %in% colnames(demographics_tbl))
 

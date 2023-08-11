@@ -32,7 +32,7 @@ test_that("Testing pull_sc() !", {
       dplyr::filter(testkit_id == "117M191B64E8684ELK") %>%
       dplyr::mutate(collection_date = as.character(collection_date)) %>%
       dplyr::pull(collection_date),
-    "2021-09-30 07:57:19"
+    "2021-09-30"
   )
   expect_equal(
     output_tbl %>%

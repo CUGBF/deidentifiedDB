@@ -6,7 +6,7 @@
 #' @return Vector containing names of US and International states/provinces
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_global_entities <- function(filepath) {
   test_tbl <- readr::read_csv(filepath,
     n_max = 1,

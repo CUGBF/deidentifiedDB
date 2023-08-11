@@ -44,7 +44,7 @@ test_that("Testing do_prelim_tidy_sc() !", {
   )
   expect_equal(
     as.character(example_dp$collection_date),
-    "2021-09-30 08:19:48"
+    "2021-09-30"
   )
   expect_equal(
     example_dp$result_date,

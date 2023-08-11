@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 polish_sc <- function(sc_tbl) {
   stopifnot(all(c(
     "testkit_id", "rymedi_result",

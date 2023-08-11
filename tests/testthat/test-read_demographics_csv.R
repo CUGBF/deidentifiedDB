@@ -29,7 +29,7 @@ test_that("Testing read_demographics_csv !", {
   expect_equal(example_dp$rymedi_result, "Negative")
   expect_equal(
     as.character(example_dp$collection_date),
-    "2021-09-30 08:19:48"
+    "2021-09-30"
   )
   expect_equal(example_dp$result_date, lubridate::as_date("2021-09-30"))
   expect_equal(example_dp$teskit_sku, "CLM-SALIVA-00002")

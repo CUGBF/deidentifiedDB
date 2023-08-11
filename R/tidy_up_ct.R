@@ -6,7 +6,7 @@
 #' @return ct value as a number (or NA if cannot be coerced to number)
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 tidy_up_ct <- function(ct_value) {
   if (is.numeric(ct_value)) {
     return(ct_value)

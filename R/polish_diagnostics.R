@@ -7,7 +7,7 @@
 #' @return A (better) reorganized diagnostics_tbl
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 polish_diagnostics <- function(diagnostics_tbl, run_date_fmt = c("mdy")) {
   stopifnot(all(c(
     "run_date",

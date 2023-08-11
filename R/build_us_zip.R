@@ -6,7 +6,7 @@
 #' @return Tibble containing US zip codes
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 build_us_zip <- function(filepath) {
   test_tbl <- readr::read_csv(filepath,
     n_max = 1,

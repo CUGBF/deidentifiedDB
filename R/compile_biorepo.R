@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compile_biorepo <- function(filepath) {
   test_tbl <- readr::read_csv(filepath,
     na = c(

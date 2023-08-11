@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 lookup_zip_code <- function(location_tbl,
                             us_zip_codes_filepath,
                             global_regions_filepath) {

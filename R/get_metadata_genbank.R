@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_metadata_genbank <- function(testkit_ids,
                                  sample_collection_tbl = NULL,
                                  demographics_tbl = NULL,

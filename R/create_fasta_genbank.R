@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 create_fasta_genbank <- function(input_dir,
                                  internal_metadata_tbl) {
   stopifnot(all(c(

@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 tidy_up_location <- function(sc_tbl,
                              location_combinations) {
   stopifnot(all(c(

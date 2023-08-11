@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_sc_wo_redundant <- function(sc_tbl,
                                 start_date = "2021-01-01",
                                 end_date = as.character(

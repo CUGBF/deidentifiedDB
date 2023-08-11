@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compile_sc_data <- function(sc_tbl,
                             us_zip_codes_filepath,
                             global_regions_filepath) {

@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 compile_viralrecon <- function(filepath,
                                run_date,
                                viralrecon_version,

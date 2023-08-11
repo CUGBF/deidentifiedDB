@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 inspect_patient <- function(demographics_tbl,
                             poi) {
   stopifnot(all(c(

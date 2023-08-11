@@ -10,7 +10,6 @@
 #' the deidentified Demographics Data
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
 read_demographics_csv <- function(filepath,
                                   date_fmt = c("%m/%d/%y"),
                                   time_zone = "America/New_York") {
@@ -75,21 +74,13 @@ read_demographics_csv <- function(filepath,
       dplyr::select(-c("Time Zone"))
   }
 
-  output_tbl <- output_tbl %>%
-    dplyr::mutate(dplyr::across(
-      tidyselect::vars_select_helpers$where(is.character),
-      stringr::str_trim
-    ),
-    `Collection Date` = lubridate::parse_date_time("Collection Date",
-      orders = date_fmt,
-      tz = time_zone
-    )
-    ) %>%
-    tidyr::unite("collection_date", `Collection Date`, `Collection Time`,
-      sep = " "
-    ) %>%
+ output_tbl <- output_tbl %>%
     dplyr::mutate(
-      collection_date = lubridate::as_datetime(collection_date,
+      `Collection Date` = lubridate::parse_date_time(`Collection Date`,
+        orders = date_fmt,
+        tz = time_zone
+      ),
+      collection_date = lubridate::as_datetime(`Collection Date`,
         tz = time_zone
       ),
       result_date = lubridate::as_date(lubridate::parse_date_time(result_date,
@@ -99,6 +90,7 @@ read_demographics_csv <- function(filepath,
       tz = time_zone
       )
     )
+
 
   output_tbl <- output_tbl %>%
     dplyr::mutate(birth_year = tidy_up_birth_year(birth_year,

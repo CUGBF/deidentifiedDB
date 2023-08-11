@@ -9,7 +9,7 @@
 #' deidentified DB database
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 do_prelim_tidy_sc <- function(sample_collection_tbl,
                               date_fmt = c("%m/%d/%y"),
                               time_zone = "America/New_York") {

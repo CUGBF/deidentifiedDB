@@ -9,7 +9,7 @@
 #' @return Vector containing Testkit IDs of redundant samples
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_redundant_samples <- function(sc_tbl_no_missing,
                                   n_days = 30) {
   stopifnot(all(c(

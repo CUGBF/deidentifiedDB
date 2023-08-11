@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @importFrom magrittr "%>%"
-#' @importFrom rlang .data
+
 get_daily_diagnostics <- function(diagnostics_tbl,
                                   start_date,
                                   end_date,
