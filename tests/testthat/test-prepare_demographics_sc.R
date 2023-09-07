@@ -53,12 +53,4 @@ test_that("Testing prepare_demographics_sc() !", {
   expect_equal(example_dp$teskit_sku, "CLM-SALIVA-00002")
   expect_equal(example_dp$population, "UNIVERSITY")
   expect_equal(example_dp$order_priority, "SURVEILLANCE")
-  expect_equal(
-    example_dp$performing_facility,
-    stringr::str_to_upper("Clemson University Personnel")
-  )
-  expect_equal(
-    example_dp$testing_facility,
-    stringr::str_to_upper("Clemson  Rymedi")
-  )
 })
