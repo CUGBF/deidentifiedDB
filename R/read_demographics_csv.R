@@ -36,8 +36,6 @@ read_demographics_csv <- function(filepath,
     "Result description",
     "Result Date",
     "Collection Date",
-    "Performing Facility",
-    "Tested by",
     "SKU",
     "Order Priority"
   ) %in% colnames(test_tbl)))
