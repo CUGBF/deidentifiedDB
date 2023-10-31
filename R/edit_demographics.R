@@ -17,7 +17,7 @@ edit_demographics <- function(filepath,
                             time_zone = "America/New_York"){
 data <- read.csv(filepath)
 rows <- nrow(data)
-print(data[])
+print(data)
 
 i <- 6
 while( i < 7){
@@ -25,7 +25,7 @@ while( i < 7){
     i <- i +1
     print(i)
 }
-print(data)
+'print(data)'
 }
 
 
