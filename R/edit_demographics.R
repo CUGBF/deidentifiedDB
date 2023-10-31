@@ -17,7 +17,7 @@ edit_demographics <- function(filepath,
                             time_zone = "America/New_York"){
 data <- read.csv(filepath)
 rows <- nrow(data)
-print(data)
+print(data[ ,6])
 
 i <- 6
 while( i < 7){
@@ -25,7 +25,7 @@ while( i < 7){
     i <- i +1
     print(i)
 }
-'print(data)'
+print(data)
 }
 
 
@@ -33,12 +33,11 @@ while( i < 7){
 
 test_that("Testing edit demographics() !", {
  data_demographics <- system.file("extdata",
-  "data_demographics_sc.csv",
+  "data_demographics_sc_v2.csv",
    package = "deidentifiedDB"
 )
 output_tbl <- edit_demographics(data_demographics)
   expect_equal(nrow(output_tbl), 19)
-
 
 })
 
